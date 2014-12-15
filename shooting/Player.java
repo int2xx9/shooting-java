@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Player implements MainLoopJob, ShootingObject, KeyListener {
-	public static final int WIDTH = 50, HEIGHT = 50;
+	public static final int WIDTH = 25, HEIGHT = 25;
 
 	protected Shooting shooting;
 	private int remaining;	// Žc‹@
