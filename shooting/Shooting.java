@@ -63,9 +63,9 @@ public class Shooting extends JPanel {
 		shootingListeners.add(listener);
 	}
 
-	public ShootingObject[] isHit(Lazer lazer) {
-		ShootingObject[] player_objs = players.isHit(lazer);
-		ShootingObject[] lazer_objs = lazers.isHit(lazer);
+	public ShootingObject[] getHitObjects(Lazer lazer) {
+		ShootingObject[] player_objs = players.getHitObjects(lazer);
+		ShootingObject[] lazer_objs = lazers.getHitObjects(lazer);
 		ShootingObject[] objs = new ShootingObject[player_objs.length + lazer_objs.length];
 		int i, j;
 		for (i = j = 0; j < player_objs.length; i++, j++) {
@@ -118,56 +118,57 @@ public class Shooting extends JPanel {
 	}
 
 	class LazerCollection implements MainLoopJob {
-		LinkedList<Lazer> lazers;
+		private LinkedList<Lazer> lazers;
+		private Object lock = new Object();
+
 		LazerCollection() {
 			lazers = new LinkedList<Lazer>();
 		}
 
 		void shoot(Lazer lazer) {
-			lazers.add(lazer);
+			synchronized(lock) {
+				lazers.add(lazer);
+			}
 		}
 
 		public void runMainLoopJob() {
-			for (Lazer lazer : lazers) {
-				lazer.runMainLoopJob();
-			}
-
-			// 画面外にいった弾を削除
-			LinkedList<Lazer> ooslazers = new LinkedList<Lazer>();
-			for (Lazer lazer : lazers) {
-				if (lazer.isOutOfScreen()) {
-					ooslazers.add(lazer);
+			synchronized(lock) {
+				// Listはforeachしながらremoveできないので予めコピーしておく
+				LinkedList<Lazer> work_lazers = new LinkedList<Lazer>(lazers);
+				for (Lazer lazer : work_lazers) {
+					lazer.runMainLoopJob();
+					if (lazer.isOutOfScreen()) {
+						lazers.remove(lazer);
+					}
 				}
-			}
-			for (Lazer lazer : ooslazers) {
-				lazers.remove(lazer);
-			}
 
-			// 当たり判定
-			for (Lazer lazer : lazers) {
-				if (Shooting.this.isHit(lazer).length > 0) {
-					System.out.println("hit");
+				// 当たり判定
+				for (Lazer lazer : lazers) {
+					if (Shooting.this.getHitObjects(lazer).length > 0) {
+						System.out.println("hit");
+					}
 				}
 			}
 		}
 
 		public void paintObject(Graphics g) {
-			for (Lazer lazer : lazers) {
-				lazer.paintObject(g);
+			synchronized(lock) {
+				for (Lazer lazer : lazers) {
+					lazer.paintObject(g);
+				}
 			}
 		}
 
-		public ShootingObject[] isHit(Lazer src_lazer) {
+		public ShootingObject[] getHitObjects(Lazer src_lazer) {
 			LinkedList<ShootingObject> objs = new LinkedList<ShootingObject>();
-			for (Lazer lazer : lazers) {
-				if (lazer.isHit(src_lazer)) {
-					objs.add(lazer);
+			synchronized(lock) {
+				for (Lazer lazer : lazers) {
+					if (lazer.isHit(src_lazer)) {
+						objs.add(lazer);
+					}
 				}
 			}
-
-			ShootingObject[] ret_objs = new ShootingObject[objs.size()];
-			objs.toArray(ret_objs);
-			return ret_objs;
+			return objs.toArray(new ShootingObject[objs.size()]);
 		}
 	}
 
@@ -193,7 +194,7 @@ public class Shooting extends JPanel {
 			}
 		}
 
-		public ShootingObject[] isHit(Lazer lazer) {
+		public ShootingObject[] getHitObjects(Lazer lazer) {
 			LinkedList<ShootingObject> objs = new LinkedList<ShootingObject>();
 			for (Player player : players) {
 				if (player.isHit(lazer)) {
