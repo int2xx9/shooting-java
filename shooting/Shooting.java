@@ -6,10 +6,10 @@ import java.awt.event.*;
 import java.util.*;
 
 public class Shooting extends JPanel {
-	LazerCollection lazers;
-	PlayerCollection players;
+	LazerCollection lazers = new LazerCollection();
+	PlayerCollection players = new PlayerCollection();
 	//public Status status;
-	LinkedList<ShootingListener> shootingListeners;
+	LinkedList<ShootingListener> shootingListeners = new LinkedList<ShootingListener>();
 	MainLoop mainLoop;
 
 	public boolean isRunning() { return mainLoop.isRunning(); }
@@ -23,9 +23,6 @@ public class Shooting extends JPanel {
 	public Shooting() {
 		super();
 		setBackground(Color.BLACK);
-		shootingListeners = new LinkedList<ShootingListener>();
-		lazers = new LazerCollection();
-		players = new PlayerCollection();
 		mainLoop = new MainLoop();
 		mainLoop.start();
 		mainLoop.addJob(lazers);
@@ -118,54 +115,42 @@ public class Shooting extends JPanel {
 	}
 
 	class LazerCollection implements MainLoopJob {
-		private LinkedList<Lazer> lazers;
-		private Object lock = new Object();
+		// 頻繁な要素の追加・削除が予想されるため連結リストを使用する
+		private LinkedList<Lazer> lazers = new LinkedList<Lazer>();
 
-		LazerCollection() {
-			lazers = new LinkedList<Lazer>();
+		synchronized void shoot(Lazer lazer) {
+			lazers.add(lazer);
 		}
 
-		void shoot(Lazer lazer) {
-			synchronized(lock) {
-				lazers.add(lazer);
-			}
-		}
-
-		public void runMainLoopJob() {
-			synchronized(lock) {
-				// Listはforeachしながらremoveできないので予めコピーしておく
-				LinkedList<Lazer> work_lazers = new LinkedList<Lazer>(lazers);
-				for (Lazer lazer : work_lazers) {
-					lazer.runMainLoopJob();
-					if (lazer.isOutOfScreen()) {
-						lazers.remove(lazer);
-					}
+		public synchronized void runMainLoopJob() {
+			// Listはforeachしながらremoveできないので予めコピーしておく
+			LinkedList<Lazer> work_lazers = new LinkedList<Lazer>(lazers);
+			for (Lazer lazer : work_lazers) {
+				lazer.runMainLoopJob();
+				if (lazer.isOutOfScreen()) {
+					lazers.remove(lazer);
 				}
+			}
 
-				// 当たり判定
-				for (Lazer lazer : lazers) {
-					if (Shooting.this.getHitObjects(lazer).length > 0) {
-						System.out.println("hit");
-					}
+			// 当たり判定
+			for (Lazer lazer : lazers) {
+				if (Shooting.this.getHitObjects(lazer).length > 0) {
+					//System.out.println("hit");
 				}
 			}
 		}
 
-		public void paintObject(Graphics g) {
-			synchronized(lock) {
-				for (Lazer lazer : lazers) {
-					lazer.paintObject(g);
-				}
+		public synchronized void paintObject(Graphics g) {
+			for (Lazer lazer : lazers) {
+				lazer.paintObject(g);
 			}
 		}
 
-		public ShootingObject[] getHitObjects(Lazer src_lazer) {
+		public synchronized ShootingObject[] getHitObjects(Lazer src_lazer) {
 			LinkedList<ShootingObject> objs = new LinkedList<ShootingObject>();
-			synchronized(lock) {
-				for (Lazer lazer : lazers) {
-					if (lazer.isHit(src_lazer)) {
-						objs.add(lazer);
-					}
+			for (Lazer lazer : lazers) {
+				if (lazer.isHit(src_lazer)) {
+					objs.add(lazer);
 				}
 			}
 			return objs.toArray(new ShootingObject[objs.size()]);
@@ -173,10 +158,8 @@ public class Shooting extends JPanel {
 	}
 
 	class PlayerCollection implements MainLoopJob, KeyListener {
-		ArrayList<Player> players;
-		PlayerCollection() {
-			players = new ArrayList<Player>();
-		}
+		// 頻繁に追加・削除せず参照する場合のほうが多いため動的配列を使用する
+		private ArrayList<Player> players = new ArrayList<Player>();
 
 		void addPlayer(Player player) {
 			players.add(player);

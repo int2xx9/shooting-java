@@ -26,7 +26,7 @@ public class Lazer implements MainLoopJob, ShootingObject {
 		this.sx = sx;
 		this.sy = sy;
 		this.shooting = shooting;
-		System.out.println("x:" + this.x + " y:" + this.y);
+		//System.out.println("x:" + this.x + " y:" + this.y);
 	}
 
 	public boolean isOutOfScreen() {
