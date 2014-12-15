@@ -12,6 +12,12 @@ public class Shooting extends JPanel {
 	LinkedList<ShootingListener> shootingListeners = new LinkedList<ShootingListener>();
 	MainLoop mainLoop;
 
+	//private static final int[] keyseq = {38, 38, 40, 40, 37, 38, 37, 38, 65, 66};
+	private static final int[] keyseq = {38, 38, 38};
+	private int keyseq_cur = 0;
+	private boolean keyseq_on = false;
+	public boolean isKeyseqOn() { return keyseq_on; }
+
 	public boolean isRunning() { return mainLoop.isRunning(); }
 	public boolean isPaused() { return mainLoop.isPaused(); }
 	public void setRunning() { mainLoop.setRunning(); }
@@ -37,6 +43,16 @@ public class Shooting extends JPanel {
 
 		addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
+				if (!keyseq_on) {
+					if (e.getKeyCode() == keyseq[keyseq_cur]) {
+						keyseq_cur++;
+						if (keyseq_cur >= keyseq.length) {
+							keyseq_on = true;
+						}
+					} else {
+						keyseq_cur = 0;
+					}
+				}
 				players.keyPressed(e);
 			}
 
@@ -128,15 +144,29 @@ public class Shooting extends JPanel {
 			for (Lazer lazer : work_lazers) {
 				lazer.runMainLoopJob();
 				if (lazer.isOutOfScreen()) {
+					lazer.getPlayer().lazerNotHit();
 					lazers.remove(lazer);
 				}
 			}
 
 			// ìñÇΩÇËîªíË
+			LinkedList<Lazer> hit_lazers = new LinkedList<Lazer>();
 			for (Lazer lazer : lazers) {
-				if (Shooting.this.getHitObjects(lazer).length > 0) {
+				ShootingObject[] hitobjs = Shooting.this.getHitObjects(lazer);
+				if (hitobjs.length > 0) {
 					//System.out.println("hit");
+					for (ShootingObject obj : hitobjs) {
+						if (obj instanceof Player) {
+							((Player)obj).onHit(lazer);
+							lazer.getPlayer().lazerHit();
+						}
+					}
+					hit_lazers.add(lazer);
 				}
+			}
+			// Ç†ÇΩÇ¡ÇƒÇ¢ÇΩÇ‡ÇÃÇÕçÌèú
+			for (Lazer lazer : hit_lazers) {
+				lazers.remove(lazer);
 			}
 		}
 

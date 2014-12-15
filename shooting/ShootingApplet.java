@@ -10,7 +10,7 @@ public class ShootingApplet extends JApplet {
 	JButton leftButton;
 	JButton rightButton;
 	JButton shootButton;
-	JPanel statusPanel;	// stub
+	StatusPanel statusPanel;
 	Shooting shooting;
 	Player player;
 
@@ -76,12 +76,32 @@ public class ShootingApplet extends JApplet {
 		shootButton.setBounds(220, ctrlY+5, 50, 40);
 		add(shootButton);
 
-		statusPanel = new JPanel();
+		statusPanel = new StatusPanel();
 		statusPanel.setBounds(275, ctrlY+5, getWidth()-275-5, 40);
 		add(statusPanel);
 
 		shooting.addPlayer(player);
+		player.addPlayerListener(new PlayerAdapter() {
+			public void scoreUpdated() {
+				statusPanel.repaint();
+			}
+			public void damageUpdated() {
+				statusPanel.repaint();
+			}
+		});
 		shooting.addPlayer(new AutoPlayer(shooting, shooting.getWidth()/2, 60, 0, 1));
+		/*
+		shooting.addPlayer(new AutoPlayer(shooting, 30, 90, 0, 1));
+		shooting.addPlayer(new AutoPlayer(shooting, shooting.getWidth()/2+40, 120, 0, 1));
+		shooting.addPlayer(new AutoPlayer(shooting, shooting.getWidth()-30, 150, 0, 1));
+		*/
+	}
+
+	class StatusPanel extends JPanel {
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.drawString("" + player.getHitPercent() + "%(" + player.getHitCount() + "/" + player.getHitSum() + ") damage:" + player.getDamage() + " score:" + player.getScore(), 0, 10);
+		}
 	}
 }
 
