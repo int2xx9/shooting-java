@@ -63,6 +63,20 @@ public class Shooting extends JPanel {
 		shootingListeners.add(listener);
 	}
 
+	public ShootingObject[] isHit(Lazer lazer) {
+		ShootingObject[] player_objs = players.isHit(lazer);
+		ShootingObject[] lazer_objs = lazers.isHit(lazer);
+		ShootingObject[] objs = new ShootingObject[player_objs.length + lazer_objs.length];
+		int i, j;
+		for (i = j = 0; j < player_objs.length; i++, j++) {
+			objs[i] = player_objs[j];
+		}
+		for (j = 0; j < lazer_objs.length; j++, i++) {
+			objs[i] = lazer_objs[j];
+		}
+		return objs;
+	}
+
 	class MainLoop extends Thread {
 		private LinkedList<MainLoopJob> jobs;
 		private boolean isPaused;
@@ -103,7 +117,7 @@ public class Shooting extends JPanel {
 		}
 	}
 
-	class LazerCollection implements MainLoopJob, ShootingObject {
+	class LazerCollection implements MainLoopJob {
 		LinkedList<Lazer> lazers;
 		LazerCollection() {
 			lazers = new LinkedList<Lazer>();
@@ -128,6 +142,13 @@ public class Shooting extends JPanel {
 			for (Lazer lazer : ooslazers) {
 				lazers.remove(lazer);
 			}
+
+			// “–‚½‚è”»’è
+			for (Lazer lazer : lazers) {
+				if (Shooting.this.isHit(lazer).length > 0) {
+					System.out.println("hit");
+				}
+			}
 		}
 
 		public void paintObject(Graphics g) {
@@ -135,9 +156,22 @@ public class Shooting extends JPanel {
 				lazer.paintObject(g);
 			}
 		}
+
+		public ShootingObject[] isHit(Lazer src_lazer) {
+			LinkedList<ShootingObject> objs = new LinkedList<ShootingObject>();
+			for (Lazer lazer : lazers) {
+				if (lazer.isHit(src_lazer)) {
+					objs.add(lazer);
+				}
+			}
+
+			ShootingObject[] ret_objs = new ShootingObject[objs.size()];
+			objs.toArray(ret_objs);
+			return ret_objs;
+		}
 	}
 
-	class PlayerCollection implements MainLoopJob, ShootingObject, KeyListener {
+	class PlayerCollection implements MainLoopJob, KeyListener {
 		ArrayList<Player> players;
 		PlayerCollection() {
 			players = new ArrayList<Player>();
@@ -157,6 +191,19 @@ public class Shooting extends JPanel {
 			for (Player player : players) {
 				player.paintObject(g);
 			}
+		}
+
+		public ShootingObject[] isHit(Lazer lazer) {
+			LinkedList<ShootingObject> objs = new LinkedList<ShootingObject>();
+			for (Player player : players) {
+				if (player.isHit(lazer)) {
+					objs.add(player);
+				}
+			}
+
+			ShootingObject[] ret_objs = new ShootingObject[objs.size()];
+			objs.toArray(ret_objs);
+			return ret_objs;
 		}
 
 		public void keyPressed(KeyEvent e) {
@@ -197,5 +244,6 @@ class ShootingAdapter implements ShootingListener {
 
 interface ShootingObject {
 	public void paintObject(Graphics g);
+	public boolean isHit(Lazer obj);
 }
 

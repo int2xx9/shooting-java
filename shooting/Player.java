@@ -14,13 +14,16 @@ public class Player implements MainLoopJob, ShootingObject, KeyListener {
 	private int mx, my;	// à⁄ìÆíÜÇÃï˚å¸
 
 	// x, yÇÕíÜêSç¿ïWÇ»ÇÃÇ≈ç∂è„ç¿ïWÇ…Ç∑ÇÈ
-	public int getRealX() { return x-WIDTH/2; }
-	public int getRealY() { return y-HEIGHT/2; }
+	public int getX() { return x-WIDTH/2; }
+	public int getY() { return y-HEIGHT/2; }
 
-	public void setX(int x) { this.x = x; }
-	public void setY(int y) { this.y = y; }
-	public int getX() { return x; }
-	public int getY() { return y; }
+	public int getWidth() { return WIDTH; }
+	public int getHeight() { return HEIGHT; }
+
+	public void setCenterX(int x) { this.x = x; }
+	public void setCenterY(int y) { this.y = y; }
+	public int getCenterX() { return x; }
+	public int getCenterY() { return y; }
 
 	public int getRemaining() { return remaining; }
 	public void setRemaining(int value) { remaining = value; }
@@ -51,7 +54,7 @@ public class Player implements MainLoopJob, ShootingObject, KeyListener {
 	private int moveIntervalCnt = 0;
 	public void runMainLoopJob() {
 		if (moveIntervalCnt == moveInterval) {
-			if (canMoveTo(getRealX()+mx, getRealY(), WIDTH, HEIGHT)) {
+			if (canMoveTo(getX()+mx, getY(), WIDTH, HEIGHT)) {
 				x+=mx;
 			}
 			moveIntervalCnt = 0;
@@ -61,7 +64,15 @@ public class Player implements MainLoopJob, ShootingObject, KeyListener {
 
 	public void paintObject(Graphics g) {
 		g.setColor(Color.WHITE);
-		g.fillRect(getRealX(), getRealY(), WIDTH, HEIGHT);
+		g.fillRect(getX(), getY(), WIDTH, HEIGHT);
+	}
+	
+	public boolean isHit(Lazer lazer) {
+		if (lazer.getY()+lazer.getHeight() < getY()) return false;
+		if (lazer.getY() > getY()+getHeight()) return false;
+		if (lazer.getX()+lazer.getWidth() < getX()) return false;
+		if (lazer.getX() > getX()+getWidth()) return false;
+		return true;
 	}
 
 	public void keyPressed(KeyEvent e) {
@@ -85,12 +96,12 @@ public class Player implements MainLoopJob, ShootingObject, KeyListener {
 			if (sy < 0) {
 				// è„ï˚å¸
 				shooting.lazers.shoot(
-					new Lazer(shooting, getRealX()+WIDTH/2, getRealY(), sx, sy)
+					new Lazer(shooting, getX()+WIDTH/2, getY(), sx, sy)
 				);
 			} else if (sy > 0) {
 				// â∫ï˚å¸
 				shooting.lazers.shoot(
-					new Lazer(shooting, getRealX()+WIDTH/2, getRealY()+HEIGHT, sx, sy)
+					new Lazer(shooting, getX()+WIDTH/2, getY()+HEIGHT, sx, sy)
 				);
 			}
 		}
@@ -110,14 +121,14 @@ class AutoPlayer extends Player {
 	public void runMainLoopJob() {
 		if ((int)(Math.random()*1000) == 0) {
 			shooting.lazers.shoot(
-				new Lazer(shooting, getRealX()+WIDTH/2, getRealY()+HEIGHT, getShootToX(), getShootToY())
+				new Lazer(shooting, getX()+WIDTH/2, getY()+HEIGHT, getShootToX(), getShootToY())
 			);
 		}
 		if (moveIntervalCnt == moveInterval) {
-			if (!canMoveTo(getRealX()+getMovingX(), getRealY(), WIDTH, HEIGHT)) {
+			if (!canMoveTo(getX()+getMovingX(), getY(), WIDTH, HEIGHT)) {
 				setMovingX(-getMovingX());
 			}
-			setX(getX()+getMovingX());
+			setCenterX(getCenterX()+getMovingX());
 			moveIntervalCnt = 0;
 		}
 		moveIntervalCnt++;

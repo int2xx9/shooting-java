@@ -10,6 +10,11 @@ public class Lazer implements MainLoopJob, ShootingObject {
 	private int x, y;
 	private int sx, sy;
 
+	public int getX() { return this.x; }
+	public int getY() { return this.y; }
+	public int getWidth() { return this.WIDTH; }
+	public int getHeight() { return this.HEIGHT; }
+
 	public Lazer(Shooting shooting, int x, int y, int sx, int sy) {
 		if (sy < 0) {
 			// ã•ûŒü‚Éi‚Þê‡
@@ -36,6 +41,10 @@ public class Lazer implements MainLoopJob, ShootingObject {
 	public void paintObject(Graphics g) {
 		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, WIDTH, HEIGHT);
+	}
+
+	public boolean isHit(Lazer lazer) {
+		return false;
 	}
 }
 
