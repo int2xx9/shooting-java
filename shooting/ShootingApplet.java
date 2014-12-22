@@ -96,6 +96,9 @@ public class ShootingApplet extends JApplet {
 			public void damageUpdated() {
 				statusPanel.repaint();
 			}
+			public void notHitCountUpdated() {
+				statusPanel.repaint();
+			}
 		});
 
 		enemies = new Player[4];

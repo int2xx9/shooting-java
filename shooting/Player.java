@@ -47,8 +47,20 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 		public void incrementCombo(int value) { setCombo(getCombo() + 1); }
 		public int getCombo() { return this.combo; }
 	private int hitCount, notHitCount;
-		public void setHitCount(int value) { this.hitCount = value; }
-		public void setNotHitCount(int value) { this.notHitCount = value; }
+		public void setHitCount(int value) {
+			this.hitCount = value;
+			for (PlayerListener listener : listeners) {
+				listener.hitCountUpdated();
+			}
+		}
+		public void setNotHitCount(int value) {
+			this.notHitCount = value;
+			for (PlayerListener listener : listeners) {
+				listener.notHitCountUpdated();
+			}
+		}
+		public void incrementHitCount() { setHitCount(getHitCount() + 1); }
+		public void incrementNotHitCount() { setNotHitCount(getNotHitCount() + 1); }
 		public int getHitCount() { return this.hitCount; }
 		public int getNotHitCount() { return this.notHitCount; }
 		public int getHitPercent() {
@@ -147,13 +159,13 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 	public void lazerHit() {
 		setCombo(getCombo() + 1);
 		setScore(getScore() + 10 * getCombo());
-		hitCount++;
+		incrementHitCount();
 	}
 
 	// Ž©•ª‚ªŒ‚‚Á‚½’e‚ª“G‚É“–‚½‚ç‚È‚©‚Á‚½
 	public void lazerNotHit() {
 		setCombo(0);
-		notHitCount++;
+		incrementNotHitCount();
 	}
 
 	public void keyPressed(KeyEvent e) {}
@@ -246,6 +258,8 @@ interface PlayerListener {
 	public void scoreUpdated();
 	public void damageUpdated();
 	public void comboUpdated();
+	public void hitCountUpdated();
+	public void notHitCountUpdated();
 	public void playerDestroyed();
 }
 
@@ -253,6 +267,8 @@ class PlayerAdapter implements PlayerListener {
 	public void scoreUpdated() {}
 	public void damageUpdated() {}
 	public void comboUpdated() {}
+	public void hitCountUpdated() {}
+	public void notHitCountUpdated() {}
 	public void playerDestroyed() {}
 }
 

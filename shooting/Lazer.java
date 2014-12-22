@@ -20,7 +20,7 @@ public abstract class Lazer implements MainLoopJob, ShootingObject {
 
 	public Lazer(Player player, int x, int y, int sx, int sy) {
 		this.player = player;
-		this.x = x+getWidth()/2; this.y = y;
+		this.x = x-getWidth()/2; this.y = y;
 		this.sx = sx; this.sy = sy;
 	}
 
@@ -52,12 +52,6 @@ class DefaultLazer extends Lazer {
 
 	public DefaultLazer(Player player, int x, int y, int sx, int sy) {
 		super(player, x, y, sx, sy);
-		//if (sy < 0) {
-		//	// ã•ûŒü‚Éi‚Þê‡
-		//	this.y = y-HEIGHT;
-		//} else {
-		//	this.y = y;
-		//}
 	}
 }
 
