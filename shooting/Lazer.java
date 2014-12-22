@@ -32,7 +32,7 @@ public class Lazer implements MainLoopJob, ShootingObject {
 	}
 
 	public boolean isOutOfScreen() {
-		return y+HEIGHT < 0 || y > player.shooting.getHeight();
+		return y+HEIGHT < 0 || y > player.getShooting().getHeight();
 	}
 
 	public void runMainLoopJob() {

@@ -22,7 +22,7 @@ public class ShootingApplet extends JApplet {
 		shooting.setBounds(5, 5, getWidth()-(5*2), getHeight()-50-5);
 		add(shooting);
 
-		player = new Player(shooting, 0, shooting.getWidth()/2, shooting.getHeight()-60, 0, -1);
+		player = new ControlablePlayer(shooting, 0, shooting.getWidth()/2, shooting.getHeight()-60, 0, -1);
 
 		int ctrlY = getHeight()-50;
 
@@ -116,7 +116,7 @@ public class ShootingApplet extends JApplet {
 	class StatusPanel extends JPanel {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			g.drawString("" + player.getHitPercent() + "%(" + player.getHitCount() + "/" + player.getHitSum() + ") damage:" + player.getDamage() + " score:" + player.getScore(), 0, 10);
+			g.drawString("" + player.getHitPercent() + "%(" + player.getHitCount() + "/" + (player.getHitCount()+player.getNotHitCount()) + ") damage:" + player.getDamage() + " score:" + player.getScore(), 0, 10);
 		}
 	}
 }
