@@ -170,7 +170,7 @@ class ControlablePlayer extends Player {
 
 	public ControlablePlayer(Shooting shooting, int team, int x, int y, int sx, int sy) {
 		super(shooting, team, x, y, sx, sy);
-		setWeapon(new Weapon(this));
+		setWeapon(new DefaultWeapon(this));
 	}
 
 	private static final int moveInterval = 5;
@@ -217,7 +217,7 @@ class AutoPlayer extends Player {
 
 	public AutoPlayer(Shooting shooting, int team, int x, int y, int sx, int sy) {
 		super(shooting, team, x, y, sx, sy);
-		setWeapon(new Weapon(this));
+		setWeapon(new DefaultWeapon(this));
 		setMovingX(1);
 	}
 
