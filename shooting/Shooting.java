@@ -11,12 +11,15 @@ public class Shooting extends JPanel {
 	//public Status status;
 	LinkedList<ShootingListener> shootingListeners = new LinkedList<ShootingListener>();
 	MainLoop mainLoop;
+	private boolean isGameovered = false;
 
 	//private static final int[] keyseq = {38, 38, 40, 40, 37, 38, 37, 38, 65, 66};
 	private static final int[] keyseq = {38, 38, 38};
 	private int keyseq_cur = 0;
 	private boolean keyseq_on = false;
 	public boolean isKeyseqOn() { return keyseq_on; }
+
+	public boolean isGameovered() { return isGameovered; }
 
 	public boolean isRunning() { return mainLoop.isRunning(); }
 	public boolean isPaused() { return mainLoop.isPaused(); }
@@ -33,6 +36,25 @@ public class Shooting extends JPanel {
 		mainLoop.start();
 		mainLoop.addJob(lazers);
 		mainLoop.addJob(players);
+
+		mainLoop.addJob(new MainLoopJob() {
+			public void runMainLoopJob() {
+				// 残りのチームが1つになったらpauseしてgameover
+				LinkedList<Integer> teams = new LinkedList<Integer>();
+				for (Player player : players.getPlayers()) {
+					if (player.isAlive() && !teams.contains(player.getTeam())) {
+						teams.add(player.getTeam());
+					}
+				}
+				if (teams.size() <= 1) {
+					mainLoop.setPaused();
+					isGameovered = true;
+					for (ShootingListener listener : shootingListeners) {
+						listener.onGameOvered();
+					}
+				}
+			}
+		});
 
 		mainLoop.addJob(new MainLoopJob() {
 			public void runMainLoopJob() {
@@ -70,6 +92,12 @@ public class Shooting extends JPanel {
 		super.paintComponent(g);
 		players.paintObject(g);
 		lazers.paintObject(g);
+
+		if (isGameovered) {
+			g.setColor(Color.RED);
+			g.setFont(new Font("Monospaced", Font.BOLD, 16));
+			g.drawString("gameover", getWidth()/2-30, getHeight()/2-8);
+		}
 	}
 
 	public void addShootingListener(ShootingListener listener) {
@@ -97,9 +125,11 @@ public class Shooting extends JPanel {
 		boolean isRunning() { return !isPaused; }
 		boolean isPaused() { return isPaused; }
 		void setRunning() {
-			isPaused = false;
-			for (ShootingListener listener : shootingListeners) {
-				listener.onGameResumed();
+			if (!isGameovered()) {
+				isPaused = false;
+				for (ShootingListener listener : shootingListeners) {
+					listener.onGameResumed();
+				}
 			}
 		}
 		void setPaused() {
@@ -121,6 +151,7 @@ public class Shooting extends JPanel {
 		public void run() {
 			while (true) {
 				if (!isPaused) {
+					LinkedList<MainLoopJob> jobs = new LinkedList<MainLoopJob>(this.jobs);
 					for (MainLoopJob job : jobs) {
 						job.runMainLoopJob();
 					}
@@ -190,6 +221,10 @@ public class Shooting extends JPanel {
 	class PlayerCollection implements MainLoopJob, KeyListener {
 		// 頻繁に追加・削除せず参照する場合のほうが多いため動的配列を使用する
 		private ArrayList<Player> players = new ArrayList<Player>();
+
+		public Player[] getPlayers() {
+			return this.players.toArray(new Player[this.players.size()]);
+		}
 
 		void addPlayer(Player player) {
 			players.add(player);

@@ -19,6 +19,8 @@ public class Player implements MainLoopJob, ShootingObject, KeyListener, LazerLi
 	private int x, y;	// ’†S‚ÌÀ•W
 	private int sx, sy;	// ’e‚ğŒ‚‚Â•ûŒü
 	private int mx, my;	// ˆÚ“®’†‚Ì•ûŒü
+	private int team = 0;
+	private Weapon weapon;
 
 	// x, y‚Í’†SÀ•W‚È‚Ì‚Å¶ãÀ•W‚É‚·‚é
 	public int getX() { return x-WIDTH/2; }
@@ -37,6 +39,11 @@ public class Player implements MainLoopJob, ShootingObject, KeyListener, LazerLi
 		damage = value;
 		for (PlayerListener listener : listeners) {
 			listener.damageUpdated();
+		}
+		if (isDestroyed()) {
+			for (PlayerListener listener : listeners) {
+				listener.playerDestroyed();
+			}
 		}
 	}
 	public int getScore() { return score; }
@@ -73,16 +80,35 @@ public class Player implements MainLoopJob, ShootingObject, KeyListener, LazerLi
 	public int getMovingX() { return mx; }
 	public int getMovingY() { return my; }
 
+	public void setTeam(int team) { this.team = team; }
+	public int getTeam() { return team; }
+
+	public boolean isAlive() { return damage < MAX_DAMAGE; }
+	public boolean isDestroyed() { return damage >= MAX_DAMAGE; }
+
+	public Weapon getWeapon() {
+		if (isAlive()) {
+			return weapon;
+		} else {
+			// Šù‚É”j‰ó‚³‚ê‚Ä‚¢‚é‚Ì‚Åƒ_ƒ~[‚ÌWeapon‚ğ•Ô‚·
+			return new Weapon(this.shooting, this) {
+				public void shoot() {}
+			};
+		}
+	}
+
 	public boolean canMoveTo(int x, int y, int width, int height) {
 		if (x < 0 || y < 0) return false;
 		if (x+width > shooting.getWidth() || y > shooting.getHeight()) return false;
 		return true;
 	}
 
-	public Player(Shooting shooting, int x, int y, int sx, int sy) {
+	public Player(Shooting shooting, int team, int x, int y, int sx, int sy) {
 		this.shooting = shooting;
+		this.team = team;
 		this.x = x; this.y = y;
 		this.sx = sx; this.sy = sy;
+		this.weapon = new Weapon(this.shooting, this);
 	}
 
 	public void addPlayerListener(PlayerListener listener) {
@@ -102,16 +128,21 @@ public class Player implements MainLoopJob, ShootingObject, KeyListener, LazerLi
 	}
 
 	public void paintObject(Graphics g) {
-		g.setColor(Color.WHITE);
-		g.fillRect(getX(), getY(), WIDTH, HEIGHT);
+		if (isAlive()) {
+			g.setColor(Color.WHITE);
+			g.fillRect(getX(), getY(), WIDTH, HEIGHT);
 
-		if (shooting.isKeyseqOn()) {
-			g.setColor(Color.RED);
-			g.drawString(damage + "/" + MAX_DAMAGE, getX()+5, getY()+5);
+			if (shooting.isKeyseqOn()) {
+				g.setColor(Color.RED);
+				g.drawString(damage + "/" + MAX_DAMAGE, getX()+5, getY()+5);
+			}
 		}
 	}
 	
+	// “–‚½‚è”»’è
 	public boolean isHit(Lazer lazer) {
+		if (isDestroyed()) return false;
+		if (getTeam() == lazer.getPlayer().getTeam()) return false;
 		if (lazer.getY()+lazer.getHeight() < getY()) return false;
 		if (lazer.getY() > getY()+getHeight()) return false;
 		if (lazer.getX()+lazer.getWidth() < getX()) return false;
@@ -119,6 +150,7 @@ public class Player implements MainLoopJob, ShootingObject, KeyListener, LazerLi
 		return true;
 	}
 
+	// “G‚Ì’e‚ª“–‚½‚Á‚½
 	public void onHit(Lazer lazer) {
 		setDamage(getDamage() + lazer.DAMAGE);
 		setCombo(0);
@@ -142,28 +174,20 @@ public class Player implements MainLoopJob, ShootingObject, KeyListener, LazerLi
 				mx=0;
 			}
 		} else if (e.getKeyChar() == 32) {
-			if (sy < 0) {
-				// ã•ûŒü
-				shooting.lazers.shoot(
-					new Lazer(this, getX()+WIDTH/2, getY(), sx, sy)
-				);
-			} else if (sy > 0) {
-				// ‰º•ûŒü
-				shooting.lazers.shoot(
-					new Lazer(this, getX()+WIDTH/2, getY()+HEIGHT, sx, sy)
-				);
-			}
+			getWeapon().shoot();
 		}
 	}
 
 	public void keyTyped(KeyEvent e) {}
 
+	// ©•ª‚ªŒ‚‚Á‚½’e‚ª“–‚½‚Á‚½
 	public void lazerHit() {
 		setCombo(getCombo() + 1);
 		setScore(getScore() + 10 * getCombo());
 		hitcnt++;
 	}
 
+	// ©•ª‚ªŒ‚‚Á‚½’e‚ª“–‚½‚Á‚½
 	public void lazerNotHit() {
 		setCombo(0);
 		nothitcnt++;
@@ -173,8 +197,8 @@ public class Player implements MainLoopJob, ShootingObject, KeyListener, LazerLi
 class AutoPlayer extends Player {
 	public static final int MAX_DAMAGE = 30;
 
-	public AutoPlayer(Shooting shooting, int x, int y, int sx, int sy) {
-		super(shooting, x, y, sx, sy);
+	public AutoPlayer(Shooting shooting, int team, int x, int y, int sx, int sy) {
+		super(shooting, team, x, y, sx, sy);
 		setMovingX(1);
 	}
 
@@ -182,9 +206,7 @@ class AutoPlayer extends Player {
 	private int moveIntervalCnt = 0;
 	public void runMainLoopJob() {
 		if ((int)(Math.random()*1000) == 0) {
-			shooting.lazers.shoot(
-				new Lazer(this, getX()+WIDTH/2, getY()+HEIGHT, getShootToX(), getShootToY())
-			);
+			getWeapon().shoot();
 		}
 		if (moveIntervalCnt == moveInterval) {
 			if (!canMoveTo(getX()+getMovingX(), getY(), WIDTH, HEIGHT)) {
@@ -205,11 +227,13 @@ interface PlayerListener {
 	public void scoreUpdated();
 	public void damageUpdated();
 	public void comboUpdated();
+	public void playerDestroyed();
 }
 
 class PlayerAdapter implements PlayerListener {
 	public void scoreUpdated() {}
 	public void damageUpdated() {}
 	public void comboUpdated() {}
+	public void playerDestroyed() {}
 }
 

@@ -13,6 +13,7 @@ public class ShootingApplet extends JApplet {
 	StatusPanel statusPanel;
 	Shooting shooting;
 	Player player;
+	Player[] enemies;
 
 	public void init() {
 		setLayout(null);
@@ -21,7 +22,7 @@ public class ShootingApplet extends JApplet {
 		shooting.setBounds(5, 5, getWidth()-(5*2), getHeight()-50-5);
 		add(shooting);
 
-		player = new Player(shooting, shooting.getWidth()/2, shooting.getHeight()-60, 0, -1);
+		player = new Player(shooting, 0, shooting.getWidth()/2, shooting.getHeight()-60, 0, -1);
 
 		int ctrlY = getHeight()-50;
 
@@ -73,6 +74,13 @@ public class ShootingApplet extends JApplet {
 		add(rightButton);
 
 		shootButton = new JButton("Å™");
+		shootButton.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (shooting.isRunning()) {
+					player.getWeapon().shoot();
+				}
+			}
+		});
 		shootButton.setBounds(220, ctrlY+5, 50, 40);
 		add(shootButton);
 
@@ -89,12 +97,20 @@ public class ShootingApplet extends JApplet {
 				statusPanel.repaint();
 			}
 		});
-		shooting.addPlayer(new AutoPlayer(shooting, shooting.getWidth()/2, 60, 0, 1));
-		/*
-		shooting.addPlayer(new AutoPlayer(shooting, 30, 90, 0, 1));
-		shooting.addPlayer(new AutoPlayer(shooting, shooting.getWidth()/2+40, 120, 0, 1));
-		shooting.addPlayer(new AutoPlayer(shooting, shooting.getWidth()-30, 150, 0, 1));
-		*/
+
+		enemies = new Player[4];
+		enemies[0] = new AutoPlayer(shooting, 1, shooting.getWidth()/2, 60, 0, 1);
+		enemies[1] = new AutoPlayer(shooting, 1, 30, 90, 0, 1);
+		enemies[2] = new AutoPlayer(shooting, 1, shooting.getWidth()/2+40, 120, 0, 1);
+		enemies[3] = new AutoPlayer(shooting, 1, shooting.getWidth()-30, 150, 0, 1);
+		for (Player enemy : enemies) {
+			enemy.addPlayerListener(new PlayerAdapter() {
+				public void playerDestroyed() {
+					System.out.println("destroyed");
+				}
+			});
+			shooting.addPlayer(enemy);
+		}
 	}
 
 	class StatusPanel extends JPanel {
