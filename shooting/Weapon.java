@@ -26,14 +26,14 @@ public class Weapon implements MainLoopJob {
 			if (player.getShootToY() < 0) {
 				// ã•ûŒü
 				player.getShooting().lazers.shoot(
-					new Lazer(player,
+					new DefaultLazer(player,
 						player.getX()+player.getWidth()/2, player.getY(),
 						player.getShootToX(), player.getShootToY())
 				);
 			} else if (player.getShootToY() > 0) {
 				// ‰º•ûŒü
 				player.getShooting().lazers.shoot(
-					new Lazer(player,
+					new DefaultLazer(player,
 						player.getX()+player.getWidth()/2, player.getY()+player.getHeight(),
 						player.getShootToX(), player.getShootToY())
 				);

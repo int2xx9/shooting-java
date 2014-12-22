@@ -139,7 +139,7 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 
 	// ’e‚ªŽ©•ª‚É“–‚½‚Á‚½
 	public void onHit(Lazer lazer) {
-		setDamage(getDamage() + lazer.DAMAGE);
+		setDamage(getDamage() + lazer.getDamage());
 		setCombo(0);
 	}
 
