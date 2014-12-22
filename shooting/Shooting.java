@@ -49,6 +49,18 @@ public class Shooting extends JPanel {
 				if (teams.size() <= 1) {
 					mainLoop.setPaused();
 					isGameovered = true;
+					// 勝ったチームのスコアを計算
+					if (teams.size() == 1) {
+						for (Player player : players.getPlayers()) {
+							if (player.getTeam() == teams.get(0)) {
+								int score = player.getScore();
+								double hitPercent = (double)player.getHitCount()/(player.getHitCount()+player.getNotHitCount());
+								double damagePercent = (double)player.getDamage()/player.getMaxDamage();
+								score = (int)(score * (1+hitPercent) * (1+damagePercent));
+								player.setScore(score);
+							}
+						}
+					}
 					for (ShootingListener listener : shootingListeners) {
 						listener.onGameOvered();
 					}
