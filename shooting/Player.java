@@ -173,14 +173,14 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 	public void keyTyped(KeyEvent e) {}
 }
 
-class ControlablePlayer extends Player {
+class ControllablePlayer extends Player {
 	public static final int WIDTH = 25, HEIGHT = 25;
 	public static final int MAX_DAMAGE = 50;
 	public int getWidth() { return WIDTH; }
 	public int getHeight() { return HEIGHT; }
 	public int getMaxDamage() { return MAX_DAMAGE; }
 
-	public ControlablePlayer(Shooting shooting, int team, int x, int y, int sx, int sy) {
+	public ControllablePlayer(Shooting shooting, int team, int x, int y, int sx, int sy) {
 		super(shooting, team, x, y, sx, sy);
 		setWeapon(new DefaultWeapon(this));
 	}
@@ -220,14 +220,14 @@ class ControlablePlayer extends Player {
 	public void keyTyped(KeyEvent e) {}
 }
 
-class AutoPlayer extends Player {
+class AIPlayer extends Player {
 	public static final int WIDTH = 25, HEIGHT = 25;
 	public static final int MAX_DAMAGE = 30;
 	public int getWidth() { return WIDTH; }
 	public int getHeight() { return HEIGHT; }
 	public int getMaxDamage() { return MAX_DAMAGE; }
 
-	public AutoPlayer(Shooting shooting, int team, int x, int y, int sx, int sy) {
+	public AIPlayer(Shooting shooting, int team, int x, int y, int sx, int sy) {
 		super(shooting, team, x, y, sx, sy);
 		setWeapon(new DefaultWeapon(this));
 		setMovingX(1);

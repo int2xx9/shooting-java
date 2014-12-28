@@ -22,7 +22,7 @@ public class ShootingApplet extends JApplet {
 		shooting.setBounds(5, 5, getWidth()-(5*2), getHeight()-50-5);
 		add(shooting);
 
-		player = new ControlablePlayer(shooting, 0, shooting.getWidth()/2, shooting.getHeight()-60, 0, -1);
+		player = new ControllablePlayer(shooting, 0, shooting.getWidth()/2, shooting.getHeight()-60, 0, -1);
 
 		int ctrlY = getHeight()-50;
 
@@ -102,10 +102,10 @@ public class ShootingApplet extends JApplet {
 		});
 
 		enemies = new Player[4];
-		enemies[0] = new AutoPlayer(shooting, 1, shooting.getWidth()/2, 60, 0, 1);
-		enemies[1] = new AutoPlayer(shooting, 1, 30, 90, 0, 1);
-		enemies[2] = new AutoPlayer(shooting, 1, shooting.getWidth()/2+40, 120, 0, 1);
-		enemies[3] = new AutoPlayer(shooting, 1, shooting.getWidth()-30, 150, 0, 1);
+		enemies[0] = new AIPlayer(shooting, 1, shooting.getWidth()/2, 60, 0, 1);
+		enemies[1] = new AIPlayer(shooting, 1, 30, 90, 0, 1);
+		enemies[2] = new AIPlayer(shooting, 1, shooting.getWidth()/2+40, 120, 0, 1);
+		enemies[3] = new AIPlayer(shooting, 1, shooting.getWidth()-30, 150, 0, 1);
 		for (Player enemy : enemies) {
 			enemy.addPlayerListener(new PlayerAdapter() {
 				public void playerDestroyed() {
