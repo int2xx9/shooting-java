@@ -13,7 +13,7 @@ public class Shooting extends JPanel {
 	MainLoop mainLoop;
 	private boolean isGameovered = false;
 
-	//private static final int[] keyseq = {38, 38, 40, 40, 37, 38, 37, 38, 65, 66};
+	//private static final int[] keyseq = {38, 38, 40, 40, 37, 39, 37, 39, 66, 65};
 	private static final int[] keyseq = {38, 38, 38};
 	private int keyseq_cur = 0;
 	private boolean keyseq_on = false;
