@@ -1,4 +1,4 @@
-package shooting;
+package shooting.core;
 
 import javax.swing.*;
 import java.awt.*;

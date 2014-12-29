@@ -1,4 +1,4 @@
-package shooting;
+package shooting.core;
 
 public class DefaultWeapon extends Weapon {
 	class DefaultLazerGenerator extends LazerGenerator {

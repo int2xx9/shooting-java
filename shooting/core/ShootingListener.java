@@ -1,4 +1,4 @@
-package shooting;
+package shooting.core;
 
 public interface ShootingListener {
 	public void onGameResumed();

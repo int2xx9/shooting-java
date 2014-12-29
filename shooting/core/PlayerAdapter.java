@@ -1,4 +1,4 @@
-package shooting;
+package shooting.core;
 
 public class PlayerAdapter implements PlayerListener {
 	public void scoreUpdated() {}

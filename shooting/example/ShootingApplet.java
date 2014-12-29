@@ -1,5 +1,6 @@
-package shooting;
+package shooting.example;
 
+import shooting.core.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

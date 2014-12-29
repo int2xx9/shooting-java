@@ -1,4 +1,4 @@
-package shooting;
+package shooting.core;
 
 public abstract class LazerGenerator {
 	private Player player;

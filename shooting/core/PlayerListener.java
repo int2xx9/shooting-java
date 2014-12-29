@@ -1,4 +1,4 @@
-package shooting;
+package shooting.core;
 
 public interface PlayerListener {
 	public void scoreUpdated();

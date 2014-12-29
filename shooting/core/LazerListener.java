@@ -1,4 +1,4 @@
-package shooting;
+package shooting.core;
 
 public interface LazerListener {
 	// 撃ったレーザーが的中した

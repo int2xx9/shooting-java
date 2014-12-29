@@ -1,4 +1,4 @@
-package shooting;
+package shooting.core;
 
 public class DefaultLazer extends Lazer {
 	public static final int WIDTH = 2, HEIGHT = 10;
