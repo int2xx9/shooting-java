@@ -43,28 +43,3 @@ public abstract class Lazer implements MainLoopJob, ShootingObject {
 	}
 }
 
-class DefaultLazer extends Lazer {
-	public static final int WIDTH = 2, HEIGHT = 10;
-	public static final int DAMAGE = 10;
-	public int getWidth() { return WIDTH; }
-	public int getHeight() { return HEIGHT; }
-	public int getDamage() { return DAMAGE; }
-
-	public DefaultLazer(Player player, int x, int y, int sx, int sy) {
-		super(player, x, y, sx, sy);
-	}
-}
-
-interface LazerListener {
-	// 撃ったレーザーが的中した
-	public void lazerHit();
-	// 撃ったレーザーがはずれた
-	// (Playerクラスのオブジェクトにあたらないまま画面外までいった)
-	public void lazerNotHit();
-}
-
-class LazerAdapter implements LazerListener {
-	public void lazerHit() {}
-	public void lazerNotHit() {}
-}
-

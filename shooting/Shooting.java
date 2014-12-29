@@ -291,18 +291,6 @@ interface MainLoopJob {
 	public void runMainLoopJob();
 }
 
-interface ShootingListener {
-	public void onGameResumed();
-	public void onGamePaused();
-	public void onGameOvered();
-}
-
-class ShootingAdapter implements ShootingListener {
-	public void onGameResumed() {}
-	public void onGamePaused() {}
-	public void onGameOvered() {}
-}
-
 interface ShootingObject {
 	public void paintObject(Graphics g);
 	public boolean isHit(Lazer obj);

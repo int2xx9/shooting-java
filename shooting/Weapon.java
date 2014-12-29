@@ -54,41 +54,9 @@ public abstract class Weapon implements MainLoopJob {
 	}
 }
 
-class DefaultWeapon extends Weapon {
-	class DefaultLazerGenerator extends LazerGenerator {
-		public DefaultLazerGenerator(Player player) {
-			super(player);
-		}
-		public Lazer generateLazer(int x, int y, int sx, int sy) {
-			return new DefaultLazer(getPlayer(), x, y, sx, sy);
-		}
-	};
-
-	public static final int INTERVAL = 500;
-	public int getInterval() { return INTERVAL; }
-	public LazerGenerator getGenerator(Player player) {
-		return new DefaultLazerGenerator(player);
-	}
-
-	public DefaultWeapon(Player player) {
-		super(player);
-	}
-}
-
 class DummyWeapon extends Weapon {
 	public int getInterval() { return Weapon.INTERVAL_INFINITY; }
 	public LazerGenerator getGenerator(Player player) { return null; }
 	public DummyWeapon() { super(null); }
-}
-
-abstract class LazerGenerator {
-	private Player player;
-		public Player getPlayer() { return this.player; }
-
-	public LazerGenerator(Player player) {
-		this.player = player;
-	}
-
-	abstract public Lazer generateLazer(int x, int y, int sx, int sy);
 }
 
