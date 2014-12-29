@@ -55,8 +55,10 @@ public abstract class Weapon implements MainLoopJob {
 }
 
 class DummyWeapon extends Weapon {
+	private static DummyWeapon instance = new DummyWeapon();
 	public int getInterval() { return Weapon.INTERVAL_INFINITY; }
 	public LazerGenerator getGenerator(Player player) { return null; }
-	public DummyWeapon() { super(null); }
+	private DummyWeapon() { super(null); }
+	static DummyWeapon getInstance() { return instance; }
 }
 

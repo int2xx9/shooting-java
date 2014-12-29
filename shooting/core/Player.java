@@ -102,7 +102,7 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 		public void setTeam(int value) { this.team = value; }
 		public int getTeam() { return this.team; }
 	private Weapon weapon;
-		private static final Weapon dummyWeapon = new DummyWeapon();
+		private static final Weapon dummyWeapon = DummyWeapon.getInstance();
 		public void setWeapon(Weapon value) { this.weapon = value; }
 		// 破壊済みであれば発射不可能なダミーのWeaponを返す
 		public Weapon getWeapon() { return isAlive() ? this.weapon : dummyWeapon; }
