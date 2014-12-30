@@ -13,7 +13,7 @@ public class ShootingApplet extends JApplet {
 	JButton shootButton;
 	StatusPanel statusPanel;
 	Shooting shooting;
-	Player player;
+	ControllablePlayer player;
 	Player[] enemies;
 
 	public void init() {
@@ -24,6 +24,9 @@ public class ShootingApplet extends JApplet {
 		add(shooting);
 
 		player = new ControllablePlayer(shooting, 0, shooting.getWidth()/2, shooting.getHeight()-60, 0, -1);
+		player.getKeyConfig().setMoveLeftKey(37, 65535);	// ←
+		player.getKeyConfig().setMoveRightKey(39, 65535);	// →
+		player.getKeyConfig().setShootKey(32, 32);			// スペース
 
 		int ctrlY = getHeight()-50;
 

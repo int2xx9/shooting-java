@@ -12,6 +12,9 @@ public class ControllablePlayer extends Player {
 	public int getHeight() { return HEIGHT; }
 	public int getMaxDamage() { return MAX_DAMAGE; }
 
+	public ControllablePlayerConfig keyConfig = new ControllablePlayerConfig();
+	public ControllablePlayerConfig getKeyConfig() { return keyConfig; }
+
 	public ControllablePlayer(Shooting shooting, int team, int x, int y, int sx, int sy) {
 		super(shooting, team, x, y, sx, sy);
 		setWeapon(new DefaultWeapon(this));
@@ -28,23 +31,19 @@ public class ControllablePlayer extends Player {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyChar() == 65535) {
-			if (e.getKeyCode() == 37) {	// Å©
-				setMovingX(-1);
-			} else if (e.getKeyCode() == 39) {	// Å®
-				setMovingX(1);
-			}
+		if (keyConfig.isMoveLeftKey(e.getKeyCode(), e.getKeyChar())) {
+			setMovingX(-1);
+		} else if (keyConfig.isMoveRightKey(e.getKeyCode(), e.getKeyChar())) {
+			setMovingX(1);
 		}
 	}
 
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyChar() == 65535) {
-			if (e.getKeyCode() == 37 && getMovingX()==-1) {	// Å©
-				setMovingX(0);
-			} else if (e.getKeyCode() == 39 && getMovingX()==1) {	// Å®
-				setMovingX(0);
-			}
-		} else if (e.getKeyChar() == 32) {
+		if (keyConfig.isMoveLeftKey(e.getKeyCode(), e.getKeyChar()) && getMovingX() < 0) {
+			setMovingX(0);
+		} else if (keyConfig.isMoveRightKey(e.getKeyCode(), e.getKeyChar()) && getMovingX() > 0) {
+			setMovingX(0);
+		} else if (keyConfig.isShootKey(e.getKeyCode(), e.getKeyChar())) {
 			getWeapon().shoot();
 		}
 	}
