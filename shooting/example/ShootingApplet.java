@@ -110,14 +110,6 @@ public class ShootingApplet extends JApplet {
 		enemies[1] = new AIPlayer(shooting, 1, 30, 90, 0, 1);
 		enemies[2] = new AIPlayer(shooting, 1, shooting.getWidth()/2+40, 120, 0, 1);
 		enemies[3] = new AIPlayer(shooting, 1, shooting.getWidth()-30, 150, 0, 1);
-		for (Player enemy : enemies) {
-			enemy.addPlayerListener(new PlayerAdapter() {
-				public void playerDestroyed() {
-					System.out.println("destroyed");
-				}
-			});
-			shooting.addPlayer(enemy);
-		}
 	}
 
 	class StatusPanel extends JPanel {
