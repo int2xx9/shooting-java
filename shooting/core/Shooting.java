@@ -8,26 +8,23 @@ import java.util.*;
 public class Shooting extends JPanel {
 	LazerCollection lazers = new LazerCollection();
 	PlayerCollection players = new PlayerCollection();
+		public void addPlayer(Player player) { players.addPlayer(player); }
 	//public Status status;
 	LinkedList<ShootingListener> shootingListeners = new LinkedList<ShootingListener>();
 	MainLoop mainLoop;
+		public boolean isRunning() { return mainLoop.isRunning(); }
+		public boolean isPaused() { return mainLoop.isPaused(); }
+		public void setRunning() { mainLoop.setRunning(); }
+		public void setPaused() { mainLoop.setPaused(); }
+		public void addMainLoopJob(MainLoopJob job) { mainLoop.addJob(job); }
 	private boolean isGameovered = false;
+		public boolean isGameovered() { return isGameovered; }
 
 	//private static final int[] keyseq = {38, 38, 40, 40, 37, 39, 37, 39, 66, 65};
 	private static final int[] keyseq = {38, 38, 38};
 	private int keyseq_cur = 0;
 	private boolean keyseq_on = false;
 	public boolean isKeyseqOn() { return keyseq_on; }
-
-	public boolean isGameovered() { return isGameovered; }
-
-	public boolean isRunning() { return mainLoop.isRunning(); }
-	public boolean isPaused() { return mainLoop.isPaused(); }
-	public void setRunning() { mainLoop.setRunning(); }
-	public void setPaused() { mainLoop.setPaused(); }
-	public void addMainLoopJob(MainLoopJob job) { mainLoop.addJob(job); }
-
-	public void addPlayer(Player player) { players.addPlayer(player); }
 
 	public Shooting() {
 		super();
@@ -131,11 +128,11 @@ public class Shooting extends JPanel {
 	}
 
 	class MainLoop extends Thread {
-		private LinkedList<MainLoopJob> jobs;
-		private boolean isPaused;
+		private LinkedList<MainLoopJob> jobs = new LinkedList<MainLoopJob>();
+		private boolean isPaused = true;
+			boolean isRunning() { return !isPaused; }
+			boolean isPaused() { return isPaused; }
 
-		boolean isRunning() { return !isPaused; }
-		boolean isPaused() { return isPaused; }
 		void setRunning() {
 			if (!isGameovered()) {
 				isPaused = false;
@@ -149,11 +146,6 @@ public class Shooting extends JPanel {
 			for (ShootingListener listener : shootingListeners) {
 				listener.onGamePaused();
 			}
-		}
-
-		MainLoop() {
-			isPaused = true;
-			jobs = new LinkedList<MainLoopJob>();
 		}
 
 		void addJob(MainLoopJob job) {
