@@ -31,8 +31,14 @@ public class Shooting extends JPanel {
 		setBackground(Color.BLACK);
 		mainLoop = new MainLoop();
 		mainLoop.start();
-		mainLoop.addJob(lazers);
-		mainLoop.addJob(players);
+
+		mainLoop.addJob(new MainLoopJob() {
+			public void runMainLoopJob() {
+				lazers.runMainLoopJob();
+				players.runMainLoopJob();
+				repaint();
+			}
+		});
 
 		mainLoop.addJob(new MainLoopJob() {
 			public void runMainLoopJob() {
@@ -67,7 +73,6 @@ public class Shooting extends JPanel {
 
 		mainLoop.addJob(new MainLoopJob() {
 			public void runMainLoopJob() {
-				repaint();
 				requestFocus();
 			}
 		});
