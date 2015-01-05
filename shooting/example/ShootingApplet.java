@@ -141,6 +141,9 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 
 		shooting.requestFocus();
 		stageSelectPanel = new StageSelectPanel(shooting, this);
+		stageSelectPanel.addStage(new Stage1(shooting));
+		stageSelectPanel.addStage(new Stage2(shooting));
+		stageSelectPanel.addStage(new shooting.example.examplestage.ExampleStage(shooting));
 		stageSelectPanel.setBounds(5, 5, getWidth()-(5*2), getHeight()-50-5);
 		add(stageSelectPanel);
 		shooting.setVisible(false);

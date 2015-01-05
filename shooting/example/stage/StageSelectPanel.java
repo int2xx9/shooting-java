@@ -12,9 +12,6 @@ public class StageSelectPanel extends JPanel {
 	private int selectPosition = 0;
 
 	public StageSelectPanel(Shooting shooting, StageSelectListener listener) {
-		stages.add(new Stage1(shooting));
-		stages.add(new Stage2(shooting));
-
 		this.listener = listener;
 
 		setBackground(Color.BLACK);
@@ -35,6 +32,10 @@ public class StageSelectPanel extends JPanel {
 				repaint();
 			}
 		});
+	}
+
+	public void addStage(Stage stage) {
+		stages.add(stage);
 	}
 
 	public Stage getSelectedStage() {
