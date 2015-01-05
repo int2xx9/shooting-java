@@ -22,8 +22,13 @@ public abstract class Weapon implements MainLoopJob {
 		}
 	}
 
+	public void initialize() {
+		this.charged = true;
+		this.loopCount = 0;
+	}
+
 	public void shoot() {
-		if (player != null && charged) {
+		if (player != null && player.getShooting().isRunning() && charged) {
 			loopCount = 0;
 			charged = false;
 			Lazer lazer = null;

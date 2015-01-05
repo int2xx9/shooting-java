@@ -71,6 +71,7 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 			if (hitCount+notHitCount == 0) return 0;
 			return (int)(((double)notHitCount)/(hitCount+notHitCount)*100);
 		}
+	private int initialX, initialY;
 	private int x, y;
 		public void setCenterX(int value) { setX(value-this.getWidth()/2); }
 		public void setCenterY(int value) { setY(value-this.getHeight()/2); }
@@ -110,9 +111,18 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 	public Player(Shooting shooting, int team, int x, int y, int sx, int sy) {
 		this.shooting = shooting;
 		this.team = team;
-		this.x = x; this.y = y;
+		this.initialX = this.x = x;
+		this.initialY = this.y = y;
 		this.sx = sx; this.sy = sy;
 		this.weapon = dummyWeapon;
+	}
+
+	public void initialize() {
+		this.score = this.damage = this.combo =
+			this.hitCount = this.notHitCount = 0;
+		this.x = this.initialX;
+		this.y = this.initialY;
+		this.weapon.initialize();
 	}
 
 	public void addPlayerListener(PlayerListener listener) {

@@ -61,6 +61,7 @@ public class Shooting extends JPanel {
 					for (ShootingListener listener : shootingListeners) {
 						listener.onGameOvered();
 					}
+					repaint();
 				}
 			}
 		});
@@ -82,6 +83,15 @@ public class Shooting extends JPanel {
 						}
 					} else {
 						keyseq_cur = 0;
+					}
+				}
+				if (isGameovered) {
+					if (e.getKeyCode() == 82 && e.getKeyChar() == 114) {	// r
+						// restart
+						initializeGame();
+						for (ShootingListener listener : shootingListeners) {
+							listener.onGameRestarted();
+						}
 					}
 				}
 				players.keyPressed(e);
@@ -106,7 +116,20 @@ public class Shooting extends JPanel {
 			g.setColor(Color.RED);
 			g.setFont(new Font("Monospaced", Font.BOLD, 16));
 			g.drawString("gameover", getWidth()/2-30, getHeight()/2-8);
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Monospaced", Font.PLAIN, 12));
+			g.drawString("press R to restart", getWidth()/2-50, getHeight()/2+8);
 		}
+	}
+
+	public void initializeGame() {
+		setPaused();
+		this.isGameovered = false;
+		this.keyseq_cur = 0;
+		this.keyseq_on = false;
+		players.initialize();
+		lazers.initialize();
+		repaint();
 	}
 
 	public void addShootingListener(ShootingListener listener) {
@@ -173,6 +196,10 @@ public class Shooting extends JPanel {
 			lazers.add(lazer);
 		}
 
+		public synchronized void initialize() {
+			lazers = new LinkedList<Lazer>();
+		}
+
 		public synchronized void runMainLoopJob() {
 			// ListÇÕforeachÇµÇ»Ç™ÇÁremoveÇ≈Ç´Ç»Ç¢ÇÃÇ≈ó\ÇﬂÉRÉsÅ[ÇµÇƒÇ®Ç≠
 			LinkedList<Lazer> work_lazers = new LinkedList<Lazer>(lazers);
@@ -228,6 +255,12 @@ public class Shooting extends JPanel {
 
 		public Player[] getPlayers() {
 			return this.players.toArray(new Player[this.players.size()]);
+		}
+
+		public void initialize() {
+			for (Player player : players) {
+				player.initialize();
+			}
 		}
 
 		void addPlayer(Player player) {

@@ -47,8 +47,12 @@ public class ShootingApplet extends JApplet {
 			public void onGamePaused() {
 				resumePauseButton.setText("çƒäJ");
 			}
+			public void onGameRestarted() {
+				statusPanel.repaint();
+			}
 		});
 		resumePauseButton.setBounds(5, ctrlY+5, 100, 40);
+		resumePauseButton.addActionListener(new MoveFocusListener());
 		add(resumePauseButton);
 
 		leftButton = new JButton("Å©");
@@ -62,6 +66,7 @@ public class ShootingApplet extends JApplet {
 			}
 		});
 		leftButton.setBounds(110, ctrlY+5, 50, 40);
+		leftButton.addActionListener(new MoveFocusListener());
 		add(leftButton);
 
 		rightButton = new JButton("Å®");
@@ -75,6 +80,7 @@ public class ShootingApplet extends JApplet {
 			}
 		});
 		rightButton.setBounds(165, ctrlY+5, 50, 40);
+		rightButton.addActionListener(new MoveFocusListener());
 		add(rightButton);
 
 		shootButton = new JButton("Å™");
@@ -86,6 +92,7 @@ public class ShootingApplet extends JApplet {
 			}
 		});
 		shootButton.setBounds(220, ctrlY+5, 50, 40);
+		shootButton.addActionListener(new MoveFocusListener());
 		add(shootButton);
 
 		statusPanel = new StatusPanel();
@@ -112,6 +119,14 @@ public class ShootingApplet extends JApplet {
 		enemies[3] = new AIPlayer(shooting, 1, shooting.getWidth()-30, 150, 0, 1);
 		for (Player enemy : enemies) {
 			shooting.addPlayer(enemy);
+		}
+
+		shooting.requestFocus();
+	}
+
+	class MoveFocusListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			shooting.requestFocus();
 		}
 	}
 

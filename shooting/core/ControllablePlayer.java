@@ -20,6 +20,12 @@ public class ControllablePlayer extends Player {
 		setWeapon(new DefaultWeapon(this));
 	}
 
+	public void initialize() {
+		super.initialize();
+		setMovingX(0);
+		setMovingY(0);
+	}
+
 	private static final int moveInterval = 5;
 	private int moveIntervalCnt = 0;
 	public void runMainLoopJob() {
