@@ -9,6 +9,7 @@ public class Shooting extends JPanel {
 	LazerCollection lazers = new LazerCollection();
 	PlayerCollection players = new PlayerCollection();
 		public void addPlayer(Player player) { players.addPlayer(player); }
+		public void clearPlayers() { players.clear(); }
 	//public Status status;
 	LinkedList<ShootingListener> shootingListeners = new LinkedList<ShootingListener>();
 	MainLoop mainLoop;
@@ -105,6 +106,8 @@ public class Shooting extends JPanel {
 				players.keyTyped(e);
 			}
 		});
+
+		initializeGame();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -129,6 +132,9 @@ public class Shooting extends JPanel {
 		this.keyseq_on = false;
 		players.initialize();
 		lazers.initialize();
+		for (ShootingListener listener : shootingListeners) {
+			listener.onGameInitialized();
+		}
 		repaint();
 	}
 
@@ -261,6 +267,10 @@ public class Shooting extends JPanel {
 			for (Player player : players) {
 				player.initialize();
 			}
+		}
+
+		public void clear() {
+			players = new ArrayList<Player>();
 		}
 
 		void addPlayer(Player player) {

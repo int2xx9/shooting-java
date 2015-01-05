@@ -1,17 +1,21 @@
 package shooting.example;
 
 import shooting.core.*;
+import shooting.example.stage.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class ShootingApplet extends JApplet {
+public class ShootingApplet extends JApplet implements StageSelectListener {
 	JButton resumePauseButton;
+	JButton stageSelectButton;
 	JButton leftButton;
 	JButton rightButton;
 	JButton shootButton;
+	StageSelectPanel stageSelectPanel;
 	StatusPanel statusPanel;
+	JPanel currentPanel;	// stageSelectPanelとstatusPanelのうち現在表示されているパネル
 	Shooting shooting;
 	ControllablePlayer player;
 	Player[] enemies;
@@ -36,11 +40,20 @@ public class ShootingApplet extends JApplet {
 				if (shooting.isRunning()) {
 					shooting.setPaused();
 				} else {
+					if (!shooting.isVisible()) {
+						stageSelectPanel.setVisible(false);
+						shooting.setVisible(true);
+						currentPanel = shooting;
+						currentPanel.requestFocus();
+					}
 					shooting.setRunning();
 				}
 			}
 		});
 		shooting.addShootingListener(new ShootingAdapter() {
+			public void onGameInitialized() {
+				resumePauseButton.setText("開始");
+			}
 			public void onGameResumed() {
 				resumePauseButton.setText("一時停止");
 			}
@@ -65,7 +78,7 @@ public class ShootingApplet extends JApplet {
 				player.setMovingX(0);
 			}
 		});
-		leftButton.setBounds(110, ctrlY+5, 50, 40);
+		leftButton.setBounds(110, ctrlY+25, 50, 20);
 		leftButton.addActionListener(new MoveFocusListener());
 		add(leftButton);
 
@@ -79,7 +92,7 @@ public class ShootingApplet extends JApplet {
 				player.setMovingX(0);
 			}
 		});
-		rightButton.setBounds(165, ctrlY+5, 50, 40);
+		rightButton.setBounds(160, ctrlY+25, 50, 20);
 		rightButton.addActionListener(new MoveFocusListener());
 		add(rightButton);
 
@@ -91,13 +104,27 @@ public class ShootingApplet extends JApplet {
 				}
 			}
 		});
-		shootButton.setBounds(220, ctrlY+5, 50, 40);
+		shootButton.setBounds(110, ctrlY+5, 100, 20);
 		shootButton.addActionListener(new MoveFocusListener());
 		add(shootButton);
 
 		statusPanel = new StatusPanel();
-		statusPanel.setBounds(275, ctrlY+5, getWidth()-275-5, 40);
+		statusPanel.setBounds(215, ctrlY+5, getWidth()-215-5, 20);
 		add(statusPanel);
+
+		stageSelectButton = new JButton("ステージ選択");
+		stageSelectButton.setBounds(getWidth()-120-5, ctrlY+25, 120, 20);
+		stageSelectButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				shooting.setPaused();
+				shooting.setVisible(false);
+				stageSelectPanel.setVisible(true);
+				currentPanel = stageSelectPanel;
+				currentPanel.requestFocus();
+			}
+		});
+		stageSelectButton.addActionListener(new MoveFocusListener());
+		add(stageSelectButton);
 
 		shooting.addPlayer(player);
 		player.addPlayerListener(new PlayerAdapter() {
@@ -112,21 +139,31 @@ public class ShootingApplet extends JApplet {
 			}
 		});
 
-		enemies = new Player[4];
-		enemies[0] = new AIPlayer(shooting, 1, shooting.getWidth()/2, 60, 0, 1);
-		enemies[1] = new AIPlayer(shooting, 1, 30, 90, 0, 1);
-		enemies[2] = new AIPlayer(shooting, 1, shooting.getWidth()/2+40, 120, 0, 1);
-		enemies[3] = new AIPlayer(shooting, 1, shooting.getWidth()-30, 150, 0, 1);
-		for (Player enemy : enemies) {
-			shooting.addPlayer(enemy);
-		}
-
 		shooting.requestFocus();
+		stageSelectPanel = new StageSelectPanel(shooting, this);
+		stageSelectPanel.setBounds(5, 5, getWidth()-(5*2), getHeight()-50-5);
+		add(stageSelectPanel);
+		shooting.setVisible(false);
+		currentPanel = stageSelectPanel;
+		currentPanel.requestFocus();
+	}
+
+	public void stageSelected(Stage selectedStage) {
+		shooting.clearPlayers();
+		shooting.addPlayer(player);
+		for (Player player : selectedStage.getEnemies()) {
+			shooting.addPlayer(player);
+		}
+		shooting.initializeGame();
+		stageSelectPanel.setVisible(false);
+		shooting.setVisible(true);
+		currentPanel = shooting;
+		currentPanel.requestFocus();
 	}
 
 	class MoveFocusListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			shooting.requestFocus();
+			currentPanel.requestFocus();
 		}
 	}
 
