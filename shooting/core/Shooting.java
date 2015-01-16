@@ -86,6 +86,11 @@ public class Shooting extends JPanel {
 						keyseq_cur = 0;
 					}
 				}
+				if (!isGameovered && isPaused()) {
+					if (e.getKeyCode() == 40 && e.getKeyChar() == 65535) {	// Å´
+						setRunning();
+					}
+				}
 				if (isGameovered) {
 					if (e.getKeyCode() == 82 && e.getKeyChar() == 114) {	// r
 						// restart
