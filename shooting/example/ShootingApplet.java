@@ -2,44 +2,54 @@ package shooting.example;
 
 import shooting.core.*;
 import shooting.example.stage.*;
+import shooting.example.examplestage.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
+/// アプレットクラス
 public class ShootingApplet extends JApplet implements StageSelectListener {
-	JButton resumePauseButton;
-	JButton stageSelectButton;
-	JButton leftButton;
-	JButton rightButton;
-	JButton shootButton;
-	StageSelectPanel stageSelectPanel;
-	StatusPanel statusPanel;
-	JPanel currentPanel;	// stageSelectPanelとstatusPanelのうち現在表示されているパネル
-	Shooting shooting;
-	ControllablePlayer player;
-	Player[] enemies;
+	JButton resumePauseButton;	///< 一時停止・再開ボタン
+	JButton stageSelectButton;	///< ステージ選択ボタン
+	JButton leftButton;		///< 左移動ボタン
+	JButton rightButton;	///< 右移動ボタン
+	JButton shootButton;	///< 発射ボタン
+	StageSelectPanel stageSelectPanel;	///< ステージ選択用パネル
+	StatusPanel statusPanel;	///< スコア等を表示するパネル
+	JPanel currentPanel;		///< stageSelectPanelとshootingのうち現在表示されているパネル
+	Shooting shooting;			///< ゲーム画面
+	ControllablePlayer player;	///< 自機
+	Player[] enemies;			///< 敵機
 
 	public void init() {
 		setLayout(null);
 
+		// ゲーム画面の配置
 		shooting = new Shooting();
 		shooting.setBounds(5, 5, getWidth()-(5*2), getHeight()-50-5);
 		add(shooting);
 
+		// 自機の準備
 		player = new ControllablePlayer(shooting, 0, shooting.getWidth()/2, shooting.getHeight()-60, 0, -1);
 		player.getKeyConfig().setMoveLeftKey(37, 65535);	// ←
 		player.getKeyConfig().setMoveRightKey(39, 65535);	// →
 		player.getKeyConfig().setShootKey(38, 65535);			// ↑
 
+		// 移動ボタンなどのゲーム画面の下に配置するボタンやパネルのY位置のオフセット
 		int ctrlY = getHeight()-50;
 
+		// 開始/再開/一時停止ボタン
 		resumePauseButton = new JButton("開始");
 		resumePauseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (shooting.isRunning()) {
+					// 既に動いていたら一時停止
 					shooting.setPaused();
 				} else {
+					// 動いていなければ再開
+					// shootingが表示されていなければstageSelectPanelを閉じ
+					// フォーカスをshootingに移動する
 					if (!shooting.isVisible()) {
 						stageSelectPanel.setVisible(false);
 						shooting.setVisible(true);
@@ -68,6 +78,7 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		resumePauseButton.addActionListener(new MoveFocusListener());
 		add(resumePauseButton);
 
+		// 左移動ボタン
 		leftButton = new JButton("←");
 		leftButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -82,6 +93,7 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		leftButton.addActionListener(new MoveFocusListener());
 		add(leftButton);
 
+		// 右移動ボタン
 		rightButton = new JButton("→");
 		rightButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -96,6 +108,7 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		rightButton.addActionListener(new MoveFocusListener());
 		add(rightButton);
 
+		// 発射ボタン
 		shootButton = new JButton("↑");
 		shootButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -108,14 +121,17 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		shootButton.addActionListener(new MoveFocusListener());
 		add(shootButton);
 
+		// スコア等の情報を表示するパネル
 		statusPanel = new StatusPanel();
 		statusPanel.setBounds(215, ctrlY+5, getWidth()-215-5, 20);
 		add(statusPanel);
 
+		// ステージ選択ボタン
 		stageSelectButton = new JButton("ステージ選択");
 		stageSelectButton.setBounds(getWidth()-120-5, ctrlY+25, 120, 20);
 		stageSelectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// ゲームを一時停止させ非表示にした後ステージ選択画面を表示
 				shooting.setPaused();
 				shooting.setVisible(false);
 				stageSelectPanel.setVisible(true);
@@ -126,7 +142,9 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		stageSelectButton.addActionListener(new MoveFocusListener());
 		add(stageSelectButton);
 
+		// shootingに自機をPlayerとして追加
 		shooting.addPlayer(player);
+		// スコア等が更新されたときstatusPanelを更新する
 		player.addPlayerListener(new PlayerAdapter() {
 			public void scoreUpdated() {
 				statusPanel.repaint();
@@ -139,37 +157,54 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 			}
 		});
 
-		shooting.requestFocus();
+		// ステージ選択画面
 		stageSelectPanel = new StageSelectPanel(shooting, this);
 		stageSelectPanel.addStage(new Stage1(shooting));
 		stageSelectPanel.addStage(new Stage2(shooting));
-		stageSelectPanel.addStage(new shooting.example.examplestage.ExampleStage(shooting));
+		stageSelectPanel.addStage(new ExampleStage(shooting));
 		stageSelectPanel.setBounds(5, 5, getWidth()-(5*2), getHeight()-50-5);
 		add(stageSelectPanel);
+
+		// shootingを非表示にする
 		shooting.setVisible(false);
 		currentPanel = stageSelectPanel;
 		currentPanel.requestFocus();
 	}
 
+	/// ステージ選択画面でステージが選ばれた
+	/// @param selectedStage 選択されたステージ
 	public void stageSelected(Stage selectedStage) {
+		// Playerを全て削除し自機と選択されたステージの敵機を追加
 		shooting.clearPlayers();
 		shooting.addPlayer(player);
 		for (Player player : selectedStage.getEnemies()) {
 			shooting.addPlayer(player);
 		}
+
+		// ゲーム初期化
 		shooting.initializeGame();
+
+		// shootingを表示
 		stageSelectPanel.setVisible(false);
 		shooting.setVisible(true);
 		currentPanel = shooting;
 		currentPanel.requestFocus();
 	}
 
+	/// クリックしたときにフォーカスをcurrentPanelに移動するリスナ
 	class MoveFocusListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			currentPanel.requestFocus();
 		}
 	}
 
+	/// スコアなどの情報を表示するパネル
+	/// 表示する情報は今のところ
+	/// * 命中率
+	/// * 撃った弾が当たった数
+	/// * 撃った弾が外れた数
+	/// * 現在のダメージ
+	/// * スコア
 	class StatusPanel extends JPanel {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
