@@ -193,6 +193,13 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 		/// @return 設定されている武器
 		/// @return 破壊済みであれば発射不可能なダミーのWeaponを返す
 		public Weapon getWeapon() { return isAlive() ? this.weapon : dummyWeapon; }
+	private Image image = null;	///< 機体の画像
+		/// 機体の画像の設定
+		/// @param value 設定する画像
+		public void setImage(Image value) { this.image = value; }
+		/// 機体の画像の取得
+		/// @return 設定されている画像
+		public Image getImage() { return this.image; }
 
 	/// コンストラクタ
 	/// @param shooting Shootingクラスのオブジェクト
@@ -201,7 +208,19 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 	/// @param sx 発射の方向・速さのX座標
 	/// @param sy 発射の方向・速さのY座標
 	public Player(Shooting shooting, int team, int x, int y, int sx, int sy) {
+		this(shooting, null, team, x, y, sx, sy);
+	}
+
+	/// コンストラクタ
+	/// @param shooting Shootingクラスのオブジェクト
+	/// @param image 機体の画像
+	/// @param x 配置する左上からのX座標
+	/// @param y 配置する左上からのY座標
+	/// @param sx 発射の方向・速さのX座標
+	/// @param sy 発射の方向・速さのY座標
+	public Player(Shooting shooting, Image image, int team, int x, int y, int sx, int sy) {
 		this.shooting = shooting;
+		this.image = image;
 		this.team = team;
 		this.initialX = this.x = x;
 		this.initialY = this.y = y;
@@ -240,8 +259,12 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 	/// @param g
 	public void paintObject(Graphics g) {
 		if (isAlive()) {
-			g.setColor(Color.WHITE);
-			g.fillRect(getX(), getY(), getWidth(), getHeight());
+			if (image != null) {
+				g.drawImage(image, getX(), getY(), null);
+			} else {
+				g.setColor(Color.WHITE);
+				g.fillRect(getX(), getY(), getWidth(), getHeight());
+			}
 
 			if (shooting.isKeyseqOn()) {
 				g.setColor(Color.RED);

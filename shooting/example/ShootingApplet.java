@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import javax.imageio.ImageIO;
+import java.net.URL;
 
 /// アプレットクラス
 public class ShootingApplet extends JApplet implements StageSelectListener {
@@ -31,7 +33,18 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		add(shooting);
 
 		// 自機の準備
-		player = new ControllablePlayer(shooting, 0, shooting.getWidth()/2, shooting.getHeight()-60, 0, -1);
+		Image playerImage = getImageImmediately(getDocumentBase(), "k1_p3a.png");
+		if (playerImage != null) {
+			player = new ControllablePlayer(shooting, playerImage, 0,
+					shooting.getWidth()/2-playerImage.getWidth(null)/2,
+					shooting.getHeight()-60,
+					0, -1);
+		} else {
+			player = new ControllablePlayer(shooting, playerImage, 0,
+					shooting.getWidth()/2-ControllablePlayer.DEFAULT_WIDTH/2,
+					shooting.getHeight()-60,
+					0, -1);
+		}
 		player.getKeyConfig().setMoveLeftKey(37, 65535);	// ←
 		player.getKeyConfig().setMoveRightKey(39, 65535);	// →
 		player.getKeyConfig().setShootKey(38, 65535);			// ↑
@@ -189,6 +202,19 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		shooting.setVisible(true);
 		currentPanel = shooting;
 		currentPanel.requestFocus();
+	}
+
+	/// 画像を即時読み込むgetImage
+	/// JApplet.getImage()は必要になってから画像を読み込むので、オブジェクト作成時点ではgetWidth(), getHeight()などが使えないためその対策
+	/// @param url base url
+	/// @param name ファイル名
+	/// @return 画像を読み込めた場合Imageオブジェクト, 読み込みに失敗した場合null
+	public Image getImageImmediately(URL url, String name) {
+		try {
+			return ImageIO.read(new URL(url, name));
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	/// クリックしたときにフォーカスをcurrentPanelに移動するリスナ
