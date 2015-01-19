@@ -227,7 +227,7 @@ public class Shooting extends JPanel {
 						job.runMainLoopJob();
 					}
 				}
-				try { Thread.sleep(1); } catch (InterruptedException e) {}
+				try { Thread.sleep(16); } catch (InterruptedException e) {}
 			}
 		}
 	}

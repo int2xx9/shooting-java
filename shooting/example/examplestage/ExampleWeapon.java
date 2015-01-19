@@ -22,7 +22,7 @@ public class ExampleWeapon extends Weapon {
 		}
 	};
 
-	public static final int INTERVAL = 3000;	///< ”­ŽË‰Â”\‚É‚È‚é‚Ü‚Å‚ÌŠÔŠu
+	public static final int INTERVAL = 75;	///< ”­ŽË‰Â”\‚É‚È‚é‚Ü‚Å‚ÌŠÔŠu
 	/// ”­ŽË‰Â”\‚É‚È‚é‚Ü‚Å‚ÌŠÔŠu‚ÌŽæ“¾
 	/// @return ”­ŽË‰Â”\‚É‚È‚é‚Ü‚Å‚ÌŠÔŠu
 	public int getInterval() { return INTERVAL; }

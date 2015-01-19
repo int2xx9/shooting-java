@@ -21,7 +21,7 @@ public class DefaultLazer extends Lazer {
 	/// @param sx XŽ²‚Ì”­ŽË‚·‚é•ûŒü‚Æ‘¬“x
 	/// @param sy YŽ²‚Ì”­ŽË‚·‚é•ûŒü‚Æ‘¬“x
 	public DefaultLazer(Player player, int x, int y, int sx, int sy) {
-		super(player, x, y, sx, sy);
+		super(player, x, y, sx, sy*8);
 	}
 }
 

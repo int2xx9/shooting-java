@@ -43,13 +43,9 @@ public class AIPlayer extends Player {
 		super(shooting, team, x, y, sx, sy);
 		setImage(image);
 		setWeapon(new DefaultWeapon(this));
-		setMovingX(1);
+		setMovingX(2);
 	}
 
-	/// メインループから呼ばれた時何度に一度処理を行うか
-	private static final int moveInterval = 5;
-	/// moveInterval回に一度実行を制御するためのカウンタ
-	private int moveIntervalCnt = 0;
 	/// メインループから呼ばれる処理
 	///
 	/// ここでは移動と弾の発射処理を行っている
@@ -59,15 +55,11 @@ public class AIPlayer extends Player {
 		if ((int)(Math.random()*1000) == 0) {
 			getWeapon().shoot();
 		}
-		if (moveIntervalCnt == moveInterval) {
-			// これ以上今の向きへ進めなくなったら方向転換する
-			if (!canMoveTo(getX()+getMovingX(), getY(), getWidth(), getHeight())) {
-				setMovingX(-getMovingX());
-			}
-			setX(getX()+getMovingX());
-			moveIntervalCnt = 0;
+		// これ以上今の向きへ進めなくなったら方向転換する
+		if (!canMoveTo(getX()+getMovingX(), getY(), getWidth(), getHeight())) {
+			setMovingX(-getMovingX());
 		}
-		moveIntervalCnt++;
+		setX(getX()+getMovingX());
 	}
 }
 

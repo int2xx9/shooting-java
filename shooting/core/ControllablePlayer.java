@@ -58,28 +58,20 @@ public class ControllablePlayer extends Player {
 		setMovingY(0);
 	}
 
-	/// メインループから呼ばれた時何度に一度処理を行うか
-	private static final int moveInterval = 5;
-	/// moveInterval回に一度実行を制御するためのカウンタ
-	private int moveIntervalCnt = 0;
 	/// メインループから呼ばれる処理
 	///
 	/// ここでは移動処理を行っている
 	public void runMainLoopJob() {
-		if (moveIntervalCnt == moveInterval) {
-			setX(getX() + getMovingX());
-			moveIntervalCnt = 0;
-		}
-		moveIntervalCnt++;
+		setX(getX() + getMovingX());
 	}
 
 	/// キーが押された場合の処理
 	/// @param e KeyEventのオブジェクト
 	public void keyPressed(KeyEvent e) {
 		if (keyConfig.isMoveLeftKey(e.getKeyCode(), e.getKeyChar())) {
-			setMovingX(-1);
+			setMovingX(-3);
 		} else if (keyConfig.isMoveRightKey(e.getKeyCode(), e.getKeyChar())) {
-			setMovingX(1);
+			setMovingX(3);
 		}
 	}
 
