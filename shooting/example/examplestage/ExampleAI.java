@@ -29,7 +29,7 @@ public class ExampleAI extends Player {
 	/// @param sx 発射の方向・速さのX座標
 	/// @param sy 発射の方向・速さのY座標
 	public ExampleAI(Shooting shooting, int team, int x, int y, int sx, int sy) {
-		super(shooting, null, team, x, y, sx, sy);
+		this(shooting, null, team, x, y, sx, sy);
 	}
 
 	/// コンストラクタ
@@ -41,7 +41,7 @@ public class ExampleAI extends Player {
 	/// @param sx 発射の方向・速さのX座標
 	/// @param sy 発射の方向・速さのY座標
 	public ExampleAI(Shooting shooting, Image image, int team, int x, int y, int sx, int sy) {
-		super(shooting, team, x, y, sx, sy);
+		super(shooting, team, x, y, sx, sy*5);
 		setImage(image);
 		setWeapon(new ExampleWeapon(this));
 		setMovingX(1);
