@@ -9,7 +9,7 @@ import java.awt.event.*;
 public class AIPlayer extends Player {
 	public static final int DEFAULT_WIDTH = 25;	///< デフォルトの幅
 	public static final int DEFAULT_HEIGHT = 25;	///< デフォルトの高さ
-	public static final int MAX_DAMAGE = 50;	///< 最大ダメージ
+	public static final int MAX_DAMAGE = 30;	///< 最大ダメージ
 	/// 幅の取得
 	/// @return 幅
 	public int getWidth() { return getImage() != null ? getImage().getWidth(null) : DEFAULT_WIDTH; }

@@ -24,6 +24,9 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 	ControllablePlayer player;	///< 自機
 	Player[] enemies;			///< 敵機
 
+	/// 画像読み込み用クラス
+	DocumentBaseImageLoader imgLoader = new DocumentBaseImageLoader(this);
+
 	public void init() {
 		setLayout(null);
 
@@ -33,7 +36,7 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		add(shooting);
 
 		// 自機の準備
-		Image playerImage = getImageImmediately(getDocumentBase(), "k1_p3a.png");
+		Image playerImage = imgLoader.getImageImmediately("k1_p3a.png");
 		if (playerImage != null) {
 			player = new ControllablePlayer(shooting, playerImage, 0,
 					shooting.getWidth()/2-playerImage.getWidth(null)/2,
@@ -172,9 +175,9 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 
 		// ステージ選択画面
 		stageSelectPanel = new StageSelectPanel(shooting, this);
-		stageSelectPanel.addStage(new Stage1(shooting));
-		stageSelectPanel.addStage(new Stage2(shooting));
-		stageSelectPanel.addStage(new ExampleStage(shooting));
+		stageSelectPanel.addStage(new Stage1(shooting, imgLoader));
+		stageSelectPanel.addStage(new Stage2(shooting, imgLoader));
+		stageSelectPanel.addStage(new ExampleStage(shooting, imgLoader));
 		stageSelectPanel.setBounds(5, 5, getWidth()-(5*2), getHeight()-50-5);
 		add(stageSelectPanel);
 
@@ -202,19 +205,6 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		shooting.setVisible(true);
 		currentPanel = shooting;
 		currentPanel.requestFocus();
-	}
-
-	/// 画像を即時読み込むgetImage
-	/// JApplet.getImage()は必要になってから画像を読み込むので、オブジェクト作成時点ではgetWidth(), getHeight()などが使えないためその対策
-	/// @param url base url
-	/// @param name ファイル名
-	/// @return 画像を読み込めた場合Imageオブジェクト, 読み込みに失敗した場合null
-	public Image getImageImmediately(URL url, String name) {
-		try {
-			return ImageIO.read(new URL(url, name));
-		} catch (Exception e) {
-			return null;
-		}
 	}
 
 	/// クリックしたときにフォーカスをcurrentPanelに移動するリスナ
