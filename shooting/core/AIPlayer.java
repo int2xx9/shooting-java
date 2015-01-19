@@ -51,6 +51,7 @@ public class AIPlayer extends Player {
 	/// moveInterval回に一度実行を制御するためのカウンタ
 	private int moveIntervalCnt = 0;
 	/// メインループから呼ばれる処理
+	///
 	/// ここでは移動と弾の発射処理を行っている
 	public void runMainLoopJob() {
 		// 1/1000の確率で弾を発射する

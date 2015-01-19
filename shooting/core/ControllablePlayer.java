@@ -63,6 +63,7 @@ public class ControllablePlayer extends Player {
 	/// moveInterval回に一度実行を制御するためのカウンタ
 	private int moveIntervalCnt = 0;
 	/// メインループから呼ばれる処理
+	///
 	/// ここでは移動処理を行っている
 	public void runMainLoopJob() {
 		if (moveIntervalCnt == moveInterval) {

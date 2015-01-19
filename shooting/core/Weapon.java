@@ -65,6 +65,7 @@ public abstract class Weapon implements MainLoopJob {
 	}
 
 	/// メインループから呼ばれる処理
+	///
 	/// ここでは発射できるかどうかの制御を行っている
 	public void runMainLoopJob() {
 		if (!charged) {
@@ -77,11 +78,13 @@ public abstract class Weapon implements MainLoopJob {
 }
 
 /// 弾の発射ができないダミーのWeapon
+///
 /// どのオブジェクトでも共通のものを使用するためシングルトンにしてある
 class DummyWeapon extends Weapon {
 	/// このクラスのインスタンス
 	private static DummyWeapon instance = new DummyWeapon();
 	/// 発射可能になるまでの間隔の取得
+	///
 	/// 発射可能になることはないのでWeapon.INTERVAL_INFINITYを返す
 	/// @return Weapon.INTERVAL_INFINITY
 	public int getInterval() { return Weapon.INTERVAL_INFINITY; }
@@ -90,6 +93,7 @@ class DummyWeapon extends Weapon {
 	/// @return null
 	public LazerGenerator getGenerator(Player player) { return null; }
 	/// コンストラクタ
+	///
 	/// 外部からインスタンス化できないようにprivateにしてある
 	private DummyWeapon() { super(null); }
 	/// DummyWeaponインスタンスの取得

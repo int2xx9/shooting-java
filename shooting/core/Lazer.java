@@ -55,6 +55,7 @@ public abstract class Lazer implements MainLoopJob, ShootingObject {
 	}
 
 	/// ƒƒCƒ“ƒ‹[ƒv‚©‚çŒÄ‚Î‚ê‚éˆ—
+	///
 	/// ‚±‚±‚Å‚ÍˆÚ“®
 	public void runMainLoopJob() {
 		x += sx;
@@ -69,6 +70,7 @@ public abstract class Lazer implements MainLoopJob, ShootingObject {
 	}
 
 	/// “–‚½‚è”»’è
+	///
 	/// ‚Æ‚è‚ ‚¦‚¸Lazer‚Í“–‚½‚è”»’è‚ğ‚½‚È‚¢‚Ì‚Åí‚Éfalse‚ğ•Ô‚·
 	/// @return false
 	public boolean isHit(Lazer lazer) {

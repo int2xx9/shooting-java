@@ -215,6 +215,7 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 	}
 
 	/// スコアなどの情報を表示するパネル
+	///
 	/// 表示する情報は今のところ
 	/// * 命中率
 	/// * 撃った弾が当たった数
