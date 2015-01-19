@@ -268,7 +268,7 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 
 			if (shooting.isKeyseqOn()) {
 				g.setColor(Color.RED);
-				g.drawString((getWeapon().isCharged() ? "*" : "-") + damage + "/" + getMaxDamage(), getX()+5, getY()+5);
+				g.drawString((getWeapon().isCharged() ? "*" : "-") + damage + "/" + getMaxDamage() + " " + getScore(), getX()+5, getY()+5);
 			}
 		}
 	}
