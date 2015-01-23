@@ -18,7 +18,8 @@ public abstract class Weapon implements MainLoopJob {
 
 	private int loopCount = 0;	///< 発射間隔を制御するためのカウンタ
 	private Player player;	///< このWeaponに紐付けられているPlayer
-	private boolean charged = true;	///< 発射可能かどうか
+	private boolean initialCharged;	///< chargedの初期値
+	private boolean charged;	///< 発射可能かどうか
 		/// 発射可能かどうか
 		/// @return 発射可能な場合true, 不可能な場合false
 		public boolean isCharged() { return this.charged; }
@@ -26,7 +27,15 @@ public abstract class Weapon implements MainLoopJob {
 	/// コンストラクタ
 	/// @param player Playerのオブジェクト
 	public Weapon(Player player) {
+		this(player, true);
+	}
+
+	/// コンストラクタ
+	/// @param player Playerのオブジェクト
+	/// @param charged chargedの状態をtrueにするかfalseにするか
+	public Weapon(Player player, boolean charged) {
 		this.player = player;
+		this.initialCharged = charged;
 		// INTERVAL_INFINITYの場合は意味がないのでメインループに登録しない
 		if (getInterval() != INTERVAL_INFINITY) {
 			this.player.getShooting().addMainLoopJob(this);
@@ -37,7 +46,7 @@ public abstract class Weapon implements MainLoopJob {
 	/// 初期化
 	public void initialize() {
 		// INTERVAL_INFINITYでない場合のみ発射可能な状態で初期化する
-		this.charged = getInterval() != INTERVAL_INFINITY;
+		this.charged = this.initialCharged;
 		this.loopCount = 0;
 	}
 
