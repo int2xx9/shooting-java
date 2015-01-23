@@ -69,7 +69,7 @@ public class Shooting extends JPanel {
 							if (player.getTeam() == teams.get(0)) {
 								int score = player.getScore();
 								double hitPercent = (double)player.getHitCount()/(player.getHitCount()+player.getNotHitCount());
-								double damagePercent = (double)player.getDamage()/player.getMaxDamage();
+								double damagePercent = 1.0-(player.getDamage()/player.getMaxDamage());
 								score = (int)(score * (1+hitPercent) * (1+damagePercent));
 								player.setScore(score);
 							}
