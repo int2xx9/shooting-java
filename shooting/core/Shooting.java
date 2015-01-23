@@ -15,6 +15,8 @@ public class Shooting extends JPanel {
 		public void addPlayer(Player player) { players.addPlayer(player); }
 		/// Playerの全削除
 		public void clearPlayers() { players.clear(); }
+		/// Playerの配列
+		public Player[] getPlayers() { return players.getPlayers(); }
 	/// ゲームに関するイベントのリスナのリスト
 	LinkedList<ShootingListener> shootingListeners = new LinkedList<ShootingListener>();
 	MainLoop mainLoop;	///< メインループ
