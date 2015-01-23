@@ -50,9 +50,9 @@ public class AIPlayer extends Player {
 	///
 	/// ここでは移動と弾の発射処理を行っている
 	public void runMainLoopJob() {
-		// 1/1000の確率で弾を発射する
+		// 1/30の確率で弾を発射する
 		// (ただしWeaponが発射可能状態でなければ発射しない)
-		if ((int)(Math.random()*1000) == 0) {
+		if ((int)(Math.random()*30) == 0) {
 			getWeapon().shoot();
 		}
 		// これ以上今の向きへ進めなくなったら方向転換する
