@@ -22,7 +22,7 @@ public class ExampleWeapon extends Weapon {
 		}
 	};
 
-	public static final int INTERVAL = 75;	///< 発射可能になるまでの間隔
+	public static final int INTERVAL = 150;	///< 発射可能になるまでの間隔
 	/// 発射可能になるまでの間隔の取得
 	/// @return 発射可能になるまでの間隔
 	public int getInterval() { return INTERVAL; }
@@ -36,7 +36,7 @@ public class ExampleWeapon extends Weapon {
 	/// コンストラクタ
 	/// @param player 発射元となるPlayer
 	public ExampleWeapon(Player player) {
-		super(player);
+		super(player, false);
 	}
 }
 
