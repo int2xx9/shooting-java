@@ -71,6 +71,7 @@ public class ExampleAI extends Player implements PlayerListener {
 						getWeapon().shoot();
 					}
 				}
+			}
 		}
 
 		// 1/400‚ÌŠm—¦‚Å•ûŒü“]Š·‚·‚é
