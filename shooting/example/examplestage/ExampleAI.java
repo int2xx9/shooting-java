@@ -51,7 +51,7 @@ public class ExampleAI extends Player implements PlayerListener {
 
 	/// メインループから呼ばれる処理
 	///
-	/// ここでは移動と弾の発射処理を行っている
+	/// ここでは移動とレーザの発射処理を行っている
 	public void runMainLoopJob() {
 		// subWeaponは撃てる時は毎回撃つ
 		subWeapon.shoot();
@@ -98,7 +98,7 @@ public class ExampleAI extends Player implements PlayerListener {
 	public void comboUpdated() {
 	}
 
-	/// 弾が当たった回数が更新された
+	/// レーザが当たった回数が更新された
 	public void hitCountUpdated() {
 		// 1/10の確率で逆方向に移動する
 		if ((int)(Math.random()*10) == 0) {
@@ -106,7 +106,7 @@ public class ExampleAI extends Player implements PlayerListener {
 		}
 	}
 
-	/// 弾が外れた回数が更新された
+	/// レーザが外れた回数が更新された
 	public void notHitCountUpdated() {
 	}
 

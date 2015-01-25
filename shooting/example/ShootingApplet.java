@@ -177,6 +177,7 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		stageSelectPanel = new StageSelectPanel(shooting, this);
 		stageSelectPanel.addStage(new Stage1(shooting, imgLoader));
 		stageSelectPanel.addStage(new Stage2(shooting, imgLoader));
+		stageSelectPanel.addStage(new Stage3(shooting, imgLoader));
 		stageSelectPanel.addStage(new ExampleStage(shooting, imgLoader));
 		stageSelectPanel.setBounds(5, 5, getWidth()-(5*2), getHeight()-50-5);
 		add(stageSelectPanel);
@@ -218,8 +219,8 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 	///
 	/// 表示する情報は今のところ
 	/// * 命中率
-	/// * 撃った弾が当たった数
-	/// * 撃った弾が外れた数
+	/// * 撃ったレーザが当たった数
+	/// * 撃ったレーザが外れた数
 	/// * 現在のダメージ
 	/// * スコア
 	class StatusPanel extends JPanel {

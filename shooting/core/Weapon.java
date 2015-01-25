@@ -50,7 +50,7 @@ public abstract class Weapon implements MainLoopJob {
 		this.loopCount = 0;
 	}
 
-	/// 弾の発射
+	/// レーザの発射
 	public void shoot() {
 		if (player != null && player.getShooting().isRunning() && charged) {
 			loopCount = 0;
@@ -86,7 +86,7 @@ public abstract class Weapon implements MainLoopJob {
 	}
 }
 
-/// 弾の発射ができないダミーのWeapon
+/// レーザの発射ができないダミーのWeapon
 ///
 /// どのオブジェクトでも共通のものを使用するためシングルトンにしてある
 class DummyWeapon extends Weapon {

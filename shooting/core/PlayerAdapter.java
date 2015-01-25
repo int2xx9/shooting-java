@@ -8,9 +8,9 @@ public class PlayerAdapter implements PlayerListener {
 	public void damageUpdated() {}
 	/// コンボ数が更新された
 	public void comboUpdated() {}
-	/// 弾が当たった回数が更新された
+	/// レーザが当たった回数が更新された
 	public void hitCountUpdated() {}
-	/// 弾が外れた回数が更新された
+	/// レーザが外れた回数が更新された
 	public void notHitCountUpdated() {}
 	/// 破壊された
 	public void playerDestroyed() {}

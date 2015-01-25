@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-/// 自動で移動・弾の発射を行うPlayer
+/// 自動で移動・レーザの発射を行うPlayer
 public class AIPlayer extends Player {
 	public static final int DEFAULT_WIDTH = 25;	///< デフォルトの幅
 	public static final int DEFAULT_HEIGHT = 25;	///< デフォルトの高さ
@@ -48,9 +48,9 @@ public class AIPlayer extends Player {
 
 	/// メインループから呼ばれる処理
 	///
-	/// ここでは移動と弾の発射処理を行っている
+	/// ここでは移動とレーザの発射処理を行っている
 	public void runMainLoopJob() {
-		// 1/30の確率で弾を発射する
+		// 1/30の確率でレーザを発射する
 		// (ただしWeaponが発射可能状態でなければ発射しない)
 		if ((int)(Math.random()*30) == 0) {
 			getWeapon().shoot();

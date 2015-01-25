@@ -54,28 +54,28 @@ public class ControllablePlayerConfig {
 		public boolean isMoveRightKey(int keyCode, char keyChar) {
 			return moveRightKey != null && moveRightKey.isPressed(keyCode, keyChar);
 		}
-	private KeyCombo shootKey = null;	///< 弾を発射するキー
-		/// 弾を発射するキーの取得
-		/// @return 弾を発射するキー
+	private KeyCombo shootKey = null;	///< レーザを発射するキー
+		/// レーザを発射するキーの取得
+		/// @return レーザを発射するキー
 		public KeyCombo getShootKey() { return shootKey; }
-		/// 弾を発射するキーの設定
-		/// @param value 弾を発射するキー
+		/// レーザを発射するキーの設定
+		/// @param value レーザを発射するキー
 		public void setShootKey(KeyCombo value) { shootKey = value; }
-		/// 弾を発射するキーの設定
-		/// @param keyCode 弾を発射するキーのkeyCode
-		/// @param keyChar 弾を発射するキーのkeyChar
+		/// レーザを発射するキーの設定
+		/// @param keyCode レーザを発射するキーのkeyCode
+		/// @param keyChar レーザを発射するキーのkeyChar
 		public void setShootKey(int keyCode, char keyChar) { shootKey = new KeyCombo(keyCode, keyChar); }
-		/// 弾を発射するキーの設定
-		/// @param keyCode 弾を発射するキーのkeyCode
-		/// @param keyChar 弾を発射するキーのkeyChar
+		/// レーザを発射するキーの設定
+		/// @param keyCode レーザを発射するキーのkeyCode
+		/// @param keyChar レーザを発射するキーのkeyChar
 		public void setShootKey(int keyCode, int keyChar) { setShootKey(keyCode, (char)keyChar); }
-		/// 弾を発射するキーが押されているか
-		/// @param key 弾を発射するキー
+		/// レーザを発射するキーが押されているか
+		/// @param key レーザを発射するキー
 		/// @return 押されている場合true, それ以外の場合false
 		public boolean isShootKey(KeyCombo key) { return isShootKey(key.getKeyCode(), key.getKeyChar()); }
-		/// 弾を発射するキーが押されているか
-		/// @param keyCode 弾を発射するキーのkeyCode
-		/// @param keyChar 弾を発射するキーのkeyChar
+		/// レーザを発射するキーが押されているか
+		/// @param keyCode レーザを発射するキーのkeyCode
+		/// @param keyChar レーザを発射するキーのkeyChar
 		/// @return 押されている場合true, それ以外の場合false
 		public boolean isShootKey(int keyCode, char keyChar) {
 			return shootKey != null && shootKey.isPressed(keyCode, keyChar);

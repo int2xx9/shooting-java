@@ -73,33 +73,33 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 		/// コンボ数の取得
 		/// @return 現在のコンボ数
 		public int getCombo() { return this.combo; }
-	private int hitCount;	///< 現在までに弾が当たった回数
-	private int notHitCount;	///< 現在までに弾が外れた回数
-		/// 弾が当たった回数の設定
-		/// @param value 新しく設定する弾が当たった回数
+	private int hitCount;	///< 現在までにレーザが当たった回数
+	private int notHitCount;	///< 現在までにレーザが外れた回数
+		/// レーザが当たった回数の設定
+		/// @param value 新しく設定するレーザが当たった回数
 		public void setHitCount(int value) {
 			this.hitCount = value;
 			for (PlayerListener listener : listeners) {
 				listener.hitCountUpdated();
 			}
 		}
-		/// 弾が外れた回数の設定
-		/// @param value 新しく設定する弾がはずれた回数
+		/// レーザが外れた回数の設定
+		/// @param value 新しく設定するレーザがはずれた回数
 		public void setNotHitCount(int value) {
 			this.notHitCount = value;
 			for (PlayerListener listener : listeners) {
 				listener.notHitCountUpdated();
 			}
 		}
-		/// 弾が当たった回数のインクリメント
+		/// レーザが当たった回数のインクリメント
 		public void incrementHitCount() { setHitCount(getHitCount() + 1); }
-		/// 弾が外れた回数のインクリメント
+		/// レーザが外れた回数のインクリメント
 		public void incrementNotHitCount() { setNotHitCount(getNotHitCount() + 1); }
-		/// 弾が当たった回数の取得
-		/// @return 現在までに弾が当たった回数
+		/// レーザが当たった回数の取得
+		/// @return 現在までにレーザが当たった回数
 		public int getHitCount() { return this.hitCount; }
-		/// 弾が外れた回数の取得
-		/// @return 現在までに弾がはずれた回数
+		/// レーザが外れた回数の取得
+		/// @return 現在までにレーザがはずれた回数
 		public int getNotHitCount() { return this.notHitCount; }
 		/// 命中率の取得
 		/// @return 命中率
@@ -107,8 +107,8 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 			if (hitCount+notHitCount == 0) return 0;
 			return (int)(((double)hitCount)/(hitCount+notHitCount)*100);
 		}
-		/// 弾がはずれた割合の取得
-		/// @return 現在までに弾がはずれた割合(百分率)
+		/// レーザがはずれた割合の取得
+		/// @return 現在までにレーザがはずれた割合(百分率)
 		public int getNotHitPercent() {
 			if (hitCount+notHitCount == 0) return 0;
 			return (int)(((double)notHitCount)/(hitCount+notHitCount)*100);
@@ -149,19 +149,19 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 		/// 左上座標のYを取得
 		/// @return 現在の左上Y座標
 		public int getY() { return this.y; }
-	private int sx;	///< X軸の弾を撃つ方向・速さ
-	private int sy;	///< Y軸の弾を撃つ方向・速さ
-		/// 弾を撃つ方向・速さのX座標を設定
-		/// @param value X軸の弾を撃つ方向・速さを示した値
+	private int sx;	///< X軸のレーザを撃つ方向・速さ
+	private int sy;	///< Y軸のレーザを撃つ方向・速さ
+		/// レーザを撃つ方向・速さのX座標を設定
+		/// @param value X軸のレーザを撃つ方向・速さを示した値
 		public void setShootToX(int value) { this.sx = value; }
-		/// 弾を撃つ方向・速さのY座標を設定
-		/// @param value Y軸の弾を撃つ方向・速さを示した値
+		/// レーザを撃つ方向・速さのY座標を設定
+		/// @param value Y軸のレーザを撃つ方向・速さを示した値
 		public void setShootToY(int value) { this.sy = value; }
-		/// 弾を撃つ方向・速さのX座標を取得
-		/// @return X軸の弾を撃つ方向・速さを示した値
+		/// レーザを撃つ方向・速さのX座標を取得
+		/// @return X軸のレーザを撃つ方向・速さを示した値
 		public int getShootToX() { return this.sx; }
-		/// 弾を撃つ方向・速さのY座標を取得
-		/// @return Y軸の弾を撃つ方向・速さを示した値
+		/// レーザを撃つ方向・速さのY座標を取得
+		/// @return Y軸のレーザを撃つ方向・速さを示した値
 		public int getShootToY() { return this.sy; }
 	private int mx;	///< X軸の移動方向・量
 	private int my;	///< Y軸の移動方向・量
@@ -286,21 +286,21 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 		return true;
 	}
 
-	/// 弾が自分に当たった
+	/// レーザが自分に当たった
 	/// @param lazer あたったLazerオブジェクト
 	public void onHit(Lazer lazer) {
 		setDamage(getDamage() + lazer.getDamage());
 		setCombo(0);
 	}
 
-	/// 自分が撃った弾が敵に当たった
+	/// 自分が撃ったレーザが敵に当たった
 	public void lazerHit() {
 		setCombo(getCombo() + 1);
 		setScore(getScore() + 10 * getCombo());
 		incrementHitCount();
 	}
 
-	/// 自分が撃った弾が敵に当たらなかった
+	/// 自分が撃ったレーザが敵に当たらなかった
 	public void lazerNotHit() {
 		setCombo(0);
 		incrementNotHitCount();
