@@ -9,6 +9,8 @@ import java.util.*;
 public class Shooting extends JPanel {
 	/// ゲームに表示されているLazerのコレクション
 	LazerCollection lazers = new LazerCollection();
+		/// Lazerの配列
+		public Lazer[] getLazers() { return lazers.getLazers(); }
 	/// ゲームに参加しているPlayerのコレクション
 	PlayerCollection players = new PlayerCollection();
 		/// Playerの追加
@@ -243,6 +245,12 @@ public class Shooting extends JPanel {
 		/// Lazerの発射
 		synchronized void shoot(Lazer lazer) {
 			lazers.add(lazer);
+		}
+
+		/// ゲーム中に存在するLazerの配列取得
+		/// @return ゲーム中に存在するLazerの配列
+		public synchronized Lazer[] getLazers() {
+			return this.lazers.toArray(new Lazer[this.lazers.size()]);
 		}
 
 		/// 初期化

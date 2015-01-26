@@ -7,7 +7,7 @@ import java.awt.event.*;
 import shooting.core.*;
 
 /// AIのサンプル
-public class ExampleAI extends Player implements PlayerListener {
+public class ExampleAI extends Player {
 	public static final int DEFAULT_WIDTH = 30;	///< デフォルトの幅
 	public static final int DEFAULT_HEIGHT = 30;	///< デフォルトの高さ
 	public static final int MAX_DAMAGE = 100;	///< 最大ダメージ
@@ -79,39 +79,22 @@ public class ExampleAI extends Player implements PlayerListener {
 			setMovingX(-getMovingX());
 		}
 
+		for (Lazer lazer : getShooting().getLazers()) {
+			if (lazer.getPlayer().getTeam() != this.getTeam()) {
+				// 100px以内に敵のLazerが近づいていていたら避けようとする
+				if (lazer.getY()-(getY()+getHeight()) <= 100) {
+					if (lazer.getX() >= this.getX()-20 && lazer.getX()+lazer.getWidth() <= this.getX()+this.getWidth()+20) {
+						setMovingX(lazer.getX() < this.getCenterX() ? 1 : -1);
+					}
+				}
+			}
+		}
+
 		// これ以上今の向きへ進めなくなったら方向転換する
 		if (!canMoveTo(getX()+getMovingX(), getY(), getWidth(), getHeight())) {
 			setMovingX(-getMovingX());
 		}
 		setX(getX()+getMovingX());
-	}
-
-	/// スコアが更新された
-	public void scoreUpdated() {
-	}
-
-	/// ダメージが更新された
-	public void damageUpdated() {
-	}
-
-	/// コンボ数が更新された
-	public void comboUpdated() {
-	}
-
-	/// レーザが当たった回数が更新された
-	public void hitCountUpdated() {
-		// 1/10の確率で逆方向に移動する
-		if ((int)(Math.random()*10) == 0) {
-			setMovingX(-getMovingX());
-		}
-	}
-
-	/// レーザが外れた回数が更新された
-	public void notHitCountUpdated() {
-	}
-
-	/// 破壊された
-	public void playerDestroyed() {
 	}
 }
 
