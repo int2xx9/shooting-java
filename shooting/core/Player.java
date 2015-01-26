@@ -139,10 +139,10 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 		}
 		/// 中心座標のXを取得
 		/// @return 現在の中心X座標
-		public int getCenterX() { return this.x-this.getWidth()/2; }
+		public int getCenterX() { return this.x+this.getWidth()/2; }
 		/// 中心座標のYを取得
 		/// @return 現在の中心Y座標
-		public int getCenterY() { return this.y-this.getHeight()/2; }
+		public int getCenterY() { return this.y+this.getHeight()/2; }
 		/// 左上座標のXを取得
 		/// @return 現在の左上X座標
 		public int getX() { return this.x; }
