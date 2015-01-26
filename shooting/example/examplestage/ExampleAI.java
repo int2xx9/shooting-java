@@ -79,13 +79,24 @@ public class ExampleAI extends Player {
 			setMovingX(-getMovingX());
 		}
 
+		boolean nearlazer = false;
 		for (Lazer lazer : getShooting().getLazers()) {
 			if (lazer.getPlayer().getTeam() != this.getTeam()) {
 				// 100pxˆÈ“à‚É“G‚ÌLazer‚ª‹ß‚Ã‚¢‚Ä‚¢‚Ä‚¢‚½‚ç”ð‚¯‚æ‚¤‚Æ‚·‚é
 				if (lazer.getY()-(getY()+getHeight()) <= 100) {
 					if (lazer.getX() >= this.getX()-20 && lazer.getX()+lazer.getWidth() <= this.getX()+this.getWidth()+20) {
 						setMovingX(lazer.getX() < this.getCenterX() ? 1 : -1);
+						nearlazer = true;
 					}
+				}
+			}
+		}
+		if (!nearlazer) {
+			// Lazer‚É‚ ‚½‚è‚»‚¤‚Å‚Í‚È‚¢‚Ì‚Å“K“–‚È“G‚É‹ß‚Ã‚±‚¤‚Æ‚·‚é
+			for (Player player : getShooting().getPlayers()) {
+				if (player.getTeam() != this.getTeam()) {
+					setMovingX(player.getCenterX() < this.getCenterX() ? -1 : 1);
+					break;
 				}
 			}
 		}
