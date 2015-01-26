@@ -1,25 +1,25 @@
 package shooting.core;
 
-/// shooting.coreƒpƒbƒP[ƒW‚Ì’†‚ÅƒfƒtƒHƒ‹ƒg‚Åg—p‚³‚ê‚éLazer
+/// shooting.coreãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®ä¸­ã§ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ä½¿ç”¨ã•ã‚Œã‚‹Lazer
 public class DefaultLazer extends Lazer {
-	public static final int WIDTH = 2;	///< •
-	public static final int HEIGHT = 10;	///< ‚‚³
-	public static final int DAMAGE = 10;	///< —^‚¦‚éƒ_ƒ[ƒW
-	/// •‚Ìæ“¾
-	/// @return •
+	public static final int WIDTH = 2;	///< å¹…
+	public static final int HEIGHT = 10;	///< é«˜ã•
+	public static final int DAMAGE = 10;	///< ä¸ãˆã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸
+	/// å¹…ã®å–å¾—
+	/// @return å¹…
 	public int getWidth() { return WIDTH; }
-	/// ‚‚³‚Ìæ“¾
-	/// @return ‚‚³
+	/// é«˜ã•ã®å–å¾—
+	/// @return é«˜ã•
 	public int getHeight() { return HEIGHT; }
-	/// —^‚¦‚éƒ_ƒ[ƒW‚Ìæ“¾
-	/// @return —^‚¦‚éƒ_ƒ[ƒW
+	/// ä¸ãˆã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸ã®å–å¾—
+	/// @return ä¸ãˆã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸
 	public int getDamage() { return DAMAGE; }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param x ¶¬‚·‚éXÀ•W‚ÌˆÊ’u
-	/// @param y ¶¬‚·‚éYÀ•W‚ÌˆÊ’u
-	/// @param sx X²‚Ì”­Ë‚·‚é•ûŒü‚Æ‘¬“x
-	/// @param sy Y²‚Ì”­Ë‚·‚é•ûŒü‚Æ‘¬“x
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param x ç”Ÿæˆã™ã‚‹Xåº§æ¨™ã®ä½ç½®
+	/// @param y ç”Ÿæˆã™ã‚‹Yåº§æ¨™ã®ä½ç½®
+	/// @param sx Xè»¸ã®ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿåº¦
+	/// @param sy Yè»¸ã®ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿåº¦
 	public DefaultLazer(Player player, int x, int y, int sx, int sy) {
 		super(player, x, y, sx, sy*8);
 	}

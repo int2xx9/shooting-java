@@ -3,38 +3,38 @@ package shooting.example.stage;
 import shooting.core.*;
 import shooting.example.DocumentBaseImageLoader;
 
-/// ÉXÉeÅ[ÉW
+/// „Çπ„ÉÜ„Éº„Ç∏
 public abstract class Stage {
-	private Shooting shooting;	///< ÉXÉeÅ[ÉWÇ…ïRïtÇØÇÁÇÍÇΩShootingÉIÉuÉWÉFÉNÉg
-		/// ÉXÉeÅ[ÉWÇ…ïRïtÇØÇÁÇÍÇΩshootingÉIÉuÉWÉFÉNÉgÇÃéÊìæ
-		/// @return ÉXÉeÅ[ÉWÇ…ïRïtÇØÇÁÇÍÇΩShootingÉIÉuÉWÉFÉNÉg
+	private Shooting shooting;	///< „Çπ„ÉÜ„Éº„Ç∏„Å´Á¥ê‰ªò„Åë„Çâ„Çå„ÅüShooting„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà
+		/// „Çπ„ÉÜ„Éº„Ç∏„Å´Á¥ê‰ªò„Åë„Çâ„Çå„Åüshooting„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà„ÅÆÂèñÂæó
+		/// @return „Çπ„ÉÜ„Éº„Ç∏„Å´Á¥ê‰ªò„Åë„Çâ„Çå„ÅüShooting„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà
 		public Shooting getShooting() { return this.shooting; }
 
-	/// DocumentBaseImageLoaderÉIÉuÉWÉFÉNÉg
+	/// DocumentBaseImageLoader„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà
 	private DocumentBaseImageLoader imgLoader = null;
-		/// DocumentBaseImageLoaderÇÃéÊìæ
-		/// @return DocumentBaseImageLoaderÉIÉuÉWÉFÉNÉg
+		/// DocumentBaseImageLoader„ÅÆÂèñÂæó
+		/// @return DocumentBaseImageLoader„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà
 		public DocumentBaseImageLoader getImageLoader() { return this.imgLoader; }
 
-	/// ÉRÉìÉXÉgÉâÉNÉ^
-	/// @param shooting ÉXÉeÅ[ÉWÇ…ïRïtÇØÇÈShootingÉIÉuÉWÉFÉNÉg
+	/// „Ç≥„É≥„Çπ„Éà„É©„ÇØ„Çø
+	/// @param shooting „Çπ„ÉÜ„Éº„Ç∏„Å´Á¥ê‰ªò„Åë„ÇãShooting„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà
 	public Stage(Shooting shooting) {
 		this.shooting = shooting;
 	}
 
-	/// ÉRÉìÉXÉgÉâÉNÉ^
-	/// @param shooting ÉXÉeÅ[ÉWÇ…ïRïtÇØÇÈShootingÉIÉuÉWÉFÉNÉg
-	/// @param imgLoader DocumentBaseImageLoaderÉIÉuÉWÉFÉNÉg
+	/// „Ç≥„É≥„Çπ„Éà„É©„ÇØ„Çø
+	/// @param shooting „Çπ„ÉÜ„Éº„Ç∏„Å´Á¥ê‰ªò„Åë„ÇãShooting„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà
+	/// @param imgLoader DocumentBaseImageLoader„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà
 	public Stage(Shooting shooting, DocumentBaseImageLoader imgLoader) {
 		this.shooting = shooting;
 		this.imgLoader = imgLoader;
 	}
 
-	/// ÉXÉeÅ[ÉWÇÃñºëOÇéÊìæ
-	/// @return ÉXÉeÅ[ÉWÇÃñºëO
+	/// „Çπ„ÉÜ„Éº„Ç∏„ÅÆÂêçÂâç„ÇíÂèñÂæó
+	/// @return „Çπ„ÉÜ„Éº„Ç∏„ÅÆÂêçÂâç
 	abstract public String getStageName();
-	/// ÉXÉeÅ[ÉWè„ÇÃìGÇÃîzóÒÇéÊìæ
-	/// @return ÉXÉeÅ[ÉWè„ÇÃìGÇÃîzóÒ
+	/// „Çπ„ÉÜ„Éº„Ç∏‰∏ä„ÅÆÊïµ„ÅÆÈÖçÂàó„ÇíÂèñÂæó
+	/// @return „Çπ„ÉÜ„Éº„Ç∏‰∏ä„ÅÆÊïµ„ÅÆÈÖçÂàó
 	abstract public Player[] getEnemies();
 }
 

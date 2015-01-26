@@ -5,26 +5,26 @@ import shooting.example.stage.*;
 import java.awt.Image;
 import shooting.example.DocumentBaseImageLoader;
 
-/// ƒXƒe[ƒW‚Ì—á3
-/// –³—–î—‘Îlí‚Ì—á
+/// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ä¾‹3
+/// ç„¡ç†çŸ¢ç†å¯¾äººæˆ¦ã®ä¾‹
 class Stage3 extends Stage {
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ƒXƒe[ƒW‚É•R•t‚¯‚éShootingƒIƒuƒWƒFƒNƒg
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting ã‚¹ãƒ†ãƒ¼ã‚¸ã«ç´ä»˜ã‘ã‚‹Shootingã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public Stage3(Shooting shooting) { super(shooting); }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ƒXƒe[ƒW‚É•R•t‚¯‚éShootingƒIƒuƒWƒFƒNƒg
-	/// @param imgLoader DocumentBaseImageLoaderƒIƒuƒWƒFƒNƒg
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting ã‚¹ãƒ†ãƒ¼ã‚¸ã«ç´ä»˜ã‘ã‚‹Shootingã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param imgLoader DocumentBaseImageLoaderã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public Stage3(Shooting shooting, DocumentBaseImageLoader imgLoader) {
 		super(shooting, imgLoader);
 	}
 
-	/// ƒXƒe[ƒW‚Ì–¼‘O‚ğæ“¾
-	/// @return ƒXƒe[ƒW‚Ì–¼‘O("Stage 3")
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸ã®åå‰ã‚’å–å¾—
+	/// @return ã‚¹ãƒ†ãƒ¼ã‚¸ã®åå‰("Stage 3")
 	public String getStageName() { return "Stage 3"; }
 
-	/// ƒXƒe[ƒWã‚Ì“G‚Ì”z—ñ‚ğæ“¾
-	/// @return ƒXƒe[ƒWã‚Ì“G‚Ì”z—ñ
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸ä¸Šã®æ•µã®é…åˆ—ã‚’å–å¾—
+	/// @return ã‚¹ãƒ†ãƒ¼ã‚¸ä¸Šã®æ•µã®é…åˆ—
 	public Player[] getEnemies() {
 		ControllablePlayer[] enemies = new ControllablePlayer[1];
 		Image image = getImageLoader().getImageImmediately("k1_p2a.png");

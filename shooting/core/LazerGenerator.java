@@ -1,24 +1,24 @@
 package shooting.core;
 
-/// Lazer‚ğ¶¬‚·‚éƒNƒ‰ƒX
+/// Lazerã‚’ç”Ÿæˆã™ã‚‹ã‚¯ãƒ©ã‚¹
 public abstract class LazerGenerator {
-	private Player player;	///< ”­ËŒ³‚Æ‚È‚éPlayer
-		/// ”­ËŒ³‚Æ‚È‚éPlayer‚Ìæ“¾
-		/// @return ”­ËŒ³‚Æ‚È‚éPlayer
+	private Player player;	///< ç™ºå°„å…ƒã¨ãªã‚‹Player
+		/// ç™ºå°„å…ƒã¨ãªã‚‹Playerã®å–å¾—
+		/// @return ç™ºå°„å…ƒã¨ãªã‚‹Player
 		public Player getPlayer() { return this.player; }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param player ”­ËŒ³‚Æ‚È‚éPlayer
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param player ç™ºå°„å…ƒã¨ãªã‚‹Player
 	public LazerGenerator(Player player) {
 		this.player = player;
 	}
 
-	/// Lazer‚Ì¶¬
-	/// @param x ¶¬‚·‚éXÀ•W‚ÌˆÊ’u
-	/// @param y ¶¬‚·‚éYÀ•W‚ÌˆÊ’u
-	/// @param sx X²‚Ì”­Ë‚·‚é•ûŒü‚Æ‘¬“x
-	/// @param sy Y²‚Ì”­Ë‚·‚é•ûŒü‚Æ‘¬“x
-	/// @return LazerƒIƒuƒWƒFƒNƒg
+	/// Lazerã®ç”Ÿæˆ
+	/// @param x ç”Ÿæˆã™ã‚‹Xåº§æ¨™ã®ä½ç½®
+	/// @param y ç”Ÿæˆã™ã‚‹Yåº§æ¨™ã®ä½ç½®
+	/// @param sx Xè»¸ã®ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿåº¦
+	/// @param sy Yè»¸ã®ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿåº¦
+	/// @return Lazerã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	abstract public Lazer generateLazer(int x, int y, int sx, int sy);
 }
 

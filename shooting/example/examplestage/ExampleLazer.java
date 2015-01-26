@@ -2,26 +2,26 @@ package shooting.example.examplestage;
 
 import shooting.core.*;
 
-/// Lazer‚ÌƒTƒ“ƒvƒ‹
+/// Lazerã®ã‚µãƒ³ãƒ—ãƒ«
 public class ExampleLazer extends Lazer {
-	public static final int WIDTH = 10;	///< •
-	public static final int HEIGHT = 50;	///< ‚‚³
-	public static final int DAMAGE = 100;	///< —^‚¦‚éƒ_ƒ[ƒW
-	/// •‚Ìæ“¾
-	/// @return •
+	public static final int WIDTH = 10;	///< å¹…
+	public static final int HEIGHT = 50;	///< é«˜ã•
+	public static final int DAMAGE = 100;	///< ä¸ãˆã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸
+	/// å¹…ã®å–å¾—
+	/// @return å¹…
 	public int getWidth() { return WIDTH; }
-	/// ‚‚³‚Ìæ“¾
-	/// @return ‚‚³
+	/// é«˜ã•ã®å–å¾—
+	/// @return é«˜ã•
 	public int getHeight() { return HEIGHT; }
-	/// —^‚¦‚éƒ_ƒ[ƒW‚Ìæ“¾
-	/// @return —^‚¦‚éƒ_ƒ[ƒW
+	/// ä¸ãˆã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸ã®å–å¾—
+	/// @return ä¸ãˆã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸
 	public int getDamage() { return DAMAGE; }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param x ¶¬‚·‚éXÀ•W‚ÌˆÊ’u
-	/// @param y ¶¬‚·‚éYÀ•W‚ÌˆÊ’u
-	/// @param sx X²‚Ì”­Ë‚·‚é•ûŒü‚Æ‘¬“x
-	/// @param sy Y²‚Ì”­Ë‚·‚é•ûŒü‚Æ‘¬“x
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param x ç”Ÿæˆã™ã‚‹Xåº§æ¨™ã®ä½ç½®
+	/// @param y ç”Ÿæˆã™ã‚‹Yåº§æ¨™ã®ä½ç½®
+	/// @param sx Xè»¸ã®ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿåº¦
+	/// @param sy Yè»¸ã®ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿåº¦
 	public ExampleLazer(Player player, int x, int y, int sx, int sy) {
 		super(player, x, y, sx, sy*16);
 	}

@@ -1,82 +1,82 @@
 package shooting.core;
 
-/// ControllablePlayerŒü‚¯‚Ìİ’è
+/// ControllablePlayerå‘ã‘ã®è¨­å®š
 public class ControllablePlayerConfig {
-	private KeyCombo moveLeftKey = null;	///< ¶‚ÉˆÚ“®‚·‚éƒL[
-		/// ¶‚ÉˆÚ“®‚·‚éƒL[‚Ìæ“¾
-		/// @return ¶‚ÉˆÚ“®‚·‚éƒL[
+	private KeyCombo moveLeftKey = null;	///< å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼
+		/// å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®å–å¾—
+		/// @return å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼
 		public KeyCombo getMoveLeftKey() { return moveLeftKey; }
-		/// ¶‚ÉˆÚ“®‚·‚éƒL[‚Ìİ’è
-		/// @param value ¶‚ÉˆÚ“®‚·‚éƒL[
+		/// å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®è¨­å®š
+		/// @param value å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼
 		public void setMoveLeftKey(KeyCombo value) { moveLeftKey = value; }
-		/// ¶‚ÉˆÚ“®‚·‚éƒL[‚Ìİ’è
-		/// @param keyCode ¶‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyCode
-		/// @param keyChar ¶‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyChar
+		/// å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®è¨­å®š
+		/// @param keyCode å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyCode
+		/// @param keyChar å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyChar
 		public void setMoveLeftKey(int keyCode, char keyChar) { moveLeftKey = new KeyCombo(keyCode, keyChar); }
-		/// ¶‚ÉˆÚ“®‚·‚éƒL[‚Ìİ’è
-		/// @param keyCode ¶‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyCode
-		/// @param keyChar ¶‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyChar
+		/// å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®è¨­å®š
+		/// @param keyCode å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyCode
+		/// @param keyChar å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyChar
 		public void setMoveLeftKey(int keyCode, int keyChar) { setMoveLeftKey(keyCode, (char)keyChar); }
-		/// ¶‚ÉˆÚ“®‚·‚éƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-		/// @param key ¶‚ÉˆÚ“®‚·‚éƒL[
-		/// @return ‰Ÿ‚³‚ê‚Ä‚¢‚éê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+		/// å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+		/// @param key å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼
+		/// @return æŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 		public boolean isMoveLeftKey(KeyCombo key) { return isMoveLeftKey(key.getKeyCode(), key.getKeyChar()); }
-		/// ¶‚ÉˆÚ“®‚·‚éƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-		/// @param keyCode ¶‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyCode
-		/// @param keyChar ¶‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyChar
-		/// @return ‰Ÿ‚³‚ê‚Ä‚¢‚éê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+		/// å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+		/// @param keyCode å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyCode
+		/// @param keyChar å·¦ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyChar
+		/// @return æŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 		public boolean isMoveLeftKey(int keyCode, char keyChar) {
 			return moveLeftKey != null && moveLeftKey.isPressed(keyCode, keyChar);
 		}
-	private KeyCombo moveRightKey = null;	///< ‰E‚ÉˆÚ“®‚·‚éƒL[
-		/// ‰E‚ÉˆÚ“®‚·‚éƒL[‚Ìæ“¾
-		/// @return ‰E‚ÉˆÚ“®‚·‚éƒL[
+	private KeyCombo moveRightKey = null;	///< å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼
+		/// å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®å–å¾—
+		/// @return å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼
 		public KeyCombo getMoveRightKey() { return moveRightKey; }
-		/// ‰E‚ÉˆÚ“®‚·‚éƒL[‚Ìİ’è
-		/// @param value ‰E‚ÉˆÚ“®‚·‚éƒL[
+		/// å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®è¨­å®š
+		/// @param value å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼
 		public void setMoveRightKey(KeyCombo value) { moveRightKey = value; }
-		/// ‰E‚ÉˆÚ“®‚·‚éƒL[‚Ìİ’è
-		/// @param keyCode ‰E‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyCode
-		/// @param keyChar ‰E‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyChar
+		/// å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®è¨­å®š
+		/// @param keyCode å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyCode
+		/// @param keyChar å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyChar
 		public void setMoveRightKey(int keyCode, char keyChar) { moveRightKey = new KeyCombo(keyCode, keyChar); }
-		/// ‰E‚ÉˆÚ“®‚·‚éƒL[‚Ìİ’è
-		/// @param keyCode ‰E‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyCode
-		/// @param keyChar ‰E‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyChar
+		/// å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®è¨­å®š
+		/// @param keyCode å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyCode
+		/// @param keyChar å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyChar
 		public void setMoveRightKey(int keyCode, int keyChar) { setMoveRightKey(keyCode, (char)keyChar); }
-		/// ‰E‚ÉˆÚ“®‚·‚éƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-		/// @param key ‰E‚ÉˆÚ“®‚·‚éƒL[
-		/// @return ‰Ÿ‚³‚ê‚Ä‚¢‚éê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+		/// å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+		/// @param key å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼
+		/// @return æŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 		public boolean isMoveRightKey(KeyCombo key) { return isMoveRightKey(key.getKeyCode(), key.getKeyChar()); }
-		/// ‰E‚ÉˆÚ“®‚·‚éƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-		/// @param keyCode ‰E‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyCode
-		/// @param keyChar ‰E‚ÉˆÚ“®‚·‚éƒL[‚ÌkeyChar
-		/// @return ‰Ÿ‚³‚ê‚Ä‚¢‚éê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+		/// å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+		/// @param keyCode å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyCode
+		/// @param keyChar å³ã«ç§»å‹•ã™ã‚‹ã‚­ãƒ¼ã®keyChar
+		/// @return æŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 		public boolean isMoveRightKey(int keyCode, char keyChar) {
 			return moveRightKey != null && moveRightKey.isPressed(keyCode, keyChar);
 		}
-	private KeyCombo shootKey = null;	///< ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[
-		/// ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚Ìæ“¾
-		/// @return ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[
+	private KeyCombo shootKey = null;	///< ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼
+		/// ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ã®å–å¾—
+		/// @return ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼
 		public KeyCombo getShootKey() { return shootKey; }
-		/// ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚Ìİ’è
-		/// @param value ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[
+		/// ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ã®è¨­å®š
+		/// @param value ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼
 		public void setShootKey(KeyCombo value) { shootKey = value; }
-		/// ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚Ìİ’è
-		/// @param keyCode ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚ÌkeyCode
-		/// @param keyChar ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚ÌkeyChar
+		/// ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ã®è¨­å®š
+		/// @param keyCode ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ã®keyCode
+		/// @param keyChar ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ã®keyChar
 		public void setShootKey(int keyCode, char keyChar) { shootKey = new KeyCombo(keyCode, keyChar); }
-		/// ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚Ìİ’è
-		/// @param keyCode ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚ÌkeyCode
-		/// @param keyChar ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚ÌkeyChar
+		/// ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ã®è¨­å®š
+		/// @param keyCode ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ã®keyCode
+		/// @param keyChar ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ã®keyChar
 		public void setShootKey(int keyCode, int keyChar) { setShootKey(keyCode, (char)keyChar); }
-		/// ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-		/// @param key ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[
-		/// @return ‰Ÿ‚³‚ê‚Ä‚¢‚éê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+		/// ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+		/// @param key ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼
+		/// @return æŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 		public boolean isShootKey(KeyCombo key) { return isShootKey(key.getKeyCode(), key.getKeyChar()); }
-		/// ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-		/// @param keyCode ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚ÌkeyCode
-		/// @param keyChar ƒŒ[ƒU‚ğ”­Ë‚·‚éƒL[‚ÌkeyChar
-		/// @return ‰Ÿ‚³‚ê‚Ä‚¢‚éê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+		/// ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+		/// @param keyCode ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ã®keyCode
+		/// @param keyChar ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹ã‚­ãƒ¼ã®keyChar
+		/// @return æŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 		public boolean isShootKey(int keyCode, char keyChar) {
 			return shootKey != null && shootKey.isPressed(keyCode, keyChar);
 		}

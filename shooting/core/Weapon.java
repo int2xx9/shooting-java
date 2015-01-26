@@ -4,65 +4,65 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-/// Player‚ªg—p‚·‚éWeapon
+/// PlayerãŒä½¿ç”¨ã™ã‚‹Weapon
 public abstract class Weapon implements MainLoopJob {
-	/// ‚±‚ÌWeapon‚Í”­Ë‰Â”\‚É‚È‚é‚±‚Æ‚Í‚È‚¢‚±‚Æ‚ğ¦‚·
+	/// ã“ã®Weaponã¯ç™ºå°„å¯èƒ½ã«ãªã‚‹ã“ã¨ã¯ãªã„ã“ã¨ã‚’ç¤ºã™
 	public static final int INTERVAL_INFINITY = -1;
 
-	/// ”­Ë‰Â”\‚É‚È‚é‚Ü‚Å‚ÌŠÔŠu‚Ìæ“¾
-	/// @return ”­Ë‰Â”\‚É‚È‚é‚Ü‚Å‚ÌŠÔŠu
+	/// ç™ºå°„å¯èƒ½ã«ãªã‚‹ã¾ã§ã®é–“éš”ã®å–å¾—
+	/// @return ç™ºå°„å¯èƒ½ã«ãªã‚‹ã¾ã§ã®é–“éš”
 	abstract public int getInterval();
-	/// LazerGenerator‚Ìæ“¾
-	/// @return LazerGenerator‚ÌƒIƒuƒWƒFƒNƒg
+	/// LazerGeneratorã®å–å¾—
+	/// @return LazerGeneratorã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	abstract public LazerGenerator getGenerator(Player player);
 
-	private int loopCount = 0;	///< ”­ËŠÔŠu‚ğ§Œä‚·‚é‚½‚ß‚ÌƒJƒEƒ“ƒ^
-	private Player player;	///< ‚±‚ÌWeapon‚É•R•t‚¯‚ç‚ê‚Ä‚¢‚éPlayer
-	private boolean initialCharged;	///< charged‚Ì‰Šú’l
-	private boolean charged;	///< ”­Ë‰Â”\‚©‚Ç‚¤‚©
-		/// ”­Ë‰Â”\‚©‚Ç‚¤‚©
-		/// @return ”­Ë‰Â”\‚Èê‡true, •s‰Â”\‚Èê‡false
+	private int loopCount = 0;	///< ç™ºå°„é–“éš”ã‚’åˆ¶å¾¡ã™ã‚‹ãŸã‚ã®ã‚«ã‚¦ãƒ³ã‚¿
+	private Player player;	///< ã“ã®Weaponã«ç´ä»˜ã‘ã‚‰ã‚Œã¦ã„ã‚‹Player
+	private boolean initialCharged;	///< chargedã®åˆæœŸå€¤
+	private boolean charged;	///< ç™ºå°„å¯èƒ½ã‹ã©ã†ã‹
+		/// ç™ºå°„å¯èƒ½ã‹ã©ã†ã‹
+		/// @return ç™ºå°„å¯èƒ½ãªå ´åˆtrue, ä¸å¯èƒ½ãªå ´åˆfalse
 		public boolean isCharged() { return this.charged; }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param player Player‚ÌƒIƒuƒWƒFƒNƒg
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param player Playerã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public Weapon(Player player) {
 		this(player, true);
 	}
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param player Player‚ÌƒIƒuƒWƒFƒNƒg
-	/// @param charged charged‚Ìó‘Ô‚ğtrue‚É‚·‚é‚©false‚É‚·‚é‚©
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param player Playerã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param charged chargedã®çŠ¶æ…‹ã‚’trueã«ã™ã‚‹ã‹falseã«ã™ã‚‹ã‹
 	public Weapon(Player player, boolean charged) {
 		this.player = player;
 		this.initialCharged = charged;
-		// INTERVAL_INFINITY‚Ìê‡‚ÍˆÓ–¡‚ª‚È‚¢‚Ì‚ÅƒƒCƒ“ƒ‹[ƒv‚É“o˜^‚µ‚È‚¢
+		// INTERVAL_INFINITYã®å ´åˆã¯æ„å‘³ãŒãªã„ã®ã§ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã«ç™»éŒ²ã—ãªã„
 		if (getInterval() != INTERVAL_INFINITY) {
 			this.player.getShooting().addMainLoopJob(this);
 		}
 		initialize();
 	}
 
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	public void initialize() {
-		// INTERVAL_INFINITY‚Å‚È‚¢ê‡‚Ì‚İ”­Ë‰Â”\‚Èó‘Ô‚Å‰Šú‰»‚·‚é
+		// INTERVAL_INFINITYã§ãªã„å ´åˆã®ã¿ç™ºå°„å¯èƒ½ãªçŠ¶æ…‹ã§åˆæœŸåŒ–ã™ã‚‹
 		this.charged = this.initialCharged;
 		this.loopCount = 0;
 	}
 
-	/// ƒŒ[ƒU‚Ì”­Ë
+	/// ãƒ¬ãƒ¼ã‚¶ã®ç™ºå°„
 	public void shoot() {
 		if (player != null && player.getShooting().isRunning() && charged) {
 			loopCount = 0;
 			charged = false;
 			Lazer lazer = null;
 			if (player.getShootToY() < 0) {
-				// ã•ûŒü
+				// ä¸Šæ–¹å‘
 				lazer = getGenerator(player).generateLazer(
 						player.getX()+player.getWidth()/2, player.getY(),
 						player.getShootToX(), player.getShootToY());
 			} else if (player.getShootToY() > 0) {
-				// ‰º•ûŒü
+				// ä¸‹æ–¹å‘
 				lazer = getGenerator(player).generateLazer(
 						player.getX()+player.getWidth()/2, player.getY()+player.getHeight(),
 						player.getShootToX(), player.getShootToY());
@@ -73,9 +73,9 @@ public abstract class Weapon implements MainLoopJob {
 		}
 	}
 
-	/// ƒƒCƒ“ƒ‹[ƒv‚©‚çŒÄ‚Î‚ê‚éˆ—
+	/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‹ã‚‰å‘¼ã°ã‚Œã‚‹å‡¦ç†
 	///
-	/// ‚±‚±‚Å‚Í”­Ë‚Å‚«‚é‚©‚Ç‚¤‚©‚Ì§Œä‚ğs‚Á‚Ä‚¢‚é
+	/// ã“ã“ã§ã¯ç™ºå°„ã§ãã‚‹ã‹ã©ã†ã‹ã®åˆ¶å¾¡ã‚’è¡Œã£ã¦ã„ã‚‹
 	public void runMainLoopJob() {
 		if (!charged) {
 			loopCount = (loopCount + 1) % getInterval();
@@ -86,27 +86,27 @@ public abstract class Weapon implements MainLoopJob {
 	}
 }
 
-/// ƒŒ[ƒU‚Ì”­Ë‚ª‚Å‚«‚È‚¢ƒ_ƒ~[‚ÌWeapon
+/// ãƒ¬ãƒ¼ã‚¶ã®ç™ºå°„ãŒã§ããªã„ãƒ€ãƒŸãƒ¼ã®Weapon
 ///
-/// ‚Ç‚ÌƒIƒuƒWƒFƒNƒg‚Å‚à‹¤’Ê‚Ì‚à‚Ì‚ğg—p‚·‚é‚½‚ßƒVƒ“ƒOƒ‹ƒgƒ“‚É‚µ‚Ä‚ ‚é
+/// ã©ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ã‚‚å…±é€šã®ã‚‚ã®ã‚’ä½¿ç”¨ã™ã‚‹ãŸã‚ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã«ã—ã¦ã‚ã‚‹
 class DummyWeapon extends Weapon {
-	/// ‚±‚ÌƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+	/// ã“ã®ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 	private static DummyWeapon instance = new DummyWeapon();
-	/// ”­Ë‰Â”\‚É‚È‚é‚Ü‚Å‚ÌŠÔŠu‚Ìæ“¾
+	/// ç™ºå°„å¯èƒ½ã«ãªã‚‹ã¾ã§ã®é–“éš”ã®å–å¾—
 	///
-	/// ”­Ë‰Â”\‚É‚È‚é‚±‚Æ‚Í‚È‚¢‚Ì‚ÅWeapon.INTERVAL_INFINITY‚ğ•Ô‚·
+	/// ç™ºå°„å¯èƒ½ã«ãªã‚‹ã“ã¨ã¯ãªã„ã®ã§Weapon.INTERVAL_INFINITYã‚’è¿”ã™
 	/// @return Weapon.INTERVAL_INFINITY
 	public int getInterval() { return Weapon.INTERVAL_INFINITY; }
-	/// LazerGenerator‚Ìæ“¾
-	/// DummyWeapon‚Å‚Íg—p‚µ‚È‚¢‚Ì‚Ånull‚ğ•Ô‚·
+	/// LazerGeneratorã®å–å¾—
+	/// DummyWeaponã§ã¯ä½¿ç”¨ã—ãªã„ã®ã§nullã‚’è¿”ã™
 	/// @return null
 	public LazerGenerator getGenerator(Player player) { return null; }
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	///
-	/// ŠO•”‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‰»‚Å‚«‚È‚¢‚æ‚¤‚Éprivate‚É‚µ‚Ä‚ ‚é
+	/// å¤–éƒ¨ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã§ããªã„ã‚ˆã†ã«privateã«ã—ã¦ã‚ã‚‹
 	private DummyWeapon() { super(null); }
-	/// DummyWeaponƒCƒ“ƒXƒ^ƒ“ƒX‚Ìæ“¾
-	/// @return DummyWeapon‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+	/// DummyWeaponã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å–å¾—
+	/// @return DummyWeaponã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 	static DummyWeapon getInstance() { return instance; }
 }
 

@@ -5,39 +5,39 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-/// ƒQ[ƒ€‚ÌƒƒCƒ“ƒNƒ‰ƒX
+/// ã‚²ãƒ¼ãƒ ã®ãƒ¡ã‚¤ãƒ³ã‚¯ãƒ©ã‚¹
 public class Shooting extends JPanel {
-	/// ƒQ[ƒ€‚É•\¦‚³‚ê‚Ä‚¢‚éLazer‚ÌƒRƒŒƒNƒVƒ‡ƒ“
+	/// ã‚²ãƒ¼ãƒ ã«è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹Lazerã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
 	LazerCollection lazers = new LazerCollection();
-		/// Lazer‚Ì”z—ñ
+		/// Lazerã®é…åˆ—
 		public Lazer[] getLazers() { return lazers.getLazers(); }
-	/// ƒQ[ƒ€‚ÉQ‰Á‚µ‚Ä‚¢‚éPlayer‚ÌƒRƒŒƒNƒVƒ‡ƒ“
+	/// ã‚²ãƒ¼ãƒ ã«å‚åŠ ã—ã¦ã„ã‚‹Playerã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
 	PlayerCollection players = new PlayerCollection();
-		/// Player‚Ì’Ç‰Á
+		/// Playerã®è¿½åŠ 
 		public void addPlayer(Player player) { players.addPlayer(player); }
-		/// Player‚Ì‘Síœ
+		/// Playerã®å…¨å‰Šé™¤
 		public void clearPlayers() { players.clear(); }
-		/// Player‚Ì”z—ñ
+		/// Playerã®é…åˆ—
 		public Player[] getPlayers() { return players.getPlayers(); }
-	/// ƒQ[ƒ€‚ÉŠÖ‚·‚éƒCƒxƒ“ƒg‚ÌƒŠƒXƒi‚ÌƒŠƒXƒg
+	/// ã‚²ãƒ¼ãƒ ã«é–¢ã™ã‚‹ã‚¤ãƒ™ãƒ³ãƒˆã®ãƒªã‚¹ãƒŠã®ãƒªã‚¹ãƒˆ
 	LinkedList<ShootingListener> shootingListeners = new LinkedList<ShootingListener>();
-	MainLoop mainLoop;	///< ƒƒCƒ“ƒ‹[ƒv
-		/// ƒƒCƒ“ƒ‹[ƒv‚ª“®ì’†‚©‚Ç‚¤‚©
-		/// @return “®ì’†‚Ìê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+	MainLoop mainLoop;	///< ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ãŒå‹•ä½œä¸­ã‹ã©ã†ã‹
+		/// @return å‹•ä½œä¸­ã®å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 		public boolean isRunning() { return mainLoop.isRunning(); }
-		/// ƒƒCƒ“ƒ‹[ƒv‚ª’â~’†‚©‚Ç‚¤‚©
-		/// @return ’â~’†‚Ìê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ãŒåœæ­¢ä¸­ã‹ã©ã†ã‹
+		/// @return åœæ­¢ä¸­ã®å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 		public boolean isPaused() { return mainLoop.isPaused(); }
-		/// ƒƒCƒ“ƒ‹[ƒv‚ÌÄŠJ
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã®å†é–‹
 		public void setRunning() { mainLoop.setRunning(); }
-		/// ƒƒCƒ“ƒ‹[ƒv‚Ì’â~
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã®åœæ­¢
 		public void setPaused() { mainLoop.setPaused(); }
-		/// ƒƒCƒ“ƒ‹[ƒv‚Éˆ—‚ğ’Ç‰Á
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã«å‡¦ç†ã‚’è¿½åŠ 
 		public void addMainLoopJob(MainLoopJob job) { mainLoop.addJob(job); }
 
-	private boolean isGameovered = false;	///< ƒQ[ƒ€ƒI[ƒo[‚©‚Ç‚¤‚©
-		/// ƒQ[ƒ€ƒI[ƒo[‚©‚Ç‚¤‚©
-		/// @return ƒQ[ƒ€ƒI[ƒo[‚Ìê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+	private boolean isGameovered = false;	///< ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã‹ã©ã†ã‹
+		/// ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã‹ã©ã†ã‹
+		/// @return ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã®å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 		public boolean isGameovered() { return isGameovered; }
 
 	private static final int[] keyseq = {38, 38, 40, 40, 37, 39, 37, 39, 66, 65};
@@ -45,7 +45,7 @@ public class Shooting extends JPanel {
 	private boolean keyseq_on = false;
 	public boolean isKeyseqOn() { return keyseq_on; }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	public Shooting() {
 		super();
 		setBackground(Color.BLACK);
@@ -54,10 +54,10 @@ public class Shooting extends JPanel {
 		mainLoop.addJob(lazers);
 		mainLoop.addJob(players);
 
-		// ƒQ[ƒ€ƒI[ƒo[”»’è‚Ìˆ—
+		// ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼åˆ¤å®šã®å‡¦ç†
 		mainLoop.addJob(new MainLoopJob() {
 			public void runMainLoopJob() {
-				// c‚è‚Ìƒ`[ƒ€‚ª1‚Â‚É‚È‚Á‚½‚çpause‚µ‚Ägameover
+				// æ®‹ã‚Šã®ãƒãƒ¼ãƒ ãŒ1ã¤ã«ãªã£ãŸã‚‰pauseã—ã¦gameover
 				LinkedList<Integer> teams = new LinkedList<Integer>();
 				for (Player player : players.getPlayers()) {
 					if (player.isAlive() && !teams.contains(player.getTeam())) {
@@ -67,7 +67,7 @@ public class Shooting extends JPanel {
 				if (teams.size() <= 1) {
 					mainLoop.setPaused();
 					isGameovered = true;
-					// Ÿ‚Á‚½ƒ`[ƒ€‚ÌƒXƒRƒA‚ğŒvZ
+					// å‹ã£ãŸãƒãƒ¼ãƒ ã®ã‚¹ã‚³ã‚¢ã‚’è¨ˆç®—
 					if (teams.size() == 1) {
 						for (Player player : players.getPlayers()) {
 							if (player.getTeam() == teams.get(0)) {
@@ -87,7 +87,7 @@ public class Shooting extends JPanel {
 			}
 		});
 
-		// ‰æ–Ê‚ÌXV‚Ìˆ—
+		// ç”»é¢ã®æ›´æ–°ã®å‡¦ç†
 		mainLoop.addJob(new MainLoopJob() {
 			public void runMainLoopJob() {
 				repaint();
@@ -108,7 +108,7 @@ public class Shooting extends JPanel {
 					}
 				}
 				if (!isGameovered && isPaused()) {
-					if (e.getKeyCode() == 40 && e.getKeyChar() == 65535) {	// «
+					if (e.getKeyCode() == 40 && e.getKeyChar() == 65535) {	// â†“
 						setRunning();
 					}
 				}
@@ -151,7 +151,7 @@ public class Shooting extends JPanel {
 		}
 	}
 
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	public void initializeGame() {
 		setPaused();
 		this.isGameovered = false;
@@ -165,15 +165,15 @@ public class Shooting extends JPanel {
 		repaint();
 	}
 
-	/// ShootingListener‚Ì“o˜^
-	/// @param listener “o˜^‚·‚éƒŠƒXƒi
+	/// ShootingListenerã®ç™»éŒ²
+	/// @param listener ç™»éŒ²ã™ã‚‹ãƒªã‚¹ãƒŠ
 	public void addShootingListener(ShootingListener listener) {
 		shootingListeners.add(listener);
 	}
 
-	/// lazer‚ª“–‚½‚Á‚Ä‚¢‚éShootingObject‚Ì”z—ñ‚ğæ“¾
-	/// @param lazer ”ò‚ñ‚Å‚«‚½Lazer
-	/// @return lazer‚ª“–‚½‚Á‚Ä‚¢‚éShootingObject‚Ì”z—ñ
+	/// lazerãŒå½“ãŸã£ã¦ã„ã‚‹ShootingObjectã®é…åˆ—ã‚’å–å¾—
+	/// @param lazer é£›ã‚“ã§ããŸLazer
+	/// @return lazerãŒå½“ãŸã£ã¦ã„ã‚‹ShootingObjectã®é…åˆ—
 	public ShootingObject[] getHitObjects(Lazer lazer) {
 		ShootingObject[] player_objs = players.getHitObjects(lazer);
 		ShootingObject[] lazer_objs = lazers.getHitObjects(lazer);
@@ -188,19 +188,19 @@ public class Shooting extends JPanel {
 		return objs;
 	}
 
-	/// ƒƒCƒ“ƒ‹[ƒv
+	/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—
 	class MainLoop extends Thread {
-		/// ƒƒCƒ“ƒ‹[ƒv‚Ås‚¤ˆ—‚ÌƒŠƒXƒg
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã§è¡Œã†å‡¦ç†ã®ãƒªã‚¹ãƒˆ
 		private LinkedList<MainLoopJob> jobs = new LinkedList<MainLoopJob>();
-		private boolean isPaused = true;	///< ƒƒCƒ“ƒ‹[ƒv‚ª’â~’†‚©‚Ç‚¤‚©
-			/// ƒƒCƒ“ƒ‹[ƒv‚ª“®ì’†‚©
-			/// @return “®ì’†‚Ìê‡true, ‚»‚êˆÈŠOfalse
+		private boolean isPaused = true;	///< ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ãŒåœæ­¢ä¸­ã‹ã©ã†ã‹
+			/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ãŒå‹•ä½œä¸­ã‹
+			/// @return å‹•ä½œä¸­ã®å ´åˆtrue, ãã‚Œä»¥å¤–false
 			boolean isRunning() { return !isPaused; }
-			/// ƒƒCƒ“ƒ‹[ƒv‚ª’â~’†‚©
-			/// @return ’â~’†‚Ìê‡true, ‚»‚êˆÈŠOfalse
+			/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ãŒåœæ­¢ä¸­ã‹
+			/// @return åœæ­¢ä¸­ã®å ´åˆtrue, ãã‚Œä»¥å¤–false
 			boolean isPaused() { return isPaused; }
 
-		/// ƒƒCƒ“ƒ‹[ƒv‚ÌÄŠJ
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã®å†é–‹
 		void setRunning() {
 			if (!isGameovered()) {
 				isPaused = false;
@@ -210,7 +210,7 @@ public class Shooting extends JPanel {
 			}
 		}
 
-		/// ƒƒCƒ“ƒ‹[ƒv‚Ì’â~
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã®åœæ­¢
 		void setPaused() {
 			isPaused = true;
 			for (ShootingListener listener : shootingListeners) {
@@ -218,7 +218,7 @@ public class Shooting extends JPanel {
 			}
 		}
 
-		/// ƒƒCƒ“ƒ‹[ƒv‚Éˆ—‚ğ’Ç‰Á
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã«å‡¦ç†ã‚’è¿½åŠ 
 		void addJob(MainLoopJob job) {
 			jobs.add(job);
 		}
@@ -236,35 +236,35 @@ public class Shooting extends JPanel {
 		}
 	}
 
-	/// ƒQ[ƒ€‚É•\¦‚³‚ê‚Ä‚¢‚éLazer‚ÌƒRƒŒƒNƒVƒ‡ƒ“
+	/// ã‚²ãƒ¼ãƒ ã«è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹Lazerã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
 	class LazerCollection implements MainLoopJob {
-		/// ƒQ[ƒ€‚É•\¦‚³‚ê‚Ä‚¢‚éLazer‚ğ•Û‚·‚éƒŠƒXƒg
-		/// @note •p”É‚È—v‘f‚Ì’Ç‰ÁEíœ‚ª—\‘z‚³‚ê‚é‚½‚ß˜AŒ‹ƒŠƒXƒg‚ğg—p‚·‚é
+		/// ã‚²ãƒ¼ãƒ ã«è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹Lazerã‚’ä¿æŒã™ã‚‹ãƒªã‚¹ãƒˆ
+		/// @note é »ç¹ãªè¦ç´ ã®è¿½åŠ ãƒ»å‰Šé™¤ãŒäºˆæƒ³ã•ã‚Œã‚‹ãŸã‚é€£çµãƒªã‚¹ãƒˆã‚’ä½¿ç”¨ã™ã‚‹
 		private LinkedList<Lazer> lazers = new LinkedList<Lazer>();
 
-		/// Lazer‚Ì”­Ë
+		/// Lazerã®ç™ºå°„
 		synchronized void shoot(Lazer lazer) {
 			lazers.add(lazer);
 		}
 
-		/// ƒQ[ƒ€’†‚É‘¶İ‚·‚éLazer‚Ì”z—ñæ“¾
-		/// @return ƒQ[ƒ€’†‚É‘¶İ‚·‚éLazer‚Ì”z—ñ
+		/// ã‚²ãƒ¼ãƒ ä¸­ã«å­˜åœ¨ã™ã‚‹Lazerã®é…åˆ—å–å¾—
+		/// @return ã‚²ãƒ¼ãƒ ä¸­ã«å­˜åœ¨ã™ã‚‹Lazerã®é…åˆ—
 		public synchronized Lazer[] getLazers() {
 			return this.lazers.toArray(new Lazer[this.lazers.size()]);
 		}
 
-		/// ‰Šú‰»
+		/// åˆæœŸåŒ–
 		public synchronized void initialize() {
 			lazers = new LinkedList<Lazer>();
 		}
 
-		/// ƒƒCƒ“ƒ‹[ƒv‚©‚çŒÄ‚Ño‚³‚ê‚éˆ—
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‹ã‚‰å‘¼ã³å‡ºã•ã‚Œã‚‹å‡¦ç†
 		///
-		/// ‚±‚±‚Å‚ÍŸ‚Ìˆ—‚ğs‚Á‚Ä‚¢‚é
-		/// * ‰æ–ÊŠO‚Éo‚Ä‚¢‚Á‚½Lazer‚Ìíœ
-		/// * “–‚½‚è”»’èŒÄ‚Ño‚µ+“–‚½‚Á‚Ä‚¢‚½Lazer‚Ìíœ
+		/// ã“ã“ã§ã¯æ¬¡ã®å‡¦ç†ã‚’è¡Œã£ã¦ã„ã‚‹
+		/// * ç”»é¢å¤–ã«å‡ºã¦ã„ã£ãŸLazerã®å‰Šé™¤
+		/// * å½“ãŸã‚Šåˆ¤å®šå‘¼ã³å‡ºã—+å½“ãŸã£ã¦ã„ãŸLazerã®å‰Šé™¤
 		public synchronized void runMainLoopJob() {
-			// List‚Íforeach‚µ‚È‚ª‚çremove‚Å‚«‚È‚¢‚Ì‚Å—\‚ßƒRƒs[‚µ‚Ä‚¨‚­
+			// Listã¯foreachã—ãªãŒã‚‰removeã§ããªã„ã®ã§äºˆã‚ã‚³ãƒ”ãƒ¼ã—ã¦ãŠã
 			LinkedList<Lazer> work_lazers = new LinkedList<Lazer>(lazers);
 			for (Lazer lazer : work_lazers) {
 				lazer.runMainLoopJob();
@@ -274,7 +274,7 @@ public class Shooting extends JPanel {
 				}
 			}
 
-			// “–‚½‚è”»’è
+			// å½“ãŸã‚Šåˆ¤å®š
 			LinkedList<Lazer> hit_lazers = new LinkedList<Lazer>();
 			for (Lazer lazer : lazers) {
 				ShootingObject[] hitobjs = Shooting.this.getHitObjects(lazer);
@@ -289,13 +289,13 @@ public class Shooting extends JPanel {
 					hit_lazers.add(lazer);
 				}
 			}
-			// ‚ ‚½‚Á‚Ä‚¢‚½‚à‚Ì‚Ííœ
+			// ã‚ãŸã£ã¦ã„ãŸã‚‚ã®ã¯å‰Šé™¤
 			for (Lazer lazer : hit_lazers) {
 				lazers.remove(lazer);
 			}
 		}
 
-		/// Lazer‚Ì•`‰æ
+		/// Lazerã®æç”»
 		/// @param g
 		public synchronized void paintObject(Graphics g) {
 			for (Lazer lazer : lazers) {
@@ -303,9 +303,9 @@ public class Shooting extends JPanel {
 			}
 		}
 
-		/// src_lazer‚ª“–‚½‚Á‚Ä‚¢‚éLazer‚Ì”z—ñ‚ğæ“¾
-		/// @param src_lazer ”ò‚ñ‚Å‚«‚½Lazer
-		/// @return src_lazer‚ª“–‚½‚Á‚Ä‚¢‚éLazer‚Ì”z—ñ
+		/// src_lazerãŒå½“ãŸã£ã¦ã„ã‚‹Lazerã®é…åˆ—ã‚’å–å¾—
+		/// @param src_lazer é£›ã‚“ã§ããŸLazer
+		/// @return src_lazerãŒå½“ãŸã£ã¦ã„ã‚‹Lazerã®é…åˆ—
 		public synchronized ShootingObject[] getHitObjects(Lazer src_lazer) {
 			LinkedList<ShootingObject> objs = new LinkedList<ShootingObject>();
 			for (Lazer lazer : lazers) {
@@ -317,53 +317,53 @@ public class Shooting extends JPanel {
 		}
 	}
 
-	/// ƒQ[ƒ€‚ÉQ‰Á‚µ‚Ä‚¢‚éPlayer‚ÌƒRƒŒƒNƒVƒ‡ƒ“
+	/// ã‚²ãƒ¼ãƒ ã«å‚åŠ ã—ã¦ã„ã‚‹Playerã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
 	class PlayerCollection implements MainLoopJob, KeyListener {
-		/// ƒQ[ƒ€‚ÉQ‰Á‚µ‚Ä‚¢‚éPlayer‚ğ•Û‚·‚éƒŠƒXƒg
-		// @note •p”É‚É’Ç‰ÁEíœ‚¹‚¸QÆ‚·‚éê‡‚Ì‚Ù‚¤‚ª‘½‚¢‚½‚ß“®“I”z—ñ‚ğg—p‚·‚é
+		/// ã‚²ãƒ¼ãƒ ã«å‚åŠ ã—ã¦ã„ã‚‹Playerã‚’ä¿æŒã™ã‚‹ãƒªã‚¹ãƒˆ
+		// @note é »ç¹ã«è¿½åŠ ãƒ»å‰Šé™¤ã›ãšå‚ç…§ã™ã‚‹å ´åˆã®ã»ã†ãŒå¤šã„ãŸã‚å‹•çš„é…åˆ—ã‚’ä½¿ç”¨ã™ã‚‹
 		private ArrayList<Player> players = new ArrayList<Player>();
 
-		/// Q‰Á‚µ‚Ä‚¢‚éPlayer‚Ì”z—ñæ“¾
-		/// @return Q‰Á‚µ‚Ä‚¢‚éPlayer‚Ì”z—ñ
+		/// å‚åŠ ã—ã¦ã„ã‚‹Playerã®é…åˆ—å–å¾—
+		/// @return å‚åŠ ã—ã¦ã„ã‚‹Playerã®é…åˆ—
 		public Player[] getPlayers() {
 			return this.players.toArray(new Player[this.players.size()]);
 		}
 
-		/// ‰Šú‰»
+		/// åˆæœŸåŒ–
 		public void initialize() {
 			for (Player player : players) {
 				player.initialize();
 			}
 		}
 
-		/// ‘SPlayer‚Ìíœ
+		/// å…¨Playerã®å‰Šé™¤
 		public void clear() {
 			players = new ArrayList<Player>();
 		}
 
-		/// Player‚Ì’Ç‰Á
-		/// @param player ’Ç‰Á‚·‚éPlayer
+		/// Playerã®è¿½åŠ 
+		/// @param player è¿½åŠ ã™ã‚‹Player
 		void addPlayer(Player player) {
 			players.add(player);
 		}
 
-		/// ƒƒCƒ“ƒ‹[ƒv‚©‚çŒÄ‚Î‚ê‚éˆ—
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‹ã‚‰å‘¼ã°ã‚Œã‚‹å‡¦ç†
 		public void runMainLoopJob() {
 			for (Player player : players) {
 				player.runMainLoopJob();
 			}
 		}
 
-		/// Player‚Ì•`‰æ
+		/// Playerã®æç”»
 		public void paintObject(Graphics g) {
 			for (Player player : players) {
 				player.paintObject(g);
 			}
 		}
 
-		/// lazer‚ª“–‚½‚Á‚Ä‚¢‚éLazer‚Ì”z—ñ‚ğæ“¾
-		/// @param lazer ”ò‚ñ‚Å‚«‚½Lazer
-		/// @return lazer‚ª“–‚½‚Á‚Ä‚¢‚éPlayer‚Ì”z—ñ
+		/// lazerãŒå½“ãŸã£ã¦ã„ã‚‹Lazerã®é…åˆ—ã‚’å–å¾—
+		/// @param lazer é£›ã‚“ã§ããŸLazer
+		/// @return lazerãŒå½“ãŸã£ã¦ã„ã‚‹Playerã®é…åˆ—
 		public ShootingObject[] getHitObjects(Lazer lazer) {
 			LinkedList<ShootingObject> objs = new LinkedList<ShootingObject>();
 			for (Player player : players) {
@@ -397,20 +397,20 @@ public class Shooting extends JPanel {
 	}
 }
 
-/// ƒƒCƒ“ƒ‹[ƒv‚Éˆ—‚ğ“o˜^‚·‚éê‡‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX
+/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã«å‡¦ç†ã‚’ç™»éŒ²ã™ã‚‹å ´åˆã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 interface MainLoopJob {
-	/// ƒƒCƒ“ƒ‹[ƒv‚©‚çŒÄ‚Î‚ê‚éˆ—
+	/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‹ã‚‰å‘¼ã°ã‚Œã‚‹å‡¦ç†
 	public void runMainLoopJob();
 }
 
-/// ƒQ[ƒ€‰æ–Ê‚É•\¦‚³‚ê‚éƒIƒuƒWƒFƒNƒg—p‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX
+/// ã‚²ãƒ¼ãƒ ç”»é¢ã«è¡¨ç¤ºã•ã‚Œã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”¨ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 interface ShootingObject {
-	/// ƒIƒuƒWƒFƒNƒg‚Ì•`‰æ
+	/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»
 	/// @param g
 	public void paintObject(Graphics g);
-	/// “–‚½‚è”»’è
-	/// @param obj “–‚½‚è”»’è‚ğs‚¤Lazer
-	/// @return “–‚½‚Á‚Ä‚¢‚éê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+	/// å½“ãŸã‚Šåˆ¤å®š
+	/// @param obj å½“ãŸã‚Šåˆ¤å®šã‚’è¡Œã†Lazer
+	/// @return å½“ãŸã£ã¦ã„ã‚‹å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 	public boolean isHit(Lazer obj);
 }
 

@@ -1,18 +1,18 @@
 package shooting.core;
 
-/// ƒvƒŒƒCƒ„[ŠÖŒW‚ÌƒCƒxƒ“ƒg‚ÌƒAƒ_ƒvƒ^
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼é–¢ä¿‚ã®ã‚¤ãƒ™ãƒ³ãƒˆã®ã‚¢ãƒ€ãƒ—ã‚¿
 public class PlayerAdapter implements PlayerListener {
-	/// ƒXƒRƒA‚ªXV‚³‚ê‚½
+	/// ã‚¹ã‚³ã‚¢ãŒæ›´æ–°ã•ã‚ŒãŸ
 	public void scoreUpdated() {}
-	/// ƒ_ƒ[ƒW‚ªXV‚³‚ê‚½
+	/// ãƒ€ãƒ¡ãƒ¼ã‚¸ãŒæ›´æ–°ã•ã‚ŒãŸ
 	public void damageUpdated() {}
-	/// ƒRƒ“ƒ{”‚ªXV‚³‚ê‚½
+	/// ã‚³ãƒ³ãƒœæ•°ãŒæ›´æ–°ã•ã‚ŒãŸ
 	public void comboUpdated() {}
-	/// ƒŒ[ƒU‚ª“–‚½‚Á‚½‰ñ”‚ªXV‚³‚ê‚½
+	/// ãƒ¬ãƒ¼ã‚¶ãŒå½“ãŸã£ãŸå›æ•°ãŒæ›´æ–°ã•ã‚ŒãŸ
 	public void hitCountUpdated() {}
-	/// ƒŒ[ƒU‚ªŠO‚ê‚½‰ñ”‚ªXV‚³‚ê‚½
+	/// ãƒ¬ãƒ¼ã‚¶ãŒå¤–ã‚ŒãŸå›æ•°ãŒæ›´æ–°ã•ã‚ŒãŸ
 	public void notHitCountUpdated() {}
-	/// ”j‰ó‚³‚ê‚½
+	/// ç ´å£Šã•ã‚ŒãŸ
 	public void playerDestroyed() {}
 }
 

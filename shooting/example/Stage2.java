@@ -5,25 +5,25 @@ import shooting.example.stage.*;
 import java.awt.Image;
 import shooting.example.DocumentBaseImageLoader;
 
-/// ƒXƒe[ƒW‚Ì—á2
+/// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ä¾‹2
 class Stage2 extends Stage {
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ƒXƒe[ƒW‚É•R•t‚¯‚éShootingƒIƒuƒWƒFƒNƒg
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting ã‚¹ãƒ†ãƒ¼ã‚¸ã«ç´ä»˜ã‘ã‚‹Shootingã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public Stage2(Shooting shooting) { super(shooting); }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ƒXƒe[ƒW‚É•R•t‚¯‚éShootingƒIƒuƒWƒFƒNƒg
-	/// @param imgLoader DocumentBaseImageLoaderƒIƒuƒWƒFƒNƒg
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting ã‚¹ãƒ†ãƒ¼ã‚¸ã«ç´ä»˜ã‘ã‚‹Shootingã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param imgLoader DocumentBaseImageLoaderã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public Stage2(Shooting shooting, DocumentBaseImageLoader imgLoader) {
 		super(shooting, imgLoader);
 	}
 
-	/// ƒXƒe[ƒW‚Ì–¼‘O‚ğæ“¾
-	/// @return ƒXƒe[ƒW‚Ì–¼‘O("Stage 2")
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸ã®åå‰ã‚’å–å¾—
+	/// @return ã‚¹ãƒ†ãƒ¼ã‚¸ã®åå‰("Stage 2")
 	public String getStageName() { return "Stage 2"; }
 
-	/// ƒXƒe[ƒWã‚Ì“G‚Ì”z—ñ‚ğæ“¾
-	/// @return ƒXƒe[ƒWã‚Ì“G‚Ì”z—ñ
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸ä¸Šã®æ•µã®é…åˆ—ã‚’å–å¾—
+	/// @return ã‚¹ãƒ†ãƒ¼ã‚¸ä¸Šã®æ•µã®é…åˆ—
 	public Player[] getEnemies() {
 		Player[] enemies = new Player[4];
 		Image image = getImageLoader().getImageImmediately("k1_p2a.png");

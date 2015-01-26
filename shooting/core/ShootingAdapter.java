@@ -1,16 +1,16 @@
 package shooting.core;
 
-/// ƒQ[ƒ€ŠÖŒW‚ÌƒCƒxƒ“ƒg‚ÌƒAƒ_ƒvƒ^
+/// ã‚²ãƒ¼ãƒ é–¢ä¿‚ã®ã‚¤ãƒ™ãƒ³ãƒˆã®ã‚¢ãƒ€ãƒ—ã‚¿
 public class ShootingAdapter implements ShootingListener {
-	/// ƒQ[ƒ€‚ª‰Šú‰»‚³‚ê‚½
+	/// ã‚²ãƒ¼ãƒ ãŒåˆæœŸåŒ–ã•ã‚ŒãŸ
 	public void onGameInitialized() {}
-	/// ƒQ[ƒ€‚ªÄŠJ‚³‚ê‚½
+	/// ã‚²ãƒ¼ãƒ ãŒå†é–‹ã•ã‚ŒãŸ
 	public void onGameResumed() {}
-	/// ƒQ[ƒ€‚ªˆê’â~‚³‚ê‚½
+	/// ã‚²ãƒ¼ãƒ ãŒä¸€æ™‚åœæ­¢ã•ã‚ŒãŸ
 	public void onGamePaused() {}
-	/// ƒQ[ƒ€‚ªÄ“Ç‚İ‚İ‚³‚ê‚½
+	/// ã‚²ãƒ¼ãƒ ãŒå†èª­ã¿è¾¼ã¿ã•ã‚ŒãŸ
 	public void onGameRestarted() {}
-	/// ƒQ[ƒ€ƒI[ƒo[
+	/// ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
 	public void onGameOvered() {}
 }
 

@@ -5,40 +5,40 @@ import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.net.URL;
 
-/// JApplet.getDocumentBase()‚Åæ“¾‚Å‚«‚éêŠ‚©‚ç‰æ‘œ‚ğ“Ç‚İ‚ŞƒNƒ‰ƒX
+/// JApplet.getDocumentBase()ã§å–å¾—ã§ãã‚‹å ´æ‰€ã‹ã‚‰ç”»åƒã‚’èª­ã¿è¾¼ã‚€ã‚¯ãƒ©ã‚¹
 public class DocumentBaseImageLoader {
 	private JApplet applet;
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param applet JAppletƒIƒuƒWƒFƒNƒg
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param applet JAppletã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public DocumentBaseImageLoader(JApplet applet) {
 		this.applet = applet;
 	}
 
-	/// ‰æ‘œ‚Ìæ“¾
+	/// ç”»åƒã®å–å¾—
 	///
-	/// JApplet.getImage(URL url)‚Ì“®ì‚Æ“¯—l
-	/// @param url æ“¾Œ³URL
-	/// @return ‰æ‘œ
+	/// JApplet.getImage(URL url)ã®å‹•ä½œã¨åŒæ§˜
+	/// @param url å–å¾—å…ƒURL
+	/// @return ç”»åƒ
 	public Image getImage(URL url) {
 		return applet.getImage(url);
 	}
 
-	/// ‰æ‘œ‚Ìæ“¾
+	/// ç”»åƒã®å–å¾—
 	///
-	/// JApplet.getImage(URL url, String name)‚Ì“®ì‚Æ“¯—l
-	/// @param string æ“¾Œ³ƒtƒ@ƒCƒ‹–¼(DocumentBase‚©‚ç‚Ì‘Š‘ÎƒpƒX)
-	/// @return ‰æ‘œ
+	/// JApplet.getImage(URL url, String name)ã®å‹•ä½œã¨åŒæ§˜
+	/// @param string å–å¾—å…ƒãƒ•ã‚¡ã‚¤ãƒ«å(DocumentBaseã‹ã‚‰ã®ç›¸å¯¾ãƒ‘ã‚¹)
+	/// @return ç”»åƒ
 	public Image getImage(String name) {
 		return applet.getImage(applet.getDocumentBase(), name);
 	}
 
-	/// ‰æ‘œ‚Ì“Ç‚İ‚İ
+	/// ç”»åƒã®èª­ã¿è¾¼ã¿
 	///
-	/// getImage‚Æ‚Íˆá‚¢‘¦‰æ‘œ‚Ì“à—e‚ğ“Ç‚İ‚Ş
-	/// ‚»‚Ì‚½‚ßAÀÛ‚Ì•`‰æ‚Ì‘O‚Å‚à•Ô‚Á‚Ä‚«‚½‰æ‘œ‚ÅgetWidth(), getHeight()‰Â”\
-	/// @param url æ“¾Œ³URL
-	/// @return ‰æ‘œ
+	/// getImageã¨ã¯é•ã„å³æ™‚ç”»åƒã®å†…å®¹ã‚’èª­ã¿è¾¼ã‚€
+	/// ãã®ãŸã‚ã€å®Ÿéš›ã®æç”»ã®å‰ã§ã‚‚è¿”ã£ã¦ããŸç”»åƒã§getWidth(), getHeight()å¯èƒ½
+	/// @param url å–å¾—å…ƒURL
+	/// @return ç”»åƒ
 	public Image getImageImmediately(URL url) {
 		try {
 			return ImageIO.read(url);
@@ -47,12 +47,12 @@ public class DocumentBaseImageLoader {
 		}
 	}
 
-	/// ‰æ‘œ‚Ì“Ç‚İ‚İ
+	/// ç”»åƒã®èª­ã¿è¾¼ã¿
 	///
-	/// getImage‚Æ‚Íˆá‚¢‘¦‰æ‘œ‚Ì“à—e‚ğ“Ç‚İ‚Ş
-	/// ‚»‚Ì‚½‚ßAÀÛ‚Ì•`‰æ‚Ì‘O‚Å‚à•Ô‚Á‚Ä‚«‚½‰æ‘œ‚ÅgetWidth(), getHeight()‰Â”\
-	/// @param string æ“¾Œ³ƒtƒ@ƒCƒ‹–¼(DocumentBase‚©‚ç‚Ì‘Š‘ÎƒpƒX)
-	/// @return ‰æ‘œ
+	/// getImageã¨ã¯é•ã„å³æ™‚ç”»åƒã®å†…å®¹ã‚’èª­ã¿è¾¼ã‚€
+	/// ãã®ãŸã‚ã€å®Ÿéš›ã®æç”»ã®å‰ã§ã‚‚è¿”ã£ã¦ããŸç”»åƒã§getWidth(), getHeight()å¯èƒ½
+	/// @param string å–å¾—å…ƒãƒ•ã‚¡ã‚¤ãƒ«å(DocumentBaseã‹ã‚‰ã®ç›¸å¯¾ãƒ‘ã‚¹)
+	/// @return ç”»åƒ
 	public Image getImageImmediately(String name) {
 		try {
 			return ImageIO.read(new URL(applet.getDocumentBase(), name));

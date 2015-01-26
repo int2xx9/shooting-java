@@ -2,39 +2,39 @@ package shooting.example.examplestage;
 
 import shooting.core.*;
 
-/// Weapon‚ÌƒTƒ“ƒvƒ‹
+/// Weaponã®ã‚µãƒ³ãƒ—ãƒ«
 public class ExampleWeapon extends Weapon {
-	/// LazerGenerator‚ÌƒTƒ“ƒvƒ‹
+	/// LazerGeneratorã®ã‚µãƒ³ãƒ—ãƒ«
 	class ExampleLazerGenerator extends LazerGenerator {
-		/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-		/// @param player ”­ËŒ³Player
+		/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		/// @param player ç™ºå°„å…ƒPlayer
 		public ExampleLazerGenerator(Player player) {
 			super(player);
 		}
-		/// ExampleLazer‚Ì¶¬
-		/// @param x ¶¬‚·‚éXÀ•W‚ÌˆÊ’u
-		/// @param y ¶¬‚·‚éYÀ•W‚ÌˆÊ’u
-		/// @param sx X²‚Ì”­Ë‚·‚é•ûŒü‚Æ‘¬“x
-		/// @param sy Y²‚Ì”­Ë‚·‚é•ûŒü‚Æ‘¬“x
-		/// @return LazerƒIƒuƒWƒFƒNƒg
+		/// ExampleLazerã®ç”Ÿæˆ
+		/// @param x ç”Ÿæˆã™ã‚‹Xåº§æ¨™ã®ä½ç½®
+		/// @param y ç”Ÿæˆã™ã‚‹Yåº§æ¨™ã®ä½ç½®
+		/// @param sx Xè»¸ã®ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿåº¦
+		/// @param sy Yè»¸ã®ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿåº¦
+		/// @return Lazerã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 		public Lazer generateLazer(int x, int y, int sx, int sy) {
 			return new ExampleLazer(getPlayer(), x, y, sx, sy);
 		}
 	};
 
-	public static final int INTERVAL = 150;	///< ”­Ë‰Â”\‚É‚È‚é‚Ü‚Å‚ÌŠÔŠu
-	/// ”­Ë‰Â”\‚É‚È‚é‚Ü‚Å‚ÌŠÔŠu‚Ìæ“¾
-	/// @return ”­Ë‰Â”\‚É‚È‚é‚Ü‚Å‚ÌŠÔŠu
+	public static final int INTERVAL = 150;	///< ç™ºå°„å¯èƒ½ã«ãªã‚‹ã¾ã§ã®é–“éš”
+	/// ç™ºå°„å¯èƒ½ã«ãªã‚‹ã¾ã§ã®é–“éš”ã®å–å¾—
+	/// @return ç™ºå°„å¯èƒ½ã«ãªã‚‹ã¾ã§ã®é–“éš”
 	public int getInterval() { return INTERVAL; }
-	/// Generator‚Ìæ“¾
-	/// @param player ”­ËŒ³‚Æ‚È‚éPlayer
-	/// @return Player‚ğ”­ËŒ³‚Æ‚·‚éLazerGenerator‚ÌƒIƒuƒWƒFƒNƒg
+	/// Generatorã®å–å¾—
+	/// @param player ç™ºå°„å…ƒã¨ãªã‚‹Player
+	/// @return Playerã‚’ç™ºå°„å…ƒã¨ã™ã‚‹LazerGeneratorã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public LazerGenerator getGenerator(Player player) {
 		return new ExampleLazerGenerator(player);
 	}
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param player ”­ËŒ³‚Æ‚È‚éPlayer
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param player ç™ºå°„å…ƒã¨ãªã‚‹Player
 	public ExampleWeapon(Player player) {
 		super(player, false);
 	}

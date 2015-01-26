@@ -5,25 +5,25 @@ import shooting.example.stage.*;
 import java.awt.Image;
 import shooting.example.DocumentBaseImageLoader;
 
-/// ƒXƒe[ƒW‚Ì—á5
+/// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ä¾‹5
 class Stage5 extends Stage {
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ƒXƒe[ƒW‚É•R•t‚¯‚éShootingƒIƒuƒWƒFƒNƒg
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting ã‚¹ãƒ†ãƒ¼ã‚¸ã«ç´ä»˜ã‘ã‚‹Shootingã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public Stage5(Shooting shooting) { super(shooting); }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ƒXƒe[ƒW‚É•R•t‚¯‚éShootingƒIƒuƒWƒFƒNƒg
-	/// @param imgLoader DocumentBaseImageLoaderƒIƒuƒWƒFƒNƒg
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting ã‚¹ãƒ†ãƒ¼ã‚¸ã«ç´ä»˜ã‘ã‚‹Shootingã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param imgLoader DocumentBaseImageLoaderã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public Stage5(Shooting shooting, DocumentBaseImageLoader imgLoader) {
 		super(shooting, imgLoader);
 	}
 
-	/// ƒXƒe[ƒW‚Ì–¼‘O‚ğæ“¾
-	/// @return ƒXƒe[ƒW‚Ì–¼‘O("Stage 5")
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸ã®åå‰ã‚’å–å¾—
+	/// @return ã‚¹ãƒ†ãƒ¼ã‚¸ã®åå‰("Stage 5")
 	public String getStageName() { return "Stage 5"; }
 
-	/// ƒXƒe[ƒWã‚Ì“G‚Ì”z—ñ‚ğæ“¾
-	/// @return ƒXƒe[ƒWã‚Ì“G‚Ì”z—ñ
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸ä¸Šã®æ•µã®é…åˆ—ã‚’å–å¾—
+	/// @return ã‚¹ãƒ†ãƒ¼ã‚¸ä¸Šã®æ•µã®é…åˆ—
 	public Player[] getEnemies() {
 		Player[] enemies = new Player[1];
 		Image image = getImageLoader().getImageImmediately("k1_p2a.png");
@@ -36,40 +36,40 @@ class Stage5 extends Stage {
 	}
 }
 
-/// ©“®‚ÅˆÚ“®EƒŒ[ƒU‚Ì”­Ë‚ğs‚¤Player
+/// è‡ªå‹•ã§ç§»å‹•ãƒ»ãƒ¬ãƒ¼ã‚¶ã®ç™ºå°„ã‚’è¡Œã†Player
 class Stage5AI extends Player {
-	public static final int DEFAULT_WIDTH = 25;	///< ƒfƒtƒHƒ‹ƒg‚Ì•
-	public static final int DEFAULT_HEIGHT = 25;	///< ƒfƒtƒHƒ‹ƒg‚Ì‚‚³
-	public static final int MAX_DAMAGE = 30;	///< Å‘åƒ_ƒ[ƒW
-	/// •‚Ìæ“¾
-	/// @return •
+	public static final int DEFAULT_WIDTH = 25;	///< ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®å¹…
+	public static final int DEFAULT_HEIGHT = 25;	///< ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®é«˜ã•
+	public static final int MAX_DAMAGE = 30;	///< æœ€å¤§ãƒ€ãƒ¡ãƒ¼ã‚¸
+	/// å¹…ã®å–å¾—
+	/// @return å¹…
 	public int getWidth() { return getImage() != null ? getImage().getWidth(null) : DEFAULT_WIDTH; }
-	/// ‚‚³‚Ìæ“¾
-	/// @return ‚‚³
+	/// é«˜ã•ã®å–å¾—
+	/// @return é«˜ã•
 	public int getHeight() { return getImage() != null ? getImage().getHeight(null) : DEFAULT_HEIGHT; }
-	/// Å‘åƒ_ƒ[ƒW‚Ìæ“¾
-	/// @return Å‘åƒ_ƒ[ƒW
+	/// æœ€å¤§ãƒ€ãƒ¡ãƒ¼ã‚¸ã®å–å¾—
+	/// @return æœ€å¤§ãƒ€ãƒ¡ãƒ¼ã‚¸
 	public int getMaxDamage() { return MAX_DAMAGE; }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ShootingƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg
-	/// @param team ƒ`[ƒ€”Ô†
-	/// @param x ”z’u‚·‚é¶ã‚©‚ç‚ÌXÀ•W
-	/// @param y ”z’u‚·‚é¶ã‚©‚ç‚ÌYÀ•W
-	/// @param sx ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌXÀ•W
-	/// @param sy ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌYÀ•W
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting Shootingã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param team ãƒãƒ¼ãƒ ç•ªå·
+	/// @param x é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Xåº§æ¨™
+	/// @param y é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Yåº§æ¨™
+	/// @param sx ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Xåº§æ¨™
+	/// @param sy ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Yåº§æ¨™
 	public Stage5AI(Shooting shooting, int team, int x, int y, int sx, int sy) {
 		this(shooting, null, team, x, y, sx, sy);
 	}
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ShootingƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg
-	/// @param image ‹@‘Ì‚Ì‰æ‘œ
-	/// @param team ƒ`[ƒ€”Ô†
-	/// @param x ”z’u‚·‚é¶ã‚©‚ç‚ÌXÀ•W
-	/// @param y ”z’u‚·‚é¶ã‚©‚ç‚ÌYÀ•W
-	/// @param sx ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌXÀ•W
-	/// @param sy ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌYÀ•W
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting Shootingã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param image æ©Ÿä½“ã®ç”»åƒ
+	/// @param team ãƒãƒ¼ãƒ ç•ªå·
+	/// @param x é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Xåº§æ¨™
+	/// @param y é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Yåº§æ¨™
+	/// @param sx ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Xåº§æ¨™
+	/// @param sy ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Yåº§æ¨™
 	public Stage5AI(Shooting shooting, Image image, int team, int x, int y, int sx, int sy) {
 		super(shooting, team, x, y, sx, sy);
 		setImage(image);
@@ -77,18 +77,18 @@ class Stage5AI extends Player {
 		setMovingX(2);
 	}
 
-	private int interval_counter = 0;	///< ƒvƒŒƒCƒ„[‚ÖŒü‚©‚Á‚Äi‚Ş•p“x‚Ì’²®—pƒJƒEƒ“ƒ^
-	private final int LOOP_INTERVAL = 180;	///< ƒvƒŒƒCƒ„[‚ÖŒü‚©‚Á‚Äi‚ŞŠÔŠu
-	/// ƒƒCƒ“ƒ‹[ƒv‚©‚çŒÄ‚Î‚ê‚éˆ—
+	private int interval_counter = 0;	///< ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¸å‘ã‹ã£ã¦é€²ã‚€é »åº¦ã®èª¿æ•´ç”¨ã‚«ã‚¦ãƒ³ã‚¿
+	private final int LOOP_INTERVAL = 180;	///< ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¸å‘ã‹ã£ã¦é€²ã‚€é–“éš”
+	/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‹ã‚‰å‘¼ã°ã‚Œã‚‹å‡¦ç†
 	///
-	/// ‚±‚±‚Å‚ÍˆÚ“®‚ÆƒŒ[ƒU‚Ì”­Ëˆ—‚ğs‚Á‚Ä‚¢‚é
+	/// ã“ã“ã§ã¯ç§»å‹•ã¨ãƒ¬ãƒ¼ã‚¶ã®ç™ºå°„å‡¦ç†ã‚’è¡Œã£ã¦ã„ã‚‹
 	public void runMainLoopJob() {
-		// 1/50‚ÌŠm—¦‚ÅƒŒ[ƒU‚ğ”­Ë‚·‚é
-		// (‚½‚¾‚µWeapon‚ª”­Ë‰Â”\ó‘Ô‚Å‚È‚¯‚ê‚Î”­Ë‚µ‚È‚¢)
+		// 1/50ã®ç¢ºç‡ã§ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹
+		// (ãŸã ã—WeaponãŒç™ºå°„å¯èƒ½çŠ¶æ…‹ã§ãªã‘ã‚Œã°ç™ºå°„ã—ãªã„)
 		if ((int)(Math.random()*50) == 0) {
 			getWeapon().shoot();
 		}
-		// ‚±‚êˆÈã¡‚ÌŒü‚«‚Öi‚ß‚È‚­‚È‚Á‚½‚ç•ûŒü“]Š·‚·‚é
+		// ã“ã‚Œä»¥ä¸Šä»Šã®å‘ãã¸é€²ã‚ãªããªã£ãŸã‚‰æ–¹å‘è»¢æ›ã™ã‚‹
 		if (!canMoveTo(getX()+getMovingX(), getY(), getWidth(), getHeight())) {
 			setMovingX(-getMovingX());
 		}

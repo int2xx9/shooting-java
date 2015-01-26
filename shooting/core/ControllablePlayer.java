@@ -5,68 +5,68 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-/// ƒ†[ƒU‚ª‘€ì‚Å‚«‚éPlayer
+/// ãƒ¦ãƒ¼ã‚¶ãŒæ“ä½œã§ãã‚‹Player
 public class ControllablePlayer extends Player {
-	public static final int DEFAULT_WIDTH = 25;	///< ƒfƒtƒHƒ‹ƒg‚Ì•
-	public static final int DEFAULT_HEIGHT = 25;	///< ƒfƒtƒHƒ‹ƒg‚Ì‚‚³
-	public static final int MAX_DAMAGE = 50;	///< Å‘åƒ_ƒ[ƒW
-	/// •‚Ìæ“¾
-	/// @return •
+	public static final int DEFAULT_WIDTH = 25;	///< ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®å¹…
+	public static final int DEFAULT_HEIGHT = 25;	///< ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®é«˜ã•
+	public static final int MAX_DAMAGE = 50;	///< æœ€å¤§ãƒ€ãƒ¡ãƒ¼ã‚¸
+	/// å¹…ã®å–å¾—
+	/// @return å¹…
 	public int getWidth() { return getImage() != null ? getImage().getWidth(null) : DEFAULT_WIDTH; }
-	/// ‚‚³‚Ìæ“¾
-	/// @return ‚‚³
+	/// é«˜ã•ã®å–å¾—
+	/// @return é«˜ã•
 	public int getHeight() { return getImage() != null ? getImage().getHeight(null) : DEFAULT_HEIGHT; }
-	/// Å‘åƒ_ƒ[ƒW‚Ìæ“¾
-	/// @return Å‘åƒ_ƒ[ƒW
+	/// æœ€å¤§ãƒ€ãƒ¡ãƒ¼ã‚¸ã®å–å¾—
+	/// @return æœ€å¤§ãƒ€ãƒ¡ãƒ¼ã‚¸
 	public int getMaxDamage() { return MAX_DAMAGE; }
 
-	/// ƒL[İ’è
+	/// ã‚­ãƒ¼è¨­å®š
 	public ControllablePlayerConfig keyConfig = new ControllablePlayerConfig();
-	/// ƒL[İ’è‚Ìæ“¾
-	/// @return ƒL[İ’è
+	/// ã‚­ãƒ¼è¨­å®šã®å–å¾—
+	/// @return ã‚­ãƒ¼è¨­å®š
 	public ControllablePlayerConfig getKeyConfig() { return keyConfig; }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ShootingƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg
-	/// @param team ƒ`[ƒ€”Ô†
-	/// @param x ”z’u‚·‚é¶ã‚©‚ç‚ÌXÀ•W
-	/// @param y ”z’u‚·‚é¶ã‚©‚ç‚ÌYÀ•W
-	/// @param sx ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌXÀ•W
-	/// @param sy ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌYÀ•W
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting Shootingã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param team ãƒãƒ¼ãƒ ç•ªå·
+	/// @param x é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Xåº§æ¨™
+	/// @param y é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Yåº§æ¨™
+	/// @param sx ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Xåº§æ¨™
+	/// @param sy ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Yåº§æ¨™
 	public ControllablePlayer(Shooting shooting, int team, int x, int y, int sx, int sy) {
 		this(shooting, null, team, x, y, sx, sy);
 	}
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ShootingƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg
-	/// @param image ‹@‘Ì‚Ì‰æ‘œ
-	/// @param team ƒ`[ƒ€”Ô†
-	/// @param x ”z’u‚·‚é¶ã‚©‚ç‚ÌXÀ•W
-	/// @param y ”z’u‚·‚é¶ã‚©‚ç‚ÌYÀ•W
-	/// @param sx ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌXÀ•W
-	/// @param sy ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌYÀ•W
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting Shootingã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param image æ©Ÿä½“ã®ç”»åƒ
+	/// @param team ãƒãƒ¼ãƒ ç•ªå·
+	/// @param x é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Xåº§æ¨™
+	/// @param y é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Yåº§æ¨™
+	/// @param sx ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Xåº§æ¨™
+	/// @param sy ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Yåº§æ¨™
 	public ControllablePlayer(Shooting shooting, Image image, int team, int x, int y, int sx, int sy) {
 		super(shooting, team, x, y, sx, sy);
 		setImage(image);
 		setWeapon(new DefaultWeapon(this));
 	}
 
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	public void initialize() {
 		super.initialize();
 		setMovingX(0);
 		setMovingY(0);
 	}
 
-	/// ƒƒCƒ“ƒ‹[ƒv‚©‚çŒÄ‚Î‚ê‚éˆ—
+	/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‹ã‚‰å‘¼ã°ã‚Œã‚‹å‡¦ç†
 	///
-	/// ‚±‚±‚Å‚ÍˆÚ“®ˆ—‚ğs‚Á‚Ä‚¢‚é
+	/// ã“ã“ã§ã¯ç§»å‹•å‡¦ç†ã‚’è¡Œã£ã¦ã„ã‚‹
 	public void runMainLoopJob() {
 		setX(getX() + getMovingX());
 	}
 
-	/// ƒL[‚ª‰Ÿ‚³‚ê‚½ê‡‚Ìˆ—
-	/// @param e KeyEvent‚ÌƒIƒuƒWƒFƒNƒg
+	/// ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸå ´åˆã®å‡¦ç†
+	/// @param e KeyEventã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public void keyPressed(KeyEvent e) {
 		if (keyConfig.isMoveLeftKey(e.getKeyCode(), e.getKeyChar())) {
 			setMovingX(-3);
@@ -75,11 +75,11 @@ public class ControllablePlayer extends Player {
 		}
 	}
 
-	/// ƒL[‚ª—£‚³‚ê‚½ê‡‚Ìˆ—
-	/// @param e KeyEvent‚ÌƒIƒuƒWƒFƒNƒg
+	/// ã‚­ãƒ¼ãŒé›¢ã•ã‚ŒãŸå ´åˆã®å‡¦ç†
+	/// @param e KeyEventã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public void keyReleased(KeyEvent e) {
-		// ˆÚ“®ŠÖŒW‚ÌƒL[‚ª‰Ÿ‚³‚ê‚½ê‡‚Í—£‚³‚ê‚½ƒL[‚ÆˆÚ“®’†‚Ì•ûŒü‚ª“¯‚¶‚©‚Ç‚¤‚©‚ğŠm”F‚µA
-		// “¯‚¶‚Å‚ ‚éê‡‚Ì‚İˆÚ“®‚ğ‚â‚ß‚é
+		// ç§»å‹•é–¢ä¿‚ã®ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸå ´åˆã¯é›¢ã•ã‚ŒãŸã‚­ãƒ¼ã¨ç§»å‹•ä¸­ã®æ–¹å‘ãŒåŒã˜ã‹ã©ã†ã‹ã‚’ç¢ºèªã—ã€
+		// åŒã˜ã§ã‚ã‚‹å ´åˆã®ã¿ç§»å‹•ã‚’ã‚„ã‚ã‚‹
 		if (keyConfig.isMoveLeftKey(e.getKeyCode(), e.getKeyChar()) && getMovingX() < 0) {
 			setMovingX(0);
 		} else if (keyConfig.isMoveRightKey(e.getKeyCode(), e.getKeyChar()) && getMovingX() > 0) {

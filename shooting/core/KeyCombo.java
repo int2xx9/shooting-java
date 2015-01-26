@@ -1,23 +1,23 @@
 package shooting.core;
 
-/// KeyEvent‚Åg—p‚³‚ê‚ékeyCode, keyChar‚Ì‘g‚İ‡‚í‚¹
+/// KeyEventã§ä½¿ç”¨ã•ã‚Œã‚‹keyCode, keyCharã®çµ„ã¿åˆã‚ã›
 public class KeyCombo {
 	private int keyCode;
-		/// keyCode‚Ìæ“¾
+		/// keyCodeã®å–å¾—
 		/// @return keyCode
 		public int getKeyCode() { return keyCode; }
-		/// keyCode‚Ìİ’è
+		/// keyCodeã®è¨­å®š
 		/// @param value keyCode
 		public void setKeyCode(int value) { keyCode = value; }
 	private char keyChar;
-		/// keyChar‚Ìæ“¾
+		/// keyCharã®å–å¾—
 		/// @return keyChar
 		public char getKeyChar() { return keyChar; }
-		/// keyChar‚Ìİ’è
+		/// keyCharã®è¨­å®š
 		/// @param value keyChar
 		public void setKeyChar(char value) { keyChar= value; }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	/// @param keyCode keyCode
 	/// @param keyChar keyChar
 	public KeyCombo(int keyCode, char keyChar) {
@@ -25,17 +25,17 @@ public class KeyCombo {
 		this.keyChar = keyChar;
 	}
 
-	/// ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
-	/// @param key ‰Ÿ‚³‚ê‚Ä‚¢‚éƒL[
-	/// @return ‰Ÿ‚³‚ê‚Ä‚¢‚éê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+	/// ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
+	/// @param key æŠ¼ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼
+	/// @return æŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 	public boolean isPressed(KeyCombo key) {
 		return isPressed(key.getKeyCode(), key.getKeyChar());
 	}
 
-	/// ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
-	/// @param keyCode ‰Ÿ‚³‚ê‚Ä‚¢‚éƒL[‚ÌkeyCode
-	/// @param keyChar ‰Ÿ‚³‚ê‚Ä‚¢‚éƒL[‚ÌkeyChar
-	/// @return ‰Ÿ‚³‚ê‚Ä‚¢‚éê‡true, ‚»‚êˆÈŠO‚Ìê‡false
+	/// ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
+	/// @param keyCode æŠ¼ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼ã®keyCode
+	/// @param keyChar æŠ¼ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼ã®keyChar
+	/// @return æŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆtrue, ãã‚Œä»¥å¤–ã®å ´åˆfalse
 	public boolean isPressed(int keyCode, char keyChar) {
 		return this.keyCode == keyCode && this.keyChar == keyChar;
 	}

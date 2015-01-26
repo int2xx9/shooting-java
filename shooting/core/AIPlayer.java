@@ -5,40 +5,40 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-/// ©“®‚ÅˆÚ“®EƒŒ[ƒU‚Ì”­Ë‚ğs‚¤Player
+/// è‡ªå‹•ã§ç§»å‹•ãƒ»ãƒ¬ãƒ¼ã‚¶ã®ç™ºå°„ã‚’è¡Œã†Player
 public class AIPlayer extends Player {
-	public static final int DEFAULT_WIDTH = 25;	///< ƒfƒtƒHƒ‹ƒg‚Ì•
-	public static final int DEFAULT_HEIGHT = 25;	///< ƒfƒtƒHƒ‹ƒg‚Ì‚‚³
-	public static final int MAX_DAMAGE = 30;	///< Å‘åƒ_ƒ[ƒW
-	/// •‚Ìæ“¾
-	/// @return •
+	public static final int DEFAULT_WIDTH = 25;	///< ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®å¹…
+	public static final int DEFAULT_HEIGHT = 25;	///< ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®é«˜ã•
+	public static final int MAX_DAMAGE = 30;	///< æœ€å¤§ãƒ€ãƒ¡ãƒ¼ã‚¸
+	/// å¹…ã®å–å¾—
+	/// @return å¹…
 	public int getWidth() { return getImage() != null ? getImage().getWidth(null) : DEFAULT_WIDTH; }
-	/// ‚‚³‚Ìæ“¾
-	/// @return ‚‚³
+	/// é«˜ã•ã®å–å¾—
+	/// @return é«˜ã•
 	public int getHeight() { return getImage() != null ? getImage().getHeight(null) : DEFAULT_HEIGHT; }
-	/// Å‘åƒ_ƒ[ƒW‚Ìæ“¾
-	/// @return Å‘åƒ_ƒ[ƒW
+	/// æœ€å¤§ãƒ€ãƒ¡ãƒ¼ã‚¸ã®å–å¾—
+	/// @return æœ€å¤§ãƒ€ãƒ¡ãƒ¼ã‚¸
 	public int getMaxDamage() { return MAX_DAMAGE; }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ShootingƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg
-	/// @param team ƒ`[ƒ€”Ô†
-	/// @param x ”z’u‚·‚é¶ã‚©‚ç‚ÌXÀ•W
-	/// @param y ”z’u‚·‚é¶ã‚©‚ç‚ÌYÀ•W
-	/// @param sx ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌXÀ•W
-	/// @param sy ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌYÀ•W
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting Shootingã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param team ãƒãƒ¼ãƒ ç•ªå·
+	/// @param x é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Xåº§æ¨™
+	/// @param y é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Yåº§æ¨™
+	/// @param sx ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Xåº§æ¨™
+	/// @param sy ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Yåº§æ¨™
 	public AIPlayer(Shooting shooting, int team, int x, int y, int sx, int sy) {
 		this(shooting, null, team, x, y, sx, sy);
 	}
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ShootingƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg
-	/// @param image ‹@‘Ì‚Ì‰æ‘œ
-	/// @param team ƒ`[ƒ€”Ô†
-	/// @param x ”z’u‚·‚é¶ã‚©‚ç‚ÌXÀ•W
-	/// @param y ”z’u‚·‚é¶ã‚©‚ç‚ÌYÀ•W
-	/// @param sx ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌXÀ•W
-	/// @param sy ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌYÀ•W
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting Shootingã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param image æ©Ÿä½“ã®ç”»åƒ
+	/// @param team ãƒãƒ¼ãƒ ç•ªå·
+	/// @param x é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Xåº§æ¨™
+	/// @param y é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Yåº§æ¨™
+	/// @param sx ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Xåº§æ¨™
+	/// @param sy ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Yåº§æ¨™
 	public AIPlayer(Shooting shooting, Image image, int team, int x, int y, int sx, int sy) {
 		super(shooting, team, x, y, sx, sy);
 		setImage(image);
@@ -46,16 +46,16 @@ public class AIPlayer extends Player {
 		setMovingX(2);
 	}
 
-	/// ƒƒCƒ“ƒ‹[ƒv‚©‚çŒÄ‚Î‚ê‚éˆ—
+	/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‹ã‚‰å‘¼ã°ã‚Œã‚‹å‡¦ç†
 	///
-	/// ‚±‚±‚Å‚ÍˆÚ“®‚ÆƒŒ[ƒU‚Ì”­Ëˆ—‚ğs‚Á‚Ä‚¢‚é
+	/// ã“ã“ã§ã¯ç§»å‹•ã¨ãƒ¬ãƒ¼ã‚¶ã®ç™ºå°„å‡¦ç†ã‚’è¡Œã£ã¦ã„ã‚‹
 	public void runMainLoopJob() {
-		// 1/30‚ÌŠm—¦‚ÅƒŒ[ƒU‚ğ”­Ë‚·‚é
-		// (‚½‚¾‚µWeapon‚ª”­Ë‰Â”\ó‘Ô‚Å‚È‚¯‚ê‚Î”­Ë‚µ‚È‚¢)
+		// 1/30ã®ç¢ºç‡ã§ãƒ¬ãƒ¼ã‚¶ã‚’ç™ºå°„ã™ã‚‹
+		// (ãŸã ã—WeaponãŒç™ºå°„å¯èƒ½çŠ¶æ…‹ã§ãªã‘ã‚Œã°ç™ºå°„ã—ãªã„)
 		if ((int)(Math.random()*30) == 0) {
 			getWeapon().shoot();
 		}
-		// ‚±‚êˆÈã¡‚ÌŒü‚«‚Öi‚ß‚È‚­‚È‚Á‚½‚ç•ûŒü“]Š·‚·‚é
+		// ã“ã‚Œä»¥ä¸Šä»Šã®å‘ãã¸é€²ã‚ãªããªã£ãŸã‚‰æ–¹å‘è»¢æ›ã™ã‚‹
 		if (!canMoveTo(getX()+getMovingX(), getY(), getWidth(), getHeight())) {
 			setMovingX(-getMovingX());
 		}

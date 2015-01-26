@@ -5,28 +5,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-/// AI‚ ‚é‚¢‚Íè“®‚Å‘€ì‚ğs‚¤ƒvƒŒƒCƒ„[‚ÌŠî’êƒNƒ‰ƒX
+/// AIã‚ã‚‹ã„ã¯æ‰‹å‹•ã§æ“ä½œã‚’è¡Œã†ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åŸºåº•ã‚¯ãƒ©ã‚¹
 public abstract class Player implements MainLoopJob, ShootingObject, KeyListener, LazerListener {
-	/// •‚Ìæ“¾
-	/// @return •
+	/// å¹…ã®å–å¾—
+	/// @return å¹…
 	abstract public int getWidth();
-	/// ‚‚³‚Ìæ“¾
-	/// @return ‚‚³
+	/// é«˜ã•ã®å–å¾—
+	/// @return é«˜ã•
 	abstract public int getHeight();
-	/// Å‘åƒ_ƒ[ƒW‚Ìæ“¾
-	/// @return Å‘åƒ_ƒ[ƒW
+	/// æœ€å¤§ãƒ€ãƒ¡ãƒ¼ã‚¸ã®å–å¾—
+	/// @return æœ€å¤§ãƒ€ãƒ¡ãƒ¼ã‚¸
 	abstract public int getMaxDamage();
 
-	/// “o˜^‚³‚ê‚Ä‚¢‚éPlayerListener‚ÌƒŠƒXƒg
+	/// ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹PlayerListenerã®ãƒªã‚¹ãƒˆ
 	private LinkedList<PlayerListener> listeners = new LinkedList<PlayerListener>();
 
-	private Shooting shooting;	///< ‚±‚ÌPlayer‚É•R•t‚¯‚ç‚ê‚Ä‚¢‚éshooting
-		/// İ’è‚³‚ê‚Ä‚¢‚éshooting‚Ìæ“¾
-		/// @return İ’è‚³‚ê‚Ä‚¢‚éshooting
+	private Shooting shooting;	///< ã“ã®Playerã«ç´ä»˜ã‘ã‚‰ã‚Œã¦ã„ã‚‹shooting
+		/// è¨­å®šã•ã‚Œã¦ã„ã‚‹shootingã®å–å¾—
+		/// @return è¨­å®šã•ã‚Œã¦ã„ã‚‹shooting
 		public Shooting getShooting() { return this.shooting; }
-	private int damage;	///< Œ»İó‚¯‚Ä‚¢‚éƒ_ƒ[ƒW
-		/// ƒ_ƒ[ƒW‚Ìİ’è
-		/// @param value V‚µ‚­İ’è‚·‚éƒ_ƒ[ƒW
+	private int damage;	///< ç¾åœ¨å—ã‘ã¦ã„ã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸
+		/// ãƒ€ãƒ¡ãƒ¼ã‚¸ã®è¨­å®š
+		/// @param value æ–°ã—ãè¨­å®šã™ã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸
 		public void setDamage(int value) {
 			this.damage = value;
 			for (PlayerListener listener : listeners) {
@@ -38,186 +38,186 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 				}
 			}
 		}
-		/// ƒ_ƒ[ƒW‚Ìæ“¾
-		/// @return Œ»İ‚Ìƒ_ƒ[ƒW
+		/// ãƒ€ãƒ¡ãƒ¼ã‚¸ã®å–å¾—
+		/// @return ç¾åœ¨ã®ãƒ€ãƒ¡ãƒ¼ã‚¸
 		public int getDamage() { return this.damage; }
-		/// ¶‘¶‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
-		/// @return ¶‘¶‚µ‚Ä‚¢‚étrue, ‚»‚êˆÈŠOfalse
+		/// ç”Ÿå­˜ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹
+		/// @return ç”Ÿå­˜ã—ã¦ã„ã‚‹æ™‚true, ãã‚Œä»¥å¤–false
 		public boolean isAlive() { return this.damage < getMaxDamage(); }
-		/// ”j‰ó‚³‚ê‚½‚©‚Ç‚¤‚©
-		/// @return ”j‰ó‚³‚ê‚Ä‚¢‚étrue, ‚»‚êˆÈŠOfalse
+		/// ç ´å£Šã•ã‚ŒãŸã‹ã©ã†ã‹
+		/// @return ç ´å£Šã•ã‚Œã¦ã„ã‚‹æ™‚true, ãã‚Œä»¥å¤–false
 		public boolean isDestroyed() { return this.damage >= getMaxDamage(); }
-	private int score;	///< Œ»İ‚ÌƒXƒRƒA
-		/// ƒXƒRƒA‚Ìİ’è
-		/// @param value V‚µ‚­İ’è‚·‚éƒXƒRƒA
+	private int score;	///< ç¾åœ¨ã®ã‚¹ã‚³ã‚¢
+		/// ã‚¹ã‚³ã‚¢ã®è¨­å®š
+		/// @param value æ–°ã—ãè¨­å®šã™ã‚‹ã‚¹ã‚³ã‚¢
 		public void setScore(int value) {
 			this.score = value;
 			for (PlayerListener listener : listeners) {
 				listener.scoreUpdated();
 			}
 		}
-		/// ƒXƒRƒA‚Ìæ“¾
-		/// @return Œ»İ‚ÌƒXƒRƒA
+		/// ã‚¹ã‚³ã‚¢ã®å–å¾—
+		/// @return ç¾åœ¨ã®ã‚¹ã‚³ã‚¢
 		public int getScore() { return this.score; }
-	private int combo;	///< Œ»İ‚ÌƒRƒ“ƒ{”
-		/// ƒRƒ“ƒ{”‚Ìİ’è
-		/// @param value V‚µ‚­İ’è‚·‚éƒRƒ“ƒ{”
+	private int combo;	///< ç¾åœ¨ã®ã‚³ãƒ³ãƒœæ•°
+		/// ã‚³ãƒ³ãƒœæ•°ã®è¨­å®š
+		/// @param value æ–°ã—ãè¨­å®šã™ã‚‹ã‚³ãƒ³ãƒœæ•°
 		public void setCombo(int value) {
 			this.combo = value;
 			for (PlayerListener listener : listeners) {
 				listener.comboUpdated();
 			}
 		}
-		/// ƒRƒ“ƒ{”‚ÌƒCƒ“ƒNƒŠƒƒ“ƒg
+		/// ã‚³ãƒ³ãƒœæ•°ã®ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
 		public void incrementCombo() { setCombo(getCombo() + 1); }
-		/// ƒRƒ“ƒ{”‚Ìæ“¾
-		/// @return Œ»İ‚ÌƒRƒ“ƒ{”
+		/// ã‚³ãƒ³ãƒœæ•°ã®å–å¾—
+		/// @return ç¾åœ¨ã®ã‚³ãƒ³ãƒœæ•°
 		public int getCombo() { return this.combo; }
-	private int hitCount;	///< Œ»İ‚Ü‚Å‚ÉƒŒ[ƒU‚ª“–‚½‚Á‚½‰ñ”
-	private int notHitCount;	///< Œ»İ‚Ü‚Å‚ÉƒŒ[ƒU‚ªŠO‚ê‚½‰ñ”
-		/// ƒŒ[ƒU‚ª“–‚½‚Á‚½‰ñ”‚Ìİ’è
-		/// @param value V‚µ‚­İ’è‚·‚éƒŒ[ƒU‚ª“–‚½‚Á‚½‰ñ”
+	private int hitCount;	///< ç¾åœ¨ã¾ã§ã«ãƒ¬ãƒ¼ã‚¶ãŒå½“ãŸã£ãŸå›æ•°
+	private int notHitCount;	///< ç¾åœ¨ã¾ã§ã«ãƒ¬ãƒ¼ã‚¶ãŒå¤–ã‚ŒãŸå›æ•°
+		/// ãƒ¬ãƒ¼ã‚¶ãŒå½“ãŸã£ãŸå›æ•°ã®è¨­å®š
+		/// @param value æ–°ã—ãè¨­å®šã™ã‚‹ãƒ¬ãƒ¼ã‚¶ãŒå½“ãŸã£ãŸå›æ•°
 		public void setHitCount(int value) {
 			this.hitCount = value;
 			for (PlayerListener listener : listeners) {
 				listener.hitCountUpdated();
 			}
 		}
-		/// ƒŒ[ƒU‚ªŠO‚ê‚½‰ñ”‚Ìİ’è
-		/// @param value V‚µ‚­İ’è‚·‚éƒŒ[ƒU‚ª‚Í‚¸‚ê‚½‰ñ”
+		/// ãƒ¬ãƒ¼ã‚¶ãŒå¤–ã‚ŒãŸå›æ•°ã®è¨­å®š
+		/// @param value æ–°ã—ãè¨­å®šã™ã‚‹ãƒ¬ãƒ¼ã‚¶ãŒã¯ãšã‚ŒãŸå›æ•°
 		public void setNotHitCount(int value) {
 			this.notHitCount = value;
 			for (PlayerListener listener : listeners) {
 				listener.notHitCountUpdated();
 			}
 		}
-		/// ƒŒ[ƒU‚ª“–‚½‚Á‚½‰ñ”‚ÌƒCƒ“ƒNƒŠƒƒ“ƒg
+		/// ãƒ¬ãƒ¼ã‚¶ãŒå½“ãŸã£ãŸå›æ•°ã®ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
 		public void incrementHitCount() { setHitCount(getHitCount() + 1); }
-		/// ƒŒ[ƒU‚ªŠO‚ê‚½‰ñ”‚ÌƒCƒ“ƒNƒŠƒƒ“ƒg
+		/// ãƒ¬ãƒ¼ã‚¶ãŒå¤–ã‚ŒãŸå›æ•°ã®ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
 		public void incrementNotHitCount() { setNotHitCount(getNotHitCount() + 1); }
-		/// ƒŒ[ƒU‚ª“–‚½‚Á‚½‰ñ”‚Ìæ“¾
-		/// @return Œ»İ‚Ü‚Å‚ÉƒŒ[ƒU‚ª“–‚½‚Á‚½‰ñ”
+		/// ãƒ¬ãƒ¼ã‚¶ãŒå½“ãŸã£ãŸå›æ•°ã®å–å¾—
+		/// @return ç¾åœ¨ã¾ã§ã«ãƒ¬ãƒ¼ã‚¶ãŒå½“ãŸã£ãŸå›æ•°
 		public int getHitCount() { return this.hitCount; }
-		/// ƒŒ[ƒU‚ªŠO‚ê‚½‰ñ”‚Ìæ“¾
-		/// @return Œ»İ‚Ü‚Å‚ÉƒŒ[ƒU‚ª‚Í‚¸‚ê‚½‰ñ”
+		/// ãƒ¬ãƒ¼ã‚¶ãŒå¤–ã‚ŒãŸå›æ•°ã®å–å¾—
+		/// @return ç¾åœ¨ã¾ã§ã«ãƒ¬ãƒ¼ã‚¶ãŒã¯ãšã‚ŒãŸå›æ•°
 		public int getNotHitCount() { return this.notHitCount; }
-		/// –½’†—¦‚Ìæ“¾
-		/// @return –½’†—¦
+		/// å‘½ä¸­ç‡ã®å–å¾—
+		/// @return å‘½ä¸­ç‡
 		public int getHitPercent() {
 			if (hitCount+notHitCount == 0) return 0;
 			return (int)(((double)hitCount)/(hitCount+notHitCount)*100);
 		}
-		/// ƒŒ[ƒU‚ª‚Í‚¸‚ê‚½Š„‡‚Ìæ“¾
-		/// @return Œ»İ‚Ü‚Å‚ÉƒŒ[ƒU‚ª‚Í‚¸‚ê‚½Š„‡(•S•ª—¦)
+		/// ãƒ¬ãƒ¼ã‚¶ãŒã¯ãšã‚ŒãŸå‰²åˆã®å–å¾—
+		/// @return ç¾åœ¨ã¾ã§ã«ãƒ¬ãƒ¼ã‚¶ãŒã¯ãšã‚ŒãŸå‰²åˆ(ç™¾åˆ†ç‡)
 		public int getNotHitPercent() {
 			if (hitCount+notHitCount == 0) return 0;
 			return (int)(((double)notHitCount)/(hitCount+notHitCount)*100);
 		}
-	private int initialX;	///< Å‰‚Éw’è‚³‚ê‚½¶ãXÀ•W
-	private int initialY;	///< Å‰‚Éw’è‚³‚ê‚½¶ãYÀ•W
-	private int x;	///<¶ãXÀ•W
-	private int y;	///<¶ãYÀ•W
-		/// ’†SÀ•W‚ÌX‚ğİ’è
-		/// @param value V‚µ‚­İ’è‚·‚é’†SXÀ•W
+	private int initialX;	///< æœ€åˆã«æŒ‡å®šã•ã‚ŒãŸå·¦ä¸ŠXåº§æ¨™
+	private int initialY;	///< æœ€åˆã«æŒ‡å®šã•ã‚ŒãŸå·¦ä¸ŠYåº§æ¨™
+	private int x;	///<å·¦ä¸ŠXåº§æ¨™
+	private int y;	///<å·¦ä¸ŠYåº§æ¨™
+		/// ä¸­å¿ƒåº§æ¨™ã®Xã‚’è¨­å®š
+		/// @param value æ–°ã—ãè¨­å®šã™ã‚‹ä¸­å¿ƒXåº§æ¨™
 		public void setCenterX(int value) { setX(value-this.getWidth()/2); }
-		/// ’†SÀ•W‚ÌY‚ğİ’è
-		/// @param value V‚µ‚­İ’è‚·‚é’†SYÀ•W
+		/// ä¸­å¿ƒåº§æ¨™ã®Yã‚’è¨­å®š
+		/// @param value æ–°ã—ãè¨­å®šã™ã‚‹ä¸­å¿ƒYåº§æ¨™
 		public void setCenterY(int value) { setY(value-this.getHeight()/2); }
-		/// ¶ãÀ•W‚ÌX‚ğİ’è
-		/// @param x V‚µ‚­İ’è‚·‚é¶ãXÀ•W
+		/// å·¦ä¸Šåº§æ¨™ã®Xã‚’è¨­å®š
+		/// @param x æ–°ã—ãè¨­å®šã™ã‚‹å·¦ä¸ŠXåº§æ¨™
 		public void setX(int x) {
 			if (canMoveTo(x, this.y, getWidth(), getHeight())) {
 				this.x = x;
 			}
 		}
-		/// ¶ãÀ•W‚ÌY‚ğİ’è
-		/// @param y V‚µ‚­İ’è‚·‚é¶ãYÀ•W
+		/// å·¦ä¸Šåº§æ¨™ã®Yã‚’è¨­å®š
+		/// @param y æ–°ã—ãè¨­å®šã™ã‚‹å·¦ä¸ŠYåº§æ¨™
 		public void setY(int y) {
 			if (canMoveTo(this.y, y, getWidth(), getHeight())) {
 				this.y = y;
 			}
 		}
-		/// ’†SÀ•W‚ÌX‚ğæ“¾
-		/// @return Œ»İ‚Ì’†SXÀ•W
+		/// ä¸­å¿ƒåº§æ¨™ã®Xã‚’å–å¾—
+		/// @return ç¾åœ¨ã®ä¸­å¿ƒXåº§æ¨™
 		public int getCenterX() { return this.x+this.getWidth()/2; }
-		/// ’†SÀ•W‚ÌY‚ğæ“¾
-		/// @return Œ»İ‚Ì’†SYÀ•W
+		/// ä¸­å¿ƒåº§æ¨™ã®Yã‚’å–å¾—
+		/// @return ç¾åœ¨ã®ä¸­å¿ƒYåº§æ¨™
 		public int getCenterY() { return this.y+this.getHeight()/2; }
-		/// ¶ãÀ•W‚ÌX‚ğæ“¾
-		/// @return Œ»İ‚Ì¶ãXÀ•W
+		/// å·¦ä¸Šåº§æ¨™ã®Xã‚’å–å¾—
+		/// @return ç¾åœ¨ã®å·¦ä¸ŠXåº§æ¨™
 		public int getX() { return this.x; }
-		/// ¶ãÀ•W‚ÌY‚ğæ“¾
-		/// @return Œ»İ‚Ì¶ãYÀ•W
+		/// å·¦ä¸Šåº§æ¨™ã®Yã‚’å–å¾—
+		/// @return ç¾åœ¨ã®å·¦ä¸ŠYåº§æ¨™
 		public int getY() { return this.y; }
-	private int sx;	///< X²‚ÌƒŒ[ƒU‚ğŒ‚‚Â•ûŒüE‘¬‚³
-	private int sy;	///< Y²‚ÌƒŒ[ƒU‚ğŒ‚‚Â•ûŒüE‘¬‚³
-		/// ƒŒ[ƒU‚ğŒ‚‚Â•ûŒüE‘¬‚³‚ÌXÀ•W‚ğİ’è
-		/// @param value X²‚ÌƒŒ[ƒU‚ğŒ‚‚Â•ûŒüE‘¬‚³‚ğ¦‚µ‚½’l
+	private int sx;	///< Xè»¸ã®ãƒ¬ãƒ¼ã‚¶ã‚’æ’ƒã¤æ–¹å‘ãƒ»é€Ÿã•
+	private int sy;	///< Yè»¸ã®ãƒ¬ãƒ¼ã‚¶ã‚’æ’ƒã¤æ–¹å‘ãƒ»é€Ÿã•
+		/// ãƒ¬ãƒ¼ã‚¶ã‚’æ’ƒã¤æ–¹å‘ãƒ»é€Ÿã•ã®Xåº§æ¨™ã‚’è¨­å®š
+		/// @param value Xè»¸ã®ãƒ¬ãƒ¼ã‚¶ã‚’æ’ƒã¤æ–¹å‘ãƒ»é€Ÿã•ã‚’ç¤ºã—ãŸå€¤
 		public void setShootToX(int value) { this.sx = value; }
-		/// ƒŒ[ƒU‚ğŒ‚‚Â•ûŒüE‘¬‚³‚ÌYÀ•W‚ğİ’è
-		/// @param value Y²‚ÌƒŒ[ƒU‚ğŒ‚‚Â•ûŒüE‘¬‚³‚ğ¦‚µ‚½’l
+		/// ãƒ¬ãƒ¼ã‚¶ã‚’æ’ƒã¤æ–¹å‘ãƒ»é€Ÿã•ã®Yåº§æ¨™ã‚’è¨­å®š
+		/// @param value Yè»¸ã®ãƒ¬ãƒ¼ã‚¶ã‚’æ’ƒã¤æ–¹å‘ãƒ»é€Ÿã•ã‚’ç¤ºã—ãŸå€¤
 		public void setShootToY(int value) { this.sy = value; }
-		/// ƒŒ[ƒU‚ğŒ‚‚Â•ûŒüE‘¬‚³‚ÌXÀ•W‚ğæ“¾
-		/// @return X²‚ÌƒŒ[ƒU‚ğŒ‚‚Â•ûŒüE‘¬‚³‚ğ¦‚µ‚½’l
+		/// ãƒ¬ãƒ¼ã‚¶ã‚’æ’ƒã¤æ–¹å‘ãƒ»é€Ÿã•ã®Xåº§æ¨™ã‚’å–å¾—
+		/// @return Xè»¸ã®ãƒ¬ãƒ¼ã‚¶ã‚’æ’ƒã¤æ–¹å‘ãƒ»é€Ÿã•ã‚’ç¤ºã—ãŸå€¤
 		public int getShootToX() { return this.sx; }
-		/// ƒŒ[ƒU‚ğŒ‚‚Â•ûŒüE‘¬‚³‚ÌYÀ•W‚ğæ“¾
-		/// @return Y²‚ÌƒŒ[ƒU‚ğŒ‚‚Â•ûŒüE‘¬‚³‚ğ¦‚µ‚½’l
+		/// ãƒ¬ãƒ¼ã‚¶ã‚’æ’ƒã¤æ–¹å‘ãƒ»é€Ÿã•ã®Yåº§æ¨™ã‚’å–å¾—
+		/// @return Yè»¸ã®ãƒ¬ãƒ¼ã‚¶ã‚’æ’ƒã¤æ–¹å‘ãƒ»é€Ÿã•ã‚’ç¤ºã—ãŸå€¤
 		public int getShootToY() { return this.sy; }
-	private int mx;	///< X²‚ÌˆÚ“®•ûŒüE—Ê
-	private int my;	///< Y²‚ÌˆÚ“®•ûŒüE—Ê
-		/// ˆÚ“®‚Ì•ûŒüE—Ê‚ÌXÀ•W‚ğİ’è
-		/// @param value X²‚ÌˆÚ“®•ûŒüE—Ê‚ğ•\‚µ‚½’l
+	private int mx;	///< Xè»¸ã®ç§»å‹•æ–¹å‘ãƒ»é‡
+	private int my;	///< Yè»¸ã®ç§»å‹•æ–¹å‘ãƒ»é‡
+		/// ç§»å‹•ã®æ–¹å‘ãƒ»é‡ã®Xåº§æ¨™ã‚’è¨­å®š
+		/// @param value Xè»¸ã®ç§»å‹•æ–¹å‘ãƒ»é‡ã‚’è¡¨ã—ãŸå€¤
 		public void setMovingX(int value) { this.mx = value; }
-		/// ˆÚ“®‚Ì•ûŒüE—Ê‚ÌYÀ•W‚ğİ’è
-		/// @param value Y²‚ÌˆÚ“®•ûŒüE—Ê‚ğ•\‚µ‚½’l
+		/// ç§»å‹•ã®æ–¹å‘ãƒ»é‡ã®Yåº§æ¨™ã‚’è¨­å®š
+		/// @param value Yè»¸ã®ç§»å‹•æ–¹å‘ãƒ»é‡ã‚’è¡¨ã—ãŸå€¤
 		public void setMovingY(int value) { this.my = value; }
-		/// ˆÚ“®‚Ì•ûŒüE—Ê‚ÌXÀ•W‚ğæ“¾
-		/// @return X²‚ÌˆÚ“®•ûŒüE—Ê‚ğ•\‚µ‚½’l
+		/// ç§»å‹•ã®æ–¹å‘ãƒ»é‡ã®Xåº§æ¨™ã‚’å–å¾—
+		/// @return Xè»¸ã®ç§»å‹•æ–¹å‘ãƒ»é‡ã‚’è¡¨ã—ãŸå€¤
 		public int getMovingX() { return this.mx; }
-		/// ˆÚ“®‚Ì•ûŒüE—Ê‚ÌYÀ•W‚ğæ“¾
-		/// @return Y²‚ÌˆÚ“®•ûŒüE—Ê‚ğ•\‚µ‚½’l
+		/// ç§»å‹•ã®æ–¹å‘ãƒ»é‡ã®Yåº§æ¨™ã‚’å–å¾—
+		/// @return Yè»¸ã®ç§»å‹•æ–¹å‘ãƒ»é‡ã‚’è¡¨ã—ãŸå€¤
 		public int getMovingY() { return this.my; }
-	private int team;	///< ƒ`[ƒ€”Ô†
-		/// ƒ`[ƒ€”Ô†‚Ìİ’è
-		/// @param value İ’è‚·‚éƒ`[ƒ€”Ô†
+	private int team;	///< ãƒãƒ¼ãƒ ç•ªå·
+		/// ãƒãƒ¼ãƒ ç•ªå·ã®è¨­å®š
+		/// @param value è¨­å®šã™ã‚‹ãƒãƒ¼ãƒ ç•ªå·
 		public void setTeam(int value) { this.team = value; }
-		/// ƒ`[ƒ€”Ô†‚Ìæ“¾
-		/// @return İ’è‚³‚ê‚Ä‚¢‚éƒ`[ƒ€”Ô†
+		/// ãƒãƒ¼ãƒ ç•ªå·ã®å–å¾—
+		/// @return è¨­å®šã•ã‚Œã¦ã„ã‚‹ãƒãƒ¼ãƒ ç•ªå·
 		public int getTeam() { return this.team; }
-	private Weapon weapon;	///< •R•t‚¯‚ç‚ê‚Ä‚¢‚é•Ší
+	private Weapon weapon;	///< ç´ä»˜ã‘ã‚‰ã‚Œã¦ã„ã‚‹æ­¦å™¨
 		private static final Weapon dummyWeapon = DummyWeapon.getInstance();
-		/// •Ší‚Ìİ’è
-		/// @param value İ’è‚·‚é•Ší
+		/// æ­¦å™¨ã®è¨­å®š
+		/// @param value è¨­å®šã™ã‚‹æ­¦å™¨
 		public void setWeapon(Weapon value) { this.weapon = value; }
-		/// •Ší‚Ìæ“¾
-		/// @return İ’è‚³‚ê‚Ä‚¢‚é•Ší
-		/// @return ”j‰óÏ‚İ‚Å‚ ‚ê‚Î”­Ë•s‰Â”\‚Èƒ_ƒ~[‚ÌWeapon‚ğ•Ô‚·
+		/// æ­¦å™¨ã®å–å¾—
+		/// @return è¨­å®šã•ã‚Œã¦ã„ã‚‹æ­¦å™¨
+		/// @return ç ´å£Šæ¸ˆã¿ã§ã‚ã‚Œã°ç™ºå°„ä¸å¯èƒ½ãªãƒ€ãƒŸãƒ¼ã®Weaponã‚’è¿”ã™
 		public Weapon getWeapon() { return isAlive() ? this.weapon : dummyWeapon; }
-	private Image image = null;	///< ‹@‘Ì‚Ì‰æ‘œ
-		/// ‹@‘Ì‚Ì‰æ‘œ‚Ìİ’è
-		/// @param value İ’è‚·‚é‰æ‘œ
+	private Image image = null;	///< æ©Ÿä½“ã®ç”»åƒ
+		/// æ©Ÿä½“ã®ç”»åƒã®è¨­å®š
+		/// @param value è¨­å®šã™ã‚‹ç”»åƒ
 		public void setImage(Image value) { this.image = value; }
-		/// ‹@‘Ì‚Ì‰æ‘œ‚Ìæ“¾
-		/// @return İ’è‚³‚ê‚Ä‚¢‚é‰æ‘œ
+		/// æ©Ÿä½“ã®ç”»åƒã®å–å¾—
+		/// @return è¨­å®šã•ã‚Œã¦ã„ã‚‹ç”»åƒ
 		public Image getImage() { return this.image; }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ShootingƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg
-	/// @param x ”z’u‚·‚é¶ã‚©‚ç‚ÌXÀ•W
-	/// @param y ”z’u‚·‚é¶ã‚©‚ç‚ÌYÀ•W
-	/// @param sx ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌXÀ•W
-	/// @param sy ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌYÀ•W
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting Shootingã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param x é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Xåº§æ¨™
+	/// @param y é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Yåº§æ¨™
+	/// @param sx ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Xåº§æ¨™
+	/// @param sy ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Yåº§æ¨™
 	public Player(Shooting shooting, int team, int x, int y, int sx, int sy) {
 		this(shooting, null, team, x, y, sx, sy);
 	}
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting ShootingƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg
-	/// @param image ‹@‘Ì‚Ì‰æ‘œ
-	/// @param x ”z’u‚·‚é¶ã‚©‚ç‚ÌXÀ•W
-	/// @param y ”z’u‚·‚é¶ã‚©‚ç‚ÌYÀ•W
-	/// @param sx ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌXÀ•W
-	/// @param sy ”­Ë‚Ì•ûŒüE‘¬‚³‚ÌYÀ•W
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting Shootingã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param image æ©Ÿä½“ã®ç”»åƒ
+	/// @param x é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Xåº§æ¨™
+	/// @param y é…ç½®ã™ã‚‹å·¦ä¸Šã‹ã‚‰ã®Yåº§æ¨™
+	/// @param sx ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Xåº§æ¨™
+	/// @param sy ç™ºå°„ã®æ–¹å‘ãƒ»é€Ÿã•ã®Yåº§æ¨™
 	public Player(Shooting shooting, Image image, int team, int x, int y, int sx, int sy) {
 		this.shooting = shooting;
 		this.image = image;
@@ -228,7 +228,7 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 		this.weapon = dummyWeapon;
 	}
 
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	public void initialize() {
 		this.score = this.damage = this.combo =
 			this.hitCount = this.notHitCount = 0;
@@ -237,25 +237,25 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 		this.weapon.initialize();
 	}
 
-	/// PlayerListener‚Ì“o˜^
-	/// @param listener PlayerListener‚ÌƒIƒuƒWƒFƒNƒg
+	/// PlayerListenerã®ç™»éŒ²
+	/// @param listener PlayerListenerã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public void addPlayerListener(PlayerListener listener) {
 		listeners.add(listener);
 	}
 
-	/// w’è‚µ‚½ˆÊ’u‚ÉˆÚ“®‰Â”\‚©
-	/// @param x ¶ãXÀ•W
-	/// @param y ¶ãYÀ•W
-	/// @param width •
-	/// @param height ‚‚³
-	/// @return ˆÚ“®‰Â”\‚Èê‡true, •s‰Â”\‚Èê‡false
+	/// æŒ‡å®šã—ãŸä½ç½®ã«ç§»å‹•å¯èƒ½ã‹
+	/// @param x å·¦ä¸ŠXåº§æ¨™
+	/// @param y å·¦ä¸ŠYåº§æ¨™
+	/// @param width å¹…
+	/// @param height é«˜ã•
+	/// @return ç§»å‹•å¯èƒ½ãªå ´åˆtrue, ä¸å¯èƒ½ãªå ´åˆfalse
 	public boolean canMoveTo(int x, int y, int width, int height) {
 		if (x < 0 || y < 0) return false;
 		if (x+width > shooting.getWidth() || y > shooting.getHeight()) return false;
 		return true;
 	}
 
-	/// ƒIƒuƒWƒFƒNƒg‚Ì•`‰æ
+	/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»
 	/// @param g
 	public void paintObject(Graphics g) {
 		if (isAlive()) {
@@ -273,9 +273,9 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 		}
 	}
 
-	/// “–‚½‚è”»’è
-	/// @param lazer ”»’è‚ğs‚¤LazerƒIƒuƒWƒFƒNƒg
-	/// @return “–‚½‚Á‚Ä‚¢‚½ê‡true, ŠO‚ê‚Ä‚¢‚½ê‡false
+	/// å½“ãŸã‚Šåˆ¤å®š
+	/// @param lazer åˆ¤å®šã‚’è¡Œã†Lazerã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @return å½“ãŸã£ã¦ã„ãŸå ´åˆtrue, å¤–ã‚Œã¦ã„ãŸå ´åˆfalse
 	public boolean isHit(Lazer lazer) {
 		if (isDestroyed()) return false;
 		if (getTeam() == lazer.getPlayer().getTeam()) return false;
@@ -286,21 +286,21 @@ public abstract class Player implements MainLoopJob, ShootingObject, KeyListener
 		return true;
 	}
 
-	/// ƒŒ[ƒU‚ª©•ª‚É“–‚½‚Á‚½
-	/// @param lazer ‚ ‚½‚Á‚½LazerƒIƒuƒWƒFƒNƒg
+	/// ãƒ¬ãƒ¼ã‚¶ãŒè‡ªåˆ†ã«å½“ãŸã£ãŸ
+	/// @param lazer ã‚ãŸã£ãŸLazerã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	public void onHit(Lazer lazer) {
 		setDamage(getDamage() + lazer.getDamage());
 		setCombo(0);
 	}
 
-	/// ©•ª‚ªŒ‚‚Á‚½ƒŒ[ƒU‚ª“G‚É“–‚½‚Á‚½
+	/// è‡ªåˆ†ãŒæ’ƒã£ãŸãƒ¬ãƒ¼ã‚¶ãŒæ•µã«å½“ãŸã£ãŸ
 	public void lazerHit() {
 		setCombo(getCombo() + 1);
 		setScore(getScore() + 10 * getCombo());
 		incrementHitCount();
 	}
 
-	/// ©•ª‚ªŒ‚‚Á‚½ƒŒ[ƒU‚ª“G‚É“–‚½‚ç‚È‚©‚Á‚½
+	/// è‡ªåˆ†ãŒæ’ƒã£ãŸãƒ¬ãƒ¼ã‚¶ãŒæ•µã«å½“ãŸã‚‰ãªã‹ã£ãŸ
 	public void lazerNotHit() {
 		setCombo(0);
 		incrementNotHitCount();

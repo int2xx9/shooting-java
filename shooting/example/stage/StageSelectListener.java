@@ -1,9 +1,9 @@
 package shooting.example.stage;
 
-/// 僗僥乕僕慖戰偵娭偡傞僀儀儞僩偺儕僗僫
+/// 銈广儐銉笺偢閬告姙銇枹銇欍倠銈ゃ儥銉炽儓銇儶銈广儕
 public interface StageSelectListener {
-	/// 僗僥乕僕偑慖戰偝傟偨
-	/// @param selectedStage 慖偽傟偨僗僥乕僕
+	/// 銈广儐銉笺偢銇岄伕鎶炪仌銈屻仧
+	/// @param selectedStage 閬搞伆銈屻仧銈广儐銉笺偢
 	public void stageSelected(Stage selectedStage);
 }
 

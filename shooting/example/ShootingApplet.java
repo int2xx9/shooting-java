@@ -10,32 +10,32 @@ import java.util.*;
 import javax.imageio.ImageIO;
 import java.net.URL;
 
-/// ƒAƒvƒŒƒbƒgƒNƒ‰ƒX
+/// ã‚¢ãƒ—ãƒ¬ãƒƒãƒˆã‚¯ãƒ©ã‚¹
 public class ShootingApplet extends JApplet implements StageSelectListener {
-	JButton resumePauseButton;	///< ˆêŽž’âŽ~EÄŠJƒ{ƒ^ƒ“
-	JButton stageSelectButton;	///< ƒXƒe[ƒW‘I‘ðƒ{ƒ^ƒ“
-	JButton leftButton;		///< ¶ˆÚ“®ƒ{ƒ^ƒ“
-	JButton rightButton;	///< ‰EˆÚ“®ƒ{ƒ^ƒ“
-	JButton shootButton;	///< ”­ŽËƒ{ƒ^ƒ“
-	StageSelectPanel stageSelectPanel;	///< ƒXƒe[ƒW‘I‘ð—pƒpƒlƒ‹
-	StatusPanel statusPanel;	///< ƒXƒRƒA“™‚ð•\Ž¦‚·‚éƒpƒlƒ‹
-	JPanel currentPanel;		///< stageSelectPanel‚Æshooting‚Ì‚¤‚¿Œ»Ý•\Ž¦‚³‚ê‚Ä‚¢‚éƒpƒlƒ‹
-	Shooting shooting;			///< ƒQ[ƒ€‰æ–Ê
-	ControllablePlayer player;	///< Ž©‹@
-	Player[] enemies;			///< “G‹@
+	JButton resumePauseButton;	///< ä¸€æ™‚åœæ­¢ãƒ»å†é–‹ãƒœã‚¿ãƒ³
+	JButton stageSelectButton;	///< ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠžãƒœã‚¿ãƒ³
+	JButton leftButton;		///< å·¦ç§»å‹•ãƒœã‚¿ãƒ³
+	JButton rightButton;	///< å³ç§»å‹•ãƒœã‚¿ãƒ³
+	JButton shootButton;	///< ç™ºå°„ãƒœã‚¿ãƒ³
+	StageSelectPanel stageSelectPanel;	///< ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠžç”¨ãƒ‘ãƒãƒ«
+	StatusPanel statusPanel;	///< ã‚¹ã‚³ã‚¢ç­‰ã‚’è¡¨ç¤ºã™ã‚‹ãƒ‘ãƒãƒ«
+	JPanel currentPanel;		///< stageSelectPanelã¨shootingã®ã†ã¡ç¾åœ¨è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹ãƒ‘ãƒãƒ«
+	Shooting shooting;			///< ã‚²ãƒ¼ãƒ ç”»é¢
+	ControllablePlayer player;	///< è‡ªæ©Ÿ
+	Player[] enemies;			///< æ•µæ©Ÿ
 
-	/// ‰æ‘œ“Ç‚Ýž‚Ý—pƒNƒ‰ƒX
+	/// ç”»åƒèª­ã¿è¾¼ã¿ç”¨ã‚¯ãƒ©ã‚¹
 	DocumentBaseImageLoader imgLoader = new DocumentBaseImageLoader(this);
 
 	public void init() {
 		setLayout(null);
 
-		// ƒQ[ƒ€‰æ–Ê‚Ì”z’u
+		// ã‚²ãƒ¼ãƒ ç”»é¢ã®é…ç½®
 		shooting = new Shooting();
 		shooting.setBounds(5, 5, getWidth()-(5*2), getHeight()-50-5);
 		add(shooting);
 
-		// Ž©‹@‚Ì€”õ
+		// è‡ªæ©Ÿã®æº–å‚™
 		Image playerImage = imgLoader.getImageImmediately("k1_p3a.png");
 		if (playerImage != null) {
 			player = new ControllablePlayer(shooting, playerImage, 0,
@@ -48,24 +48,24 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 					shooting.getHeight()-60,
 					0, -1);
 		}
-		player.getKeyConfig().setMoveLeftKey(37, 65535);	// ©
-		player.getKeyConfig().setMoveRightKey(39, 65535);	// ¨
-		player.getKeyConfig().setShootKey(38, 65535);			// ª
+		player.getKeyConfig().setMoveLeftKey(37, 65535);	// â†
+		player.getKeyConfig().setMoveRightKey(39, 65535);	// â†’
+		player.getKeyConfig().setShootKey(38, 65535);			// â†‘
 
-		// ˆÚ“®ƒ{ƒ^ƒ“‚È‚Ç‚ÌƒQ[ƒ€‰æ–Ê‚Ì‰º‚É”z’u‚·‚éƒ{ƒ^ƒ“‚âƒpƒlƒ‹‚ÌYˆÊ’u‚ÌƒIƒtƒZƒbƒg
+		// ç§»å‹•ãƒœã‚¿ãƒ³ãªã©ã®ã‚²ãƒ¼ãƒ ç”»é¢ã®ä¸‹ã«é…ç½®ã™ã‚‹ãƒœã‚¿ãƒ³ã‚„ãƒ‘ãƒãƒ«ã®Yä½ç½®ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 		int ctrlY = getHeight()-50;
 
-		// ŠJŽn/ÄŠJ/ˆêŽž’âŽ~ƒ{ƒ^ƒ“
-		resumePauseButton = new JButton("ŠJŽn");
+		// é–‹å§‹/å†é–‹/ä¸€æ™‚åœæ­¢ãƒœã‚¿ãƒ³
+		resumePauseButton = new JButton("é–‹å§‹");
 		resumePauseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (shooting.isRunning()) {
-					// Šù‚É“®‚¢‚Ä‚¢‚½‚çˆêŽž’âŽ~
+					// æ—¢ã«å‹•ã„ã¦ã„ãŸã‚‰ä¸€æ™‚åœæ­¢
 					shooting.setPaused();
 				} else {
-					// “®‚¢‚Ä‚¢‚È‚¯‚ê‚ÎÄŠJ
-					// shooting‚ª•\Ž¦‚³‚ê‚Ä‚¢‚È‚¯‚ê‚ÎstageSelectPanel‚ð•Â‚¶
-					// ƒtƒH[ƒJƒX‚ðshooting‚ÉˆÚ“®‚·‚é
+					// å‹•ã„ã¦ã„ãªã‘ã‚Œã°å†é–‹
+					// shootingãŒè¡¨ç¤ºã•ã‚Œã¦ã„ãªã‘ã‚Œã°stageSelectPanelã‚’é–‰ã˜
+					// ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’shootingã«ç§»å‹•ã™ã‚‹
 					if (!shooting.isVisible()) {
 						stageSelectPanel.setVisible(false);
 						shooting.setVisible(true);
@@ -78,13 +78,13 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		});
 		shooting.addShootingListener(new ShootingAdapter() {
 			public void onGameInitialized() {
-				resumePauseButton.setText("ŠJŽn");
+				resumePauseButton.setText("é–‹å§‹");
 			}
 			public void onGameResumed() {
-				resumePauseButton.setText("ˆêŽž’âŽ~");
+				resumePauseButton.setText("ä¸€æ™‚åœæ­¢");
 			}
 			public void onGamePaused() {
-				resumePauseButton.setText("ÄŠJ");
+				resumePauseButton.setText("å†é–‹");
 			}
 			public void onGameRestarted() {
 				statusPanel.repaint();
@@ -94,8 +94,8 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		resumePauseButton.addActionListener(new MoveFocusListener());
 		add(resumePauseButton);
 
-		// ¶ˆÚ“®ƒ{ƒ^ƒ“
-		leftButton = new JButton("©");
+		// å·¦ç§»å‹•ãƒœã‚¿ãƒ³
+		leftButton = new JButton("â†");
 		leftButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				player.setMovingX(-1);
@@ -109,8 +109,8 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		leftButton.addActionListener(new MoveFocusListener());
 		add(leftButton);
 
-		// ‰EˆÚ“®ƒ{ƒ^ƒ“
-		rightButton = new JButton("¨");
+		// å³ç§»å‹•ãƒœã‚¿ãƒ³
+		rightButton = new JButton("â†’");
 		rightButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				player.setMovingX(1);
@@ -124,8 +124,8 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		rightButton.addActionListener(new MoveFocusListener());
 		add(rightButton);
 
-		// ”­ŽËƒ{ƒ^ƒ“
-		shootButton = new JButton("ª");
+		// ç™ºå°„ãƒœã‚¿ãƒ³
+		shootButton = new JButton("â†‘");
 		shootButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (shooting.isRunning()) {
@@ -137,17 +137,17 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		shootButton.addActionListener(new MoveFocusListener());
 		add(shootButton);
 
-		// ƒXƒRƒA“™‚Ìî•ñ‚ð•\Ž¦‚·‚éƒpƒlƒ‹
+		// ã‚¹ã‚³ã‚¢ç­‰ã®æƒ…å ±ã‚’è¡¨ç¤ºã™ã‚‹ãƒ‘ãƒãƒ«
 		statusPanel = new StatusPanel();
 		statusPanel.setBounds(215, ctrlY+5, getWidth()-215-5, 20);
 		add(statusPanel);
 
-		// ƒXƒe[ƒW‘I‘ðƒ{ƒ^ƒ“
-		stageSelectButton = new JButton("ƒXƒe[ƒW‘I‘ð");
+		// ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠžãƒœã‚¿ãƒ³
+		stageSelectButton = new JButton("ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠž");
 		stageSelectButton.setBounds(getWidth()-120-5, ctrlY+25, 120, 20);
 		stageSelectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// ƒQ[ƒ€‚ðˆêŽž’âŽ~‚³‚¹”ñ•\Ž¦‚É‚µ‚½ŒãƒXƒe[ƒW‘I‘ð‰æ–Ê‚ð•\Ž¦
+				// ã‚²ãƒ¼ãƒ ã‚’ä¸€æ™‚åœæ­¢ã•ã›éžè¡¨ç¤ºã«ã—ãŸå¾Œã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠžç”»é¢ã‚’è¡¨ç¤º
 				shooting.setPaused();
 				shooting.setVisible(false);
 				stageSelectPanel.setVisible(true);
@@ -158,9 +158,9 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		stageSelectButton.addActionListener(new MoveFocusListener());
 		add(stageSelectButton);
 
-		// shooting‚ÉŽ©‹@‚ðPlayer‚Æ‚µ‚Ä’Ç‰Á
+		// shootingã«è‡ªæ©Ÿã‚’Playerã¨ã—ã¦è¿½åŠ 
 		shooting.addPlayer(player);
-		// ƒXƒRƒA“™‚ªXV‚³‚ê‚½‚Æ‚«statusPanel‚ðXV‚·‚é
+		// ã‚¹ã‚³ã‚¢ç­‰ãŒæ›´æ–°ã•ã‚ŒãŸã¨ãstatusPanelã‚’æ›´æ–°ã™ã‚‹
 		player.addPlayerListener(new PlayerAdapter() {
 			public void scoreUpdated() {
 				statusPanel.repaint();
@@ -173,7 +173,7 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 			}
 		});
 
-		// ƒXƒe[ƒW‘I‘ð‰æ–Ê
+		// ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠžç”»é¢
 		stageSelectPanel = new StageSelectPanel(shooting, this);
 		stageSelectPanel.addStage(new Stage1(shooting, imgLoader));
 		stageSelectPanel.addStage(new Stage2(shooting, imgLoader));
@@ -184,47 +184,47 @@ public class ShootingApplet extends JApplet implements StageSelectListener {
 		stageSelectPanel.setBounds(5, 5, getWidth()-(5*2), getHeight()-50-5);
 		add(stageSelectPanel);
 
-		// shooting‚ð”ñ•\Ž¦‚É‚·‚é
+		// shootingã‚’éžè¡¨ç¤ºã«ã™ã‚‹
 		shooting.setVisible(false);
 		currentPanel = stageSelectPanel;
 		currentPanel.requestFocus();
 	}
 
-	/// ƒXƒe[ƒW‘I‘ð‰æ–Ê‚ÅƒXƒe[ƒW‚ª‘I‚Î‚ê‚½
-	/// @param selectedStage ‘I‘ð‚³‚ê‚½ƒXƒe[ƒW
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠžç”»é¢ã§ã‚¹ãƒ†ãƒ¼ã‚¸ãŒé¸ã°ã‚ŒãŸ
+	/// @param selectedStage é¸æŠžã•ã‚ŒãŸã‚¹ãƒ†ãƒ¼ã‚¸
 	public void stageSelected(Stage selectedStage) {
-		// Player‚ð‘S‚Äíœ‚µŽ©‹@‚Æ‘I‘ð‚³‚ê‚½ƒXƒe[ƒW‚Ì“G‹@‚ð’Ç‰Á
+		// Playerã‚’å…¨ã¦å‰Šé™¤ã—è‡ªæ©Ÿã¨é¸æŠžã•ã‚ŒãŸã‚¹ãƒ†ãƒ¼ã‚¸ã®æ•µæ©Ÿã‚’è¿½åŠ 
 		shooting.clearPlayers();
 		shooting.addPlayer(player);
 		for (Player player : selectedStage.getEnemies()) {
 			shooting.addPlayer(player);
 		}
 
-		// ƒQ[ƒ€‰Šú‰»
+		// ã‚²ãƒ¼ãƒ åˆæœŸåŒ–
 		shooting.initializeGame();
 
-		// shooting‚ð•\Ž¦
+		// shootingã‚’è¡¨ç¤º
 		stageSelectPanel.setVisible(false);
 		shooting.setVisible(true);
 		currentPanel = shooting;
 		currentPanel.requestFocus();
 	}
 
-	/// ƒNƒŠƒbƒN‚µ‚½‚Æ‚«‚ÉƒtƒH[ƒJƒX‚ðcurrentPanel‚ÉˆÚ“®‚·‚éƒŠƒXƒi
+	/// ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ãã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’currentPanelã«ç§»å‹•ã™ã‚‹ãƒªã‚¹ãƒŠ
 	class MoveFocusListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			currentPanel.requestFocus();
 		}
 	}
 
-	/// ƒXƒRƒA‚È‚Ç‚Ìî•ñ‚ð•\Ž¦‚·‚éƒpƒlƒ‹
+	/// ã‚¹ã‚³ã‚¢ãªã©ã®æƒ…å ±ã‚’è¡¨ç¤ºã™ã‚‹ãƒ‘ãƒãƒ«
 	///
-	/// •\Ž¦‚·‚éî•ñ‚Í¡‚Ì‚Æ‚±‚ë
-	/// * –½’†—¦
-	/// * Œ‚‚Á‚½ƒŒ[ƒU‚ª“–‚½‚Á‚½”
-	/// * Œ‚‚Á‚½ƒŒ[ƒU‚ªŠO‚ê‚½”
-	/// * Œ»Ý‚Ìƒ_ƒ[ƒW
-	/// * ƒXƒRƒA
+	/// è¡¨ç¤ºã™ã‚‹æƒ…å ±ã¯ä»Šã®ã¨ã“ã‚
+	/// * å‘½ä¸­çŽ‡
+	/// * æ’ƒã£ãŸãƒ¬ãƒ¼ã‚¶ãŒå½“ãŸã£ãŸæ•°
+	/// * æ’ƒã£ãŸãƒ¬ãƒ¼ã‚¶ãŒå¤–ã‚ŒãŸæ•°
+	/// * ç¾åœ¨ã®ãƒ€ãƒ¡ãƒ¼ã‚¸
+	/// * ã‚¹ã‚³ã‚¢
 	class StatusPanel extends JPanel {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);

@@ -6,18 +6,18 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-/// ƒXƒe[ƒW‘I‘ğ‰æ–Ê
+/// ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠç”»é¢
 public class StageSelectPanel extends JPanel {
-	/// •\¦‚³‚ê‚éƒXƒe[ƒW‚Ìˆê——
+	/// è¡¨ç¤ºã•ã‚Œã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã®ä¸€è¦§
 	private ArrayList<Stage> stages = new ArrayList<Stage>();
-	/// ƒXƒe[ƒW‚ª‘I‘ğ‚³‚ê‚½‚Æ‚«ŒÄ‚Î‚ê‚éƒŠƒXƒi
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸ãŒé¸æŠã•ã‚ŒãŸã¨ãå‘¼ã°ã‚Œã‚‹ãƒªã‚¹ãƒŠ
 	private StageSelectListener listener;
-	/// Œ»İ‘I‘ğ‚µ‚Ä‚¢‚éƒXƒe[ƒW‚ÌˆÊ’u
+	/// ç¾åœ¨é¸æŠã—ã¦ã„ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã®ä½ç½®
 	private int selectPosition = 0;
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param shooting •R•t‚¯‚éshootingƒIƒuƒWƒFƒNƒg
-	/// @param listener ƒXƒe[ƒW‚ª‘I‘ğ‚³‚ê‚½‚Æ‚«ŒÄ‚Î‚ê‚éƒŠƒXƒi
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param shooting ç´ä»˜ã‘ã‚‹shootingã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	/// @param listener ã‚¹ãƒ†ãƒ¼ã‚¸ãŒé¸æŠã•ã‚ŒãŸã¨ãå‘¼ã°ã‚Œã‚‹ãƒªã‚¹ãƒŠ
 	public StageSelectPanel(Shooting shooting, StageSelectListener listener) {
 		this.listener = listener;
 
@@ -25,18 +25,18 @@ public class StageSelectPanel extends JPanel {
 		addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyChar() == 65535) {
-					if (e.getKeyCode() == 38) {	// ª
-						// Å‰(selectPosition==0)‚ÌƒXƒe[ƒW‚ª‘I‘ğ‚³‚ê‚Ä‚¢‚½‚çÅŒã
-						// ‚»‚¤‚Å‚È‚¯‚ê‚Î1‚Â‘O‚ÌƒXƒe[ƒW‚ğ‘I‘ğ‚µ‚½ó‘Ô‚É‚·‚é
+					if (e.getKeyCode() == 38) {	// â†‘
+						// æœ€åˆ(selectPosition==0)ã®ã‚¹ãƒ†ãƒ¼ã‚¸ãŒé¸æŠã•ã‚Œã¦ã„ãŸã‚‰æœ€å¾Œ
+						// ãã†ã§ãªã‘ã‚Œã°1ã¤å‰ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’é¸æŠã—ãŸçŠ¶æ…‹ã«ã™ã‚‹
 						selectPosition =
 							(selectPosition == 0)
 								? (stages.size()-1)
 								: (selectPosition-1);
-					} else if (e.getKeyCode() == 40) {	// «
+					} else if (e.getKeyCode() == 40) {	// â†“
 						selectPosition = (selectPosition + 1) % stages.size();
 					}
 				} else if (e.getKeyChar() == 10 && e.getKeyCode() == 10) {	// Enter
-					// ƒXƒe[ƒW‚ğ‘I‘ğ‚µ‚½
+					// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’é¸æŠã—ãŸ
 					StageSelectPanel.this.listener.stageSelected(stages.get(selectPosition));
 				}
 				repaint();
@@ -44,14 +44,14 @@ public class StageSelectPanel extends JPanel {
 		});
 	}
 
-	/// ƒXƒe[ƒW‚Ì’Ç‰Á
-	/// @param stage ’Ç‰Á‚·‚éƒXƒe[ƒW
+	/// ã‚¹ãƒ†ãƒ¼ã‚¸ã®è¿½åŠ 
+	/// @param stage è¿½åŠ ã™ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸
 	public void addStage(Stage stage) {
 		stages.add(stage);
 	}
 
-	/// ‘I‘ğ’†‚ÌƒXƒe[ƒW‚Ìæ“¾
-	/// @return ‘I‘ğ’†‚ÌƒXƒe[ƒW
+	/// é¸æŠä¸­ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã®å–å¾—
+	/// @return é¸æŠä¸­ã®ã‚¹ãƒ†ãƒ¼ã‚¸
 	public Stage getSelectedStage() {
 		return stages.get(selectPosition);
 	}
@@ -60,19 +60,19 @@ public class StageSelectPanel extends JPanel {
 		super.paintComponent(g);
 		g.setColor(Color.WHITE);
 
-		// ˆê”Ôã‚É•\¦‚·‚éStage Select
+		// ä¸€ç•ªä¸Šã«è¡¨ç¤ºã™ã‚‹Stage Select
 		g.setFont(new Font("Monospaced", Font.BOLD, 24));
 		g.drawString("StageSelect", getWidth()/2-60, 32);
 
 		g.setFont(new Font("Monospaced", Font.BOLD, 16));
-		// ‘I‘ğ’†‚ÌƒXƒe[ƒW‚Ì•\¦
+		// é¸æŠä¸­ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã®è¡¨ç¤º
 		g.drawString("-> " + stages.get(selectPosition).getStageName(), 10, 64);
 		int currentLine = 1;
-		// ‘I‘ğ’†‚ÌƒXƒe[ƒW‚æ‚èŒã‚É’Ç‰Á‚³‚ê‚½ƒXƒe[ƒW‚Ì–¼‘O‚ğ•\¦
+		// é¸æŠä¸­ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã‚ˆã‚Šå¾Œã«è¿½åŠ ã•ã‚ŒãŸã‚¹ãƒ†ãƒ¼ã‚¸ã®åå‰ã‚’è¡¨ç¤º
 		for (int i = selectPosition+1; i < stages.size(); i++, currentLine++) {
 			g.drawString("   " + stages.get(i).getStageName(), 10, 64+16*currentLine);
 		}
-		// ‘I‘ğ’†‚ÌƒXƒe[ƒW‚æ‚è‘O‚É’Ç‰Á‚³‚ê‚½ƒXƒe[ƒW‚Ì–¼‘O‚ğ•\¦
+		// é¸æŠä¸­ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã‚ˆã‚Šå‰ã«è¿½åŠ ã•ã‚ŒãŸã‚¹ãƒ†ãƒ¼ã‚¸ã®åå‰ã‚’è¡¨ç¤º
 		for (int i = 0; i < selectPosition; i++, currentLine++) {
 			g.drawString("   " + stages.get(i).getStageName(), 10, 64+16*currentLine);
 		}

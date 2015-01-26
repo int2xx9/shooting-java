@@ -4,74 +4,74 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-/// Weapon‚ª”­Ë‚·‚éLazer
+/// WeaponãŒç™ºå°„ã™ã‚‹Lazer
 public abstract class Lazer implements MainLoopJob, ShootingObject {
-	/// •‚Ìæ“¾
-	/// @return •
+	/// å¹…ã®å–å¾—
+	/// @return å¹…
 	abstract public int getWidth();
-	/// ‚‚³‚Ìæ“¾
-	/// @return ‚‚³
+	/// é«˜ã•ã®å–å¾—
+	/// @return é«˜ã•
 	abstract public int getHeight();
-	/// —^‚¦‚éƒ_ƒ[ƒW‚Ìæ“¾
-	/// @return —^‚¦‚éƒ_ƒ[ƒW
+	/// ä¸ãˆã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸ã®å–å¾—
+	/// @return ä¸ãˆã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸
 	abstract public int getDamage();
 
-	private Player player;	///< •R•t‚¯‚ç‚ê‚Ä‚¢‚éPlayer
-		/// •R•t‚¯‚ç‚ê‚Ä‚¢‚éPlayer‚Ìæ“¾
-		/// @return •R•t‚¯‚ç‚ê‚Ä‚¢‚éPlayer
+	private Player player;	///< ç´ä»˜ã‘ã‚‰ã‚Œã¦ã„ã‚‹Player
+		/// ç´ä»˜ã‘ã‚‰ã‚Œã¦ã„ã‚‹Playerã®å–å¾—
+		/// @return ç´ä»˜ã‘ã‚‰ã‚Œã¦ã„ã‚‹Player
 		public Player getPlayer() { return this.player; }
-	private int x;	///< XÀ•W
-	private int y;	///< YÀ•W
-		/// XÀ•W‚Ìæ“¾
-		/// @return XÀ•W
+	private int x;	///< Xåº§æ¨™
+	private int y;	///< Yåº§æ¨™
+		/// Xåº§æ¨™ã®å–å¾—
+		/// @return Xåº§æ¨™
 		public int getX() { return this.x; }
-		/// YÀ•W‚Ìæ“¾
-		/// @return YÀ•W
+		/// Yåº§æ¨™ã®å–å¾—
+		/// @return Yåº§æ¨™
 		public int getY() { return this.y; }
-	private int sx;	///< X²‚ÌˆÚ“®•ûŒü‚Æ—Ê
-	private int sy;	///< Y²‚ÌˆÚ“®•ûŒü‚Æ—Ê
-		/// X²‚ÌˆÚ“®•ûŒü‚Æ—Ê‚ğæ“¾
-		/// @return X²‚ÌˆÚ“®•ûŒü‚Æ—Ê
+	private int sx;	///< Xè»¸ã®ç§»å‹•æ–¹å‘ã¨é‡
+	private int sy;	///< Yè»¸ã®ç§»å‹•æ–¹å‘ã¨é‡
+		/// Xè»¸ã®ç§»å‹•æ–¹å‘ã¨é‡ã‚’å–å¾—
+		/// @return Xè»¸ã®ç§»å‹•æ–¹å‘ã¨é‡
 		public int getShootingToX() { return this.sx; }
-		/// Y²‚ÌˆÚ“®•ûŒü‚Æ—Ê‚ğæ“¾
-		/// @return Y²‚ÌˆÚ“®•ûŒü‚Æ—Ê
+		/// Yè»¸ã®ç§»å‹•æ–¹å‘ã¨é‡ã‚’å–å¾—
+		/// @return Yè»¸ã®ç§»å‹•æ–¹å‘ã¨é‡
 		public int getShootingToY() { return this.sy; }
 
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	/// @param x ¶¬‚·‚éXÀ•W‚ÌˆÊ’u
-	/// @param y ¶¬‚·‚éYÀ•W‚ÌˆÊ’u
-	/// @param sx X²‚Ì”­Ë‚·‚é•ûŒü‚Æ‘¬“x
-	/// @param sy Y²‚Ì”­Ë‚·‚é•ûŒü‚Æ‘¬“x
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	/// @param x ç”Ÿæˆã™ã‚‹Xåº§æ¨™ã®ä½ç½®
+	/// @param y ç”Ÿæˆã™ã‚‹Yåº§æ¨™ã®ä½ç½®
+	/// @param sx Xè»¸ã®ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿåº¦
+	/// @param sy Yè»¸ã®ç™ºå°„ã™ã‚‹æ–¹å‘ã¨é€Ÿåº¦
 	public Lazer(Player player, int x, int y, int sx, int sy) {
 		this.player = player;
 		this.x = x-getWidth()/2; this.y = y;
 		this.sx = sx; this.sy = sy;
 	}
 
-	/// ‰æ–ÊŠO‚É‘¶İ‚·‚é‚©‚Ç‚¤‚©
-	/// @return ‰æ–ÊŠO‚É‘¶İ‚µ‚½ê‡true, ‚»‚¤‚Å‚È‚¢ê‡false
+	/// ç”»é¢å¤–ã«å­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹
+	/// @return ç”»é¢å¤–ã«å­˜åœ¨ã—ãŸå ´åˆtrue, ãã†ã§ãªã„å ´åˆfalse
 	public boolean isOutOfScreen() {
 		return y+getHeight() < 0 || y > player.getShooting().getHeight();
 	}
 
-	/// ƒƒCƒ“ƒ‹[ƒv‚©‚çŒÄ‚Î‚ê‚éˆ—
+	/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‹ã‚‰å‘¼ã°ã‚Œã‚‹å‡¦ç†
 	///
-	/// ‚±‚±‚Å‚ÍˆÚ“®
+	/// ã“ã“ã§ã¯ç§»å‹•
 	public void runMainLoopJob() {
 		x += sx;
 		y += sy;
 	}
 
-	/// ƒIƒuƒWƒFƒNƒg‚Ì•`‰æ
+	/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»
 	/// @param g
 	public void paintObject(Graphics g) {
 		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, getWidth(), getHeight());
 	}
 
-	/// “–‚½‚è”»’è
+	/// å½“ãŸã‚Šåˆ¤å®š
 	///
-	/// ‚Æ‚è‚ ‚¦‚¸Lazer‚Í“–‚½‚è”»’è‚ğ‚½‚È‚¢‚Ì‚Åí‚Éfalse‚ğ•Ô‚·
+	/// ã¨ã‚Šã‚ãˆãšLazerã¯å½“ãŸã‚Šåˆ¤å®šã‚’æŒãŸãªã„ã®ã§å¸¸ã«falseã‚’è¿”ã™
 	/// @return false
 	public boolean isHit(Lazer lazer) {
 		return false;

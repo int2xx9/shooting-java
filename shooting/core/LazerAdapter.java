@@ -1,11 +1,11 @@
 package shooting.core;
 
-/// Lazer�֌W�̃C�x���g�̃A�_�v�^
+/// Lazer関係のイベントのアダプタ
 public class LazerAdapter implements LazerListener {
-	/// ���������[�U�[���I������
+	/// 撃ったレーザーが的中した
 	public void lazerHit() {}
-	/// ���������[�U�[���͂��ꂽ
-	/// (Player�N���X�̃I�u�W�F�N�g�ɂ�����Ȃ��܂܉�ʊO�܂ł�����)
+	/// 撃ったレーザーがはずれた
+	/// (Playerクラスのオブジェクトにあたらないまま画面外までいった)
 	public void lazerNotHit() {}
 }
 
